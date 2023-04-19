@@ -23,7 +23,7 @@ from PIL import Image
 from tqdm import tqdm
 import matplotlib
 from matplotlib import pyplot as plt
-
+import pickle
 from visualize_data import visualize_brain
 import time
 # from nilearn import datasets
@@ -59,12 +59,27 @@ def training_data_creator(subject):
 
     """
     
-    images_dir = f"../Data/{subject}/training_split/training_images"
-    # Create a dataloader that can load the images
-    images = []
-    for image in tqdm(os.listdir(images_dir)):
-        image = Image.open(os.path.join(images_dir, image))
-        images.append(np.array(image))
+    if not os.path.exists(f"../Data/{subject}/training_split/resized_training_images.pkl"):
+        images_dir = f"../Data/{subject}/training_split/training_images"
+        # Create a dataloader that can load the images
+        images = []
+        for image in tqdm(os.listdir(images_dir)):
+            image = Image.open(os.path.join(images_dir, image))
+            image_array = np.array(image)
+            # Shape is (425, 425, 3) pr image.
+
+            # print("size of image_array: ", image_array.shape)
+            # resize 
+            # image_array = cv2.resize(image_array, (227, 227))
+            images.append(image_array)
+
+        # save images as pickle file 
+        with open(f"../Data/{subject}/training_split/resized_training_images.pkl", "wb") as f:
+            pickle.dump(images, f)
+
+    else:
+        with open(f"../Data/{subject}/training_split/resized_training_images.pkl", "rb") as f:
+            images = pickle.load(f)
 
     return images
 
@@ -136,32 +151,32 @@ def map_brain_to_surface(subject, hemisphere,lh_fmri,rh_fmri,img_idx):
 def main(subject):
 
     lh_fmri, rh_fmri = target_creator(subject)
-    # images = training_data_creator(subject)
+    images = training_data_creator(subject)
 
-    for roi in ["V1v", "V1d", "V2v", "V2d", "V3v", "V3d", "hV4", "EBA", 
-    "FBA-1", "FBA-2", "mTL-bodies", "OFA", "FFA-1", "FFA-2", 
-    "mTL-faces", "aTL-faces", "OPA", "PPA", "RSC", "OWFA", 
-    "VWFA-1", "VWFA-2", "mfs-words", "mTL-words", "early", 
-    "midventral", "midlateral", "midparietal", "ventral", 
-    "lateral", "parietal"]:
+    # for roi in ["V1v", "V1d", "V2v", "V2d", "V3v", "V3d", "hV4", "EBA", 
+    # "FBA-1", "FBA-2", "mTL-bodies", "OFA", "FFA-1", "FFA-2", 
+    # "mTL-faces", "aTL-faces", "OPA", "PPA", "RSC", "OWFA", 
+    # "VWFA-1", "VWFA-2", "mfs-words", "mTL-words", "early", 
+    # "midventral", "midlateral", "midparietal", "ventral", 
+    # "lateral", "parietal"]:
             
-    # roi = "midlateral"
-        hemisphere = "left"
+    roi = "VWFA-1"
+    hemisphere = "left"
 
-        roi_mapping, challenge_roi, fsaverage_roi = roi_mapping_func(subject = subject, 
-                                                                    hemisphere = hemisphere, 
-                                                                    roi = roi)
-        # view = visualize_brain(roi, hemisphere, fsaverage_roi_map = fsaverage_roi)
+    roi_mapping, challenge_roi, fsaverage_roi = roi_mapping_func(subject = subject, 
+                                                                hemisphere = hemisphere, 
+                                                                roi = roi)
+    # view = visualize_brain(roi, hemisphere, fsaverage_roi_map = fsaverage_roi)
 
-        img_idx = 0
-        fsaverage_roi_response = map_brain_to_surface(subject, hemisphere,lh_fmri,rh_fmri,img_idx)
-        print("fsaverage_roi_response: ", fsaverage_roi_response.shape)
+    img_idx = 0
+    fsaverage_roi_response = map_brain_to_surface(subject, hemisphere,lh_fmri,rh_fmri,img_idx)
+    print("fsaverage_roi_response: ", fsaverage_roi_response.shape)
 
-        view = visualize_brain(roi, hemisphere, 
-                            title = f"{roi} part of the brain",
-                            fsaverage_roi_map = fsaverage_roi_response)
+    view = visualize_brain(roi, hemisphere, 
+                        title = f"{roi} part of the brain",
+                        fsaverage_roi_map = fsaverage_roi_response)
 
-        time.sleep(8)
+        # time.sleep(8)
 
 
 
