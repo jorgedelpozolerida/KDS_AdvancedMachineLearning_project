@@ -24,8 +24,8 @@ import matplotlib.pyplot as plt
 from PIL import Image
 from tqdm import tqdm
 from nilearn import surface, datasets, plotting
-from decord import cpu
-from decord import VideoReader
+# from decord import cpu
+# from decord import VideoReader
 
 logging.basicConfig(level=logging.INFO)
 _logger = logging.getLogger(__name__)
