@@ -23,17 +23,17 @@ from tqdm import tqdm
 import matplotlib
 from matplotlib import pyplot as plt
 import pickle
-from visualize_data import visualize_brain
 import time
+from sklearn.model_selection import train_test_split
 import utils  # our custom functions
 
 # Global variables
 THISFILE_PATH = os.path.abspath(__file__)
 DATAIN_PATH = os.path.join(
-    os.path.abspath(os.path.join(THISFILE_PATH, os.pardir, os.pardir)), "datain"
+    os.path.abspath(os.path.join(THISFILE_PATH, os.pardir, os.pardir)), "Data"
 )
 DATAOUT_PATH = os.path.join(
-    os.path.abspath(os.path.join(THISFILE_PATH, os.pardir, os.pardir)), "dataout"
+    os.path.abspath(os.path.join(THISFILE_PATH, os.pardir, os.pardir)), "Data"
 )
 
 
@@ -41,18 +41,46 @@ logging.basicConfig(level=logging.INFO)
 _logger = logging.getLogger(__name__)
 
 
-def training_data_creator(subject):
+def target_creator(subject, DATAIN_PATH=DATAIN_PATH, test =False, merged = False ):
+    """
+    """
+    fmri_dir = os.path.join(DATAIN_PATH, f"{subject}","training_split","training_fmri")
+    lh_fmri = np.load(os.path.join(fmri_dir, 'lh_training_fmri.npy'))
+    rh_fmri = np.load(os.path.join(fmri_dir, 'rh_training_fmri.npy'))
+
+    if test:
+        lh_fmri = lh_fmri[:400]
+        rh_fmri = rh_fmri[:400]
+
+    i = 0
+    print("lh_fmri loaded...")
+    print("lh_fmri.shape: ", lh_fmri.shape)
+    print(f"lh_fmri[{i}].shape: ", lh_fmri[i].shape, "\n")
+    print("rh_fmri loaded...")
+    print("rh_fmri.shape: ", rh_fmri.shape)
+    print(f"rh_fmri[{i}].shape: ", rh_fmri[i].shape, "\n")
+    print("")
+
+    if merged: 
+        return merge_y_data((lh_fmri, rh_fmri))
+    else:
+        return lh_fmri, rh_fmri
+
+
+def training_data_creator(subject, DATAIN_PATH=DATAIN_PATH, test =False):
     """ """
 
     if not os.path.exists(
-        f"../datain/{subject}/training_split/resized_training_images.pkl"
-    ):
-        images_dir = f"../datain/{subject}/training_split/training_images"
+        f"../Data/{subject}/training_split/resized_training_images.pkl"
+    ) or test:
+        images_dir = f"../Data/{subject}/training_split/training_images"
         # Create a dataloader that can load the images
-        images = []
+        images = [] #np.array([])
         for image in tqdm(os.listdir(images_dir)):
             image = Image.open(os.path.join(images_dir, image))
             image_array = np.array(image)
+
+            ### Potential preprocessing here ###
             # Shape is (425, 425, 3) pr image.
 
             # print("size of image_array: ", image_array.shape)
@@ -60,19 +88,69 @@ def training_data_creator(subject):
             # image_array = cv2.resize(image_array, (227, 227))
             images.append(image_array)
 
+            if test and len(images) == 400:
+                break
+
         # save images as pickle file
-        with open(
-            f"../datain/{subject}/training_split/resized_training_images.pkl", "wb"
-        ) as f:
-            pickle.dump(images, f)
+        if not test:
+            with open(
+                f"../Data/{subject}/training_split/resized_training_images.pkl", "wb"
+            ) as f:
+                pickle.dump(images, f)
 
     else:
         with open(
-            f"../datain/{subject}/training_split/resized_training_images.pkl", "rb"
+            f"../Data/{subject}/training_split/resized_training_images.pkl", "rb"
         ) as f:
             images = pickle.load(f)
 
     return images
+
+
+def split_y_data(y_data: np.array(object)):
+    """
+    Expected format: a numpy array of all the merged fmri data 
+    E.g y_data shape: (N, 39548) , where N is the number of images
+    """
+    len_of_left_side = 19004
+    left_y_data = []
+    right_y_data = []
+    for i in range(len(y_data)):
+        left_y_data.append(y_data[i][:len_of_left_side])
+        right_y_data.append(y_data[i][len_of_left_side:])
+    
+    return y_data[0], y_data[1]
+
+def merge_y_data(y_data: tuple):
+    """
+    Expected format: a tuple of two numpy arrays such as: y_data = (lh_fmri, rh_fmri)
+    """
+    y_data_tmp = []
+    for i in range(len(y_data[0])):
+        y_data_tmp.append(np.concatenate((y_data[0][i], y_data[1][i]), axis=None))
+
+    return np.array(y_data_tmp)
+    
+
+def create_train_test_split(X_data, y_data, test_size=0.20, random_state=123):
+    """
+    Create train-test split
+    """
+
+    if type(X_data):
+        # transform to numpy array
+        X_data = np.array(X_data)
+
+    print("X_data.shape: ", X_data.shape)
+    print("y_data.shape: ", y_data.shape)
+
+    X_train, X_test, y_train, y_test = train_test_split(X_data, y_data, test_size=test_size,
+                                                        random_state=random_state, shuffle=True)
+
+    X_train, X_val, y_train, y_val = train_test_split(X_train, y_train, test_size=test_size,
+                                                        random_state=random_state, shuffle=True)
+
+    return X_train, X_val, X_test, y_train, y_val, y_test 
 
 
 def main():
@@ -80,4 +158,11 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    subject = 'subj01'
+    test = False
+    y_data = target_creator(subject, test = test, merged = True)
+    X_data = training_data_creator(subject, test = test)
+
+    input_shape = X_data[0].shape
+
+    X_train, X_val, X_test, y_train, y_val, y_test = create_train_test_split(X_data, y_data, test_size=0.2, random_state=123)

@@ -40,10 +40,10 @@ _logger = logging.getLogger(__name__)
 # Global variables
 THISFILE_PATH = os.path.abspath(__file__)
 DATAIN_PATH = os.path.join(
-    os.path.abspath(os.path.join(THISFILE_PATH, os.pardir, os.pardir)), "datain"
+    os.path.abspath(os.path.join(THISFILE_PATH, os.pardir, os.pardir)), "Data"
 )
 DATAOUT_PATH = os.path.join(
-    os.path.abspath(os.path.join(THISFILE_PATH, os.pardir, os.pardir)), "dataout"
+    os.path.abspath(os.path.join(THISFILE_PATH, os.pardir, os.pardir)), "Data"
 )
 
 
@@ -55,7 +55,7 @@ DATAOUT_PATH = os.path.join(
 # -----------------------------
 
 
-def load_fMRIdata(subject, data_path=DATAIN_PATH):
+def load_fMRIdata(subject,data_path=DATAIN_PATH):
     """
     Retrieves fMRI data for subject for both hemispheres in a dict
     """
@@ -244,3 +244,19 @@ def map_fMRI_to_surface(subject, vertices, fmri_data, img_id, masks=None):
         response_maps[key] = fsaverage_response
 
     return response_maps
+
+
+# -----------------------------
+#  ML functions
+# -----------------------------
+
+
+def find_latest_model(model_path):
+        """
+        Find the latest model
+        """
+        model_list = os.listdir(model_path)
+        model_list = [int(model.split('_')[1].split('.')[0]) for model in model_list]
+        latest_model = max(model_list)
+        return latest_model
+
