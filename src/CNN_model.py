@@ -9,7 +9,7 @@
 import os
 import sys
 import argparse
-# os.environ['CUDA_VISIBLE_DEVICES'] = '-1' # forces CPU use because errors with GPU
+os.environ['CUDA_VISIBLE_DEVICES'] = '-1' # forces CPU use because errors with GPU
 
 
 import logging                                                                      # NOQA E402
@@ -82,11 +82,11 @@ def test_model(model, X_test, y_test):
 if __name__ == '__main__':
     
     subject = 'subj01'
-    test = True
+    test = False
     y_data = target_creator(subject, test = test, merged = True)
     X_data = training_data_creator(subject, test = test)
     epochs = 500
-    batch_size = 16
+    batch_size = 32
 
     input_shape = X_data[0].shape
     output_dim = y_data[0].shape
