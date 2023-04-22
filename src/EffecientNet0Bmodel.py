@@ -51,7 +51,7 @@ def train_model(model, model_path, X_train, y_train, X_val, model_version, y_val
 
     model.compile(optimizer= Adam(learning_rate = learning_rate),
                   loss= keras.losses.MeanSquaredError(),
-                  metrics=['MSE','MAE'])
+                  metrics=['MSE','MAE','MAPE'])
 
     es_callback = EarlyStopping(monitor='val_loss', mode='min', verbose=1, patience=patience , restore_best_weights = True)
     cb_list = [es_callback]
@@ -100,11 +100,11 @@ if __name__ == '__main__':
     test = True
     y_data = target_creator(subject, test = test, merged = True)
     X_data = training_data_creator(subject, test = test)
-    epochs = 6
+    epochs = 5
     batch_size = 32
     learning_rate = 0.000001
     patience = 2
-    model_path = f"../dataout/models/CNN/{subject}"
+    model_path = f"../dataout/models/EffecientNet/{subject}"
 
     input_shape = X_data[0].shape
     output_dim = y_data[0].shape
