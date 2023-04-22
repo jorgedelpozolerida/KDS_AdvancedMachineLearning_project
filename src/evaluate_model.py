@@ -67,7 +67,7 @@ DATAOUT_PATH = os.path.join(
 
 
 
-def calculate_correlation(groundtruth_fmri, predicted_fmri, subject, model, save=False, plot = False):
+def calculate_correlation(groundtruth_fmri, predicted_fmri, subject, model, id, save=False, plot = False):
     '''
     Returns dict for left and right correlation values computed per vertex and across images
     '''
@@ -78,13 +78,13 @@ def calculate_correlation(groundtruth_fmri, predicted_fmri, subject, model, save
     for hemisphere, hem_data in groundtruth_fmri.items():
         
         correlation_data_hemisphere = np.zeros(hem_data.shape[1])
-        for v in tqdm(range(hem_data.shape[1])):
+        for v in tqdm(range(hem_data.shape[1]), desc="Calculating correlation"):
             correlation_data_hemisphere[v] = corr(predicted_fmri[hemisphere][:,v], hem_data[:,v])[0]
         correlation_data[hemisphere] = correlation_data_hemisphere
     
     if save:
         out_dir = utils.ensure_dir(os.path.join(DATAOUT_PATH, 'evaluation', model, 'pearson_correlation', subject))
-        file_path = os.path.join(out_dir, f'pearsoncorr_{subject}_{model}_' + datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S") + '.pickle')
+        file_path = os.path.join(out_dir, f'{id}_pearsoncorr_{subject}_{model}.pickle')
         with open(file_path, 'wb') as f:
             pickle.dump(correlation_data, f)
     
@@ -100,38 +100,39 @@ def calculate_correlation(groundtruth_fmri, predicted_fmri, subject, model, save
                                         surface_map=fsaverage_correlation, 
                                         cmap='cold_hot',
                                         title='Encoding accuracy, '+ hemisphere+' hemisphere'
-                                        )
-            
+                                        
 
+    
+                                        )
+        
     return correlation_data
 
-def calculate_correlation2(groundtruth_fmri, predicted_fmri, subject, model, save=False, plot = False):
-    '''
-    Returns dict for left and right correlation values computed per vertex and across images
-    '''
-    # groundtruth_fmri = utils.load_fMRIdata(subject)
-    # predicted_fmri = utils.load_predicted_data(subject, model='CNN')
-    
-    correlation_data = {}
-    
 
-    for hemisphere, hem_data in groundtruth_fmri.items():
-        # Calculate correlations for each column using list comprehension and vectorized operations
-        correlation_data_hemisphere = np.array([corr(predicted_fmri[hemisphere][:, v], hem_data[:, v])[0] for v in range(hem_data.shape[1])])
-        correlation_data[hemisphere] = correlation_data_hemisphere
 
+def load_correlation( subject, model, id):
+    '''
+    Loads some specific correlation data: subejct, model and ide to be specified
+    '''
+    out_dir = os.path.join(DATAOUT_PATH, 'evaluation', model, 'pearson_correlation', subject)
+    file_path = utils.get_file_with_id(id, out_dir )
+    correlation_data = np.load(file_path, allow_pickle=True)
+    
     return correlation_data
 
 def main(args):
-
-    subject = 'subj01'
-
     
+    subject = 'subj01'
+    # Calculate correlaiton
     groundtruth_fmri = utils.load_fMRIdata(subject)
     predicted_fmri = utils.load_predicted_data(subject, model_name='CNN', id=1)
     
-
-    correlation = calculate_correlation(groundtruth_fmri, predicted_fmri, subject, model='CNN', save=False, plot = False)
+   
+    correlation = calculate_correlation(groundtruth_fmri, predicted_fmri, subject, id=0, model='CNN', 
+                                        save=True, 
+                                        plot = False)
+    
+    # # Or load it if you have it claculated already
+    # correlation = load_correlation(subject,  model='CNN', id = 1)
 
 
     return

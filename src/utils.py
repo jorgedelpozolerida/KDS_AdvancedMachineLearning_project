@@ -197,6 +197,25 @@ def load_predicted_data(subject, model_name, id):
     return {'left': lh_data, 'right': rh_data}
 
 
+
+def get_file_with_id(id, folder_path):
+    """
+    Get the file name that starts with the given ID in the given folder.
+
+    Args:
+    id (int or str): The ID to search for.
+    folder_path (str): The path to the folder to search in.
+
+    Returns:
+    str: The file name that starts with the given ID, or None if no file is found.
+    """
+    pattern = re.compile(f"^{id}_")
+    for filename in os.listdir(folder_path):
+        if pattern.match(filename):
+            return os.path.join(folder_path, filename)
+    return None
+
+
 # -----------------------------
 # Visualization
 # -----------------------------
@@ -295,7 +314,6 @@ def ensure_dir(dir):
 # -----------------------------
 #  ML functions
 # -----------------------------
-
 
 def find_latest_model(model_path):
     """
