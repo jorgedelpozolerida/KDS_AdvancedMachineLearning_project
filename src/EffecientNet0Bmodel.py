@@ -30,22 +30,10 @@ from keras.callbacks import EarlyStopping
 
 
 def create_cnn_model(input_shape, output_dim, model_path):
-    model = models.Sequential([
-        layers.Input(shape=input_shape),
-        layers.Conv2D(4, (5, 5), activation='relu', padding='same'),
-        layers.MaxPooling2D((2, 2)),
-        layers.Conv2D(4, (5, 5), activation='relu', padding='same'),
-        layers.MaxPooling2D((2, 2)),
-        layers.Conv2D(8, (5, 5), activation='relu', padding='same'),
-        layers.MaxPooling2D((2, 2)),
-        layers.Conv2D(8, (5, 5), activation='relu', padding='same'),
-        layers.MaxPooling2D((2, 2)),
-        layers.Flatten(),
-        layers.Dense(128, activation='relu'),
-        layers.Dropout(0.5),
-        layers.Dense(output_dim[0])
-    ])
-
+    base_model = EfficientNetB0(weights='imagenet', include_top=False, input_shape=input_shape)
+    x = layers.GlobalAveragePooling2D()(base_model.output)
+    output_layer = layers.Dense(output_dim)(x)
+    model = models.Model(inputs=base_model.inputs, outputs=output_layer)
     model.summary()
 
     # Save the model

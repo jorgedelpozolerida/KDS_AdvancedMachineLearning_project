@@ -30,6 +30,8 @@ import matplotlib.pyplot as plt
 from PIL import Image
 from tqdm import tqdm
 from nilearn import surface, datasets, plotting
+import keras 
+import tensorflow as tf
 
 # from decord import cpu
 # from decord import VideoReader
@@ -257,8 +259,8 @@ def find_latest_model(model_path):
     """
     for part in ["models", "predictions"]:
         tmp_model_path = model_path.replace("models", part)
-        if not os.path.exists(model_path):
-            os.makedirs(model_path)
+        if not os.path.exists(tmp_model_path):
+            os.makedirs(tmp_model_path)
 
     model_list = os.listdir(model_path)
     if len(model_list) == 0:
@@ -268,3 +270,12 @@ def find_latest_model(model_path):
     latest_model = max(model_list)
     return latest_model
 
+
+
+
+def check_for_GPU():
+    """
+    Check if GPU is available
+    """
+    print("Num GPUs Available: ", len(tf.config.experimental.list_physical_devices('GPU')))
+    print("Num CPUs Available: ", len(tf.config.experimental.list_physical_devices('CPU')))
