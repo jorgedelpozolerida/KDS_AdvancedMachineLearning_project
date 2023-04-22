@@ -322,9 +322,7 @@ def find_latest_model(model_path):
     Find the latest model
     """
     for part in ["models", "predictions"]:
-        tmp_model_path = model_path.replace("models", part)
-        if not os.path.exists(tmp_model_path):
-            os.makedirs(tmp_model_path)
+        tmp_model_path = ensure_dir(model_path.replace("models", part))
 
     model_list = os.listdir(model_path)
     if len(model_list) == 0:

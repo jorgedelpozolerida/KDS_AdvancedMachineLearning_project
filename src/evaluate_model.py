@@ -24,7 +24,6 @@ import os
 import sys
 import argparse
 
-
 import logging                                                                      # NOQA E402
 import numpy as np                                                                  # NOQA E402
 import pandas as pd                                                                 # NOQA E402
@@ -67,9 +66,12 @@ DATAOUT_PATH = os.path.join(
 
 
 
-def calculate_correlation(groundtruth_fmri, predicted_fmri, subject, model, id, save=False, plot = False):
+def calculate_correlations(groundtruth_fmri, predicted_fmri, subject, save=False, save_args=None , plot = False):
     '''
     Returns dict for left and right correlation values computed per vertex and across images
+    
+    
+    save_ags: {'model_name': XX, 'id': X}
     '''
     # groundtruth_fmri = utils.load_fMRIdata(subject)
     # predicted_fmri = utils.load_predicted_data(subject, model='CNN')
@@ -83,8 +85,10 @@ def calculate_correlation(groundtruth_fmri, predicted_fmri, subject, model, id, 
         correlation_data[hemisphere] = correlation_data_hemisphere
     
     if save:
-        out_dir = utils.ensure_dir(os.path.join(DATAOUT_PATH, 'evaluation', model, 'pearson_correlation', subject))
-        file_path = os.path.join(out_dir, f'{id}_pearsoncorr_{subject}_{model}.pickle')
+        
+        assert save_args is not None, "Please provide saving arguments accordingly"
+        out_dir = utils.ensure_dir(os.path.join(DATAOUT_PATH, 'evaluation', save_args['model_name'], 'pearson_correlation', subject))
+        file_path = os.path.join(out_dir, f"{save_args['id']}_pearsoncorr_{subject}_{save_args['model_name']}.pickle")
         with open(file_path, 'wb') as f:
             pickle.dump(correlation_data, f)
     
@@ -95,21 +99,19 @@ def calculate_correlation(groundtruth_fmri, predicted_fmri, subject, model, id, 
         for hemisphere, hem_corr in correlation_data.items():
 
             fsaverage_correlation = np.zeros(len(fsaverage_all_vertices[hemisphere]))
-            fsaverage_correlation[np.where(fsaverage_all_vertices[hemisphere])[0]] = correlation_data[hemisphere]
+            fsaverage_correlation[np.where(fsaverage_all_vertices[hemisphere])[0]] = hem_corr
             utils.visualize_brainresponse(hemisphere, 
                                         surface_map=fsaverage_correlation, 
                                         cmap='cold_hot',
                                         title='Encoding accuracy, '+ hemisphere+' hemisphere'
                                         
-
-    
                                         )
         
     return correlation_data
 
 
 
-def load_correlation( subject, model, id):
+def load_correlations( subject, model, id):
     '''
     Loads some specific correlation data: subejct, model and ide to be specified
     '''
@@ -119,24 +121,118 @@ def load_correlation( subject, model, id):
     
     return correlation_data
 
+
+def plot_ROI_correlations(subject, correlations, save=False, save_args=None, show=True):
+    '''
+    Function that plots obtained calculated correlations per ROI class for 
+    some subject
+    
+    save_ags: {'model_name': XX, 'id': X}
+    '''
+    subject_dir = os.path.join(DATAIN_PATH, subject)
+    lh_correlation, rh_correlation = correlations['left'], correlations['right']
+    
+    # Load the ROI classes mapping dictionaries
+    roi_mapping_files = ['mapping_prf-visualrois.npy', 'mapping_floc-bodies.npy',
+        'mapping_floc-faces.npy', 'mapping_floc-places.npy',
+        'mapping_floc-words.npy', 'mapping_streams.npy']
+    
+    roi_name_maps = []
+    for r in roi_mapping_files:
+        roi_name_maps.append(np.load(os.path.join(subject_dir, 'roi_masks', r),
+            allow_pickle=True).item())
+
+    # Load the ROI brain surface maps
+    lh_challenge_roi_files = ['lh.prf-visualrois_challenge_space.npy',
+        'lh.floc-bodies_challenge_space.npy', 'lh.floc-faces_challenge_space.npy',
+        'lh.floc-places_challenge_space.npy', 'lh.floc-words_challenge_space.npy',
+        'lh.streams_challenge_space.npy']
+    rh_challenge_roi_files = ['rh.prf-visualrois_challenge_space.npy',
+        'rh.floc-bodies_challenge_space.npy', 'rh.floc-faces_challenge_space.npy',
+        'rh.floc-places_challenge_space.npy', 'rh.floc-words_challenge_space.npy',
+        'rh.streams_challenge_space.npy']
+    lh_challenge_rois = []
+    rh_challenge_rois = []
+    for r in range(len(lh_challenge_roi_files)):
+        lh_challenge_rois.append(np.load(os.path.join(subject_dir, 'roi_masks',
+            lh_challenge_roi_files[r])))
+        rh_challenge_rois.append(np.load(os.path.join(subject_dir, 'roi_masks',
+            rh_challenge_roi_files[r])))
+
+    # Select the correlation results vertices of each ROI
+    roi_names = []
+    lh_roi_correlation = []
+    rh_roi_correlation = []
+    for r1 in range(len(lh_challenge_rois)):
+        for r2 in roi_name_maps[r1].items():
+            if r2[0] != 0: # zeros indicate to vertices falling outside the ROI of interest
+                roi_names.append(r2[1])
+                lh_roi_idx = np.where(lh_challenge_rois[r1] == r2[0])[0]
+                rh_roi_idx = np.where(rh_challenge_rois[r1] == r2[0])[0]
+                lh_roi_correlation.append(lh_correlation[lh_roi_idx])
+                rh_roi_correlation.append(rh_correlation[rh_roi_idx])
+    roi_names.append('All vertices')
+    lh_roi_correlation.append(lh_correlation)
+    rh_roi_correlation.append(rh_correlation)
+
+
+    lh_median_roi_correlation = [np.median(lh_roi_correlation[r]) for r in range(len(lh_roi_correlation))]
+    rh_median_roi_correlation = [np.median(rh_roi_correlation[r]) for r in range(len(rh_roi_correlation))]
+    
+    
+    # Create plot
+    plt.figure(figsize=(18,6))
+    x = np.arange(len(roi_names))
+    width = 0.30
+    plt.bar(x - width/2, lh_median_roi_correlation, width, label='Left Hemisphere')
+    plt.bar(x + width/2, rh_median_roi_correlation, width,
+        label='Right Hemishpere')
+    plt.xlim(left=min(x)-.5, right=max(x)+.5)
+    plt.xlabel('ROIs')
+    plt.ylim(bottom=0, top=1)
+    plt.xticks(ticks=x, labels=roi_names, rotation=60)
+    plt.ylabel('Median Pearson\'s $r$')
+    plt.legend(frameon=True, loc=1)
+    
+
+    if save:
+        assert save_args is not None, "Please provide save_args accordingly"
+        out_dir = utils.ensure_dir(os.path.join(DATAOUT_PATH, 'evaluation', save_args['model_name'], 'pearson_correlation', subject))
+        plt.savefig(os.path.join(out_dir, f"{save_args['id']}_plot_pearsoncorr_{subject}_{save_args['model_name']}.png"))
+   
+    if show:
+        plt.show()
+
+
+
 def main(args):
     
     subject = 'subj01'
-    # Calculate correlaiton
+    idx = 1
+    model = 'CNN'
+    
+    # --------------------- CORRELATION METRICS -----------------------------
+    # Calculate correlations
     groundtruth_fmri = utils.load_fMRIdata(subject)
-    predicted_fmri = utils.load_predicted_data(subject, model_name='CNN', id=1)
-    
+    predicted_fmri = utils.load_predicted_data(subject, model_name=model, id=idx) # for now taking a copy of the target
+ 
    
-    correlation = calculate_correlation(groundtruth_fmri, predicted_fmri, subject, id=0, model='CNN', 
-                                        save=True, 
-                                        plot = False)
+    correlations = calculate_correlations(groundtruth_fmri, predicted_fmri, subject,
+                                        save=True, save_args={'id': idx, 'model_name': model},
+                                        plot = True)
+
+    # or load it if you have it calculated already
+    # correlations = load_correlations(subject,  model='CNN', id = idx)
     
-    # # Or load it if you have it claculated already
-    # correlation = load_correlation(subject,  model='CNN', id = 1)
+    
+    # Plot correlation
+    plot_ROI_correlations(subject, correlations,
+                          show=True,
+                          save=True, save_args={'id': idx, 'model_name': model})
 
 
-    return
 
+    # ---------------------  INFORMATION METRICS --------------------------
 
 def parse_args():
     '''
