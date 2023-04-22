@@ -23,17 +23,16 @@ from tqdm import tqdm
 import matplotlib
 from matplotlib import pyplot as plt
 import pickle
-from visualize_data import visualize_brain
 import time
 import utils  # our custom functions
 
 # Global variables
 THISFILE_PATH = os.path.abspath(__file__)
 DATAIN_PATH = os.path.join(
-    os.path.abspath(os.path.join(THISFILE_PATH, os.pardir, os.pardir)), "datain"
+    os.path.abspath(os.path.join(THISFILE_PATH, os.pardir, os.pardir)), "Data"
 )
 DATAOUT_PATH = os.path.join(
-    os.path.abspath(os.path.join(THISFILE_PATH, os.pardir, os.pardir)), "dataout"
+    os.path.abspath(os.path.join(THISFILE_PATH, os.pardir, os.pardir)), "Data"
 )
 
 
@@ -41,18 +40,39 @@ logging.basicConfig(level=logging.INFO)
 _logger = logging.getLogger(__name__)
 
 
-def training_data_creator(subject):
+def target_creator(subject, DATAIN_PATH=DATAIN_PATH):
+    """
+    """
+    fmri_dir = os.path.join(DATAIN_PATH, f"{subject}","training_split","training_fmri")
+    lh_fmri = np.load(os.path.join(fmri_dir, 'lh_training_fmri.npy'))
+
+    for i in range(0,1):
+        print("lh_fmri loaded...")
+        print("lh_fmri.shape: ", lh_fmri.shape)
+        print(f"lh_fmri[{i}].shape: ", lh_fmri[i].shape, "\n")
+        rh_fmri = np.load(os.path.join(fmri_dir, 'rh_training_fmri.npy'))
+        print("rh_fmri loaded...")
+        print("rh_fmri.shape: ", rh_fmri.shape)
+        print(f"rh_fmri[{i}].shape: ", rh_fmri[i].shape, "\n")
+        print("")
+
+    return lh_fmri, rh_fmri
+
+
+def training_data_creator(subject, DATAIN_PATH=DATAIN_PATH):
     """ """
 
     if not os.path.exists(
-        f"../datain/{subject}/training_split/resized_training_images.pkl"
+        f"../Data/{subject}/training_split/resized_training_images.pkl"
     ):
-        images_dir = f"../datain/{subject}/training_split/training_images"
+        images_dir = f"../Data/{subject}/training_split/training_images"
         # Create a dataloader that can load the images
         images = []
         for image in tqdm(os.listdir(images_dir)):
             image = Image.open(os.path.join(images_dir, image))
             image_array = np.array(image)
+
+            ### Potential preprocessing here ###
             # Shape is (425, 425, 3) pr image.
 
             # print("size of image_array: ", image_array.shape)
@@ -62,13 +82,13 @@ def training_data_creator(subject):
 
         # save images as pickle file
         with open(
-            f"../datain/{subject}/training_split/resized_training_images.pkl", "wb"
+            f"../Data/{subject}/training_split/resized_training_images.pkl", "wb"
         ) as f:
             pickle.dump(images, f)
 
     else:
         with open(
-            f"../datain/{subject}/training_split/resized_training_images.pkl", "rb"
+            f"../Data/{subject}/training_split/resized_training_images.pkl", "rb"
         ) as f:
             images = pickle.load(f)
 

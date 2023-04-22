@@ -40,10 +40,10 @@ _logger = logging.getLogger(__name__)
 # Global variables
 THISFILE_PATH = os.path.abspath(__file__)
 DATAIN_PATH = os.path.join(
-    os.path.abspath(os.path.join(THISFILE_PATH, os.pardir, os.pardir)), "datain"
+    os.path.abspath(os.path.join(THISFILE_PATH, os.pardir, os.pardir)), "Data"
 )
 DATAOUT_PATH = os.path.join(
-    os.path.abspath(os.path.join(THISFILE_PATH, os.pardir, os.pardir)), "dataout"
+    os.path.abspath(os.path.join(THISFILE_PATH, os.pardir, os.pardir)), "Data"
 )
 
 
@@ -55,7 +55,7 @@ DATAOUT_PATH = os.path.join(
 # -----------------------------
 
 
-def load_fMRIdata(subject, data_path=DATAIN_PATH):
+def load_fMRIdata(subject,data_path=DATAIN_PATH):
     """
     Retrieves fMRI data for subject for both hemispheres in a dict
     """

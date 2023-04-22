@@ -19,21 +19,8 @@ import utils
 import tensorflow as tf
 from tensorflow.keras import layers, models
 
-from sklearn.model_selection import train_test_split
 from generate_processed_data import target_creator, training_data_creator
-
-
-def create_train_test_split(X_data, y_data, test_size=0.20, random_state=123):
-    """
-    Create train-test split
-    """
-    X_train, X_test, y_train, y_test = train_test_split(X_data, y_data, test_size=test_size,
-                                                        random_state=random_state)
-
-    X_train, X_val, y_train, y_val = train_test_split(X_data, y_data, test_size=test_size,
-                                                        random_state=random_state)
-
-    return X_train, X_val, X_test, y_train, y_val, y_test 
+from MLdata_processing import create_train_test_split
 
 
 def create_cnn_model(input_shape, output_dim):
