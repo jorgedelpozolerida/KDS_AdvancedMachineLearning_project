@@ -49,8 +49,8 @@ def target_creator(subject, DATAIN_PATH=DATAIN_PATH, test =False, merged = False
     rh_fmri = np.load(os.path.join(fmri_dir, 'rh_training_fmri.npy'))
 
     if test:
-        lh_fmri = lh_fmri[:400]
-        rh_fmri = rh_fmri[:400]
+        lh_fmri = lh_fmri[:100]
+        rh_fmri = rh_fmri[:100]
 
     i = 0
     print("lh_fmri loaded...")
@@ -88,7 +88,7 @@ def training_data_creator(subject, DATAIN_PATH=DATAIN_PATH, test =False):
             # image_array = cv2.resize(image_array, (227, 227))
             images.append(image_array)
 
-            if test and len(images) == 400:
+            if test and len(images) == 100:
                 break
 
         # save images as pickle file

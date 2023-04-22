@@ -16,6 +16,7 @@ import logging                                                                  
 import numpy as np                                                                  # NOQA E402
 import pandas as pd                                                                 # NOQA E402
 import utils
+import pickle
 
 import tensorflow as tf
 from keras import layers, models
@@ -37,7 +38,7 @@ def check_for_GPU():
     print("Num CPUs Available: ", len(tf.config.experimental.list_physical_devices('CPU')))
 
 
-def create_cnn_model(input_shape, output_dim):
+def create_cnn_model(input_shape, output_dim, model_path):
     model = models.Sequential([
         layers.Input(shape=input_shape),
         layers.Conv2D(4, (5, 5), activation='relu', padding='same'),
@@ -56,10 +57,13 @@ def create_cnn_model(input_shape, output_dim):
 
     model.summary()
 
-    return model
+    # Save the model
+    model_version = find_latest_model(model_path) +1
+
+    return model, model_version
 
 
-def train_model(model, model_path, X_train, y_train, X_val, y_val, epochs, batch_size,
+def train_model(model, model_path, X_train, y_train, X_val, model_version, y_val, epochs, batch_size,
                 learning_rate=0.001, patience = 5):
     """
     Train the model
@@ -77,25 +81,23 @@ def train_model(model, model_path, X_train, y_train, X_val, y_val, epochs, batch
                                 epochs=epochs, batch_size=batch_size, 
                                 validation_data=(X_val, y_val), callbacks=cb_list)
 
-    
-
-    # print("model.keys():", model.History.keys())
     epochs_trained = len(model_history.history['loss']) - patience
     val_loss, val_mae, val_mse  = model.evaluate(X_val,  y_val,  verbose=1)
-    # Save the model
 
-
-    model.save(f"{model_path}/model_{find_latest_model()}.h5")
+    model.save(f"{model_path}/model_{model_version}.h5")
 
     return model
 
 
-def save_test_pred_(model_path, specific_model_path, specific_model_name):
+def save_test_pred_(model_path,  X_test, y_test, model_version):
     """
     Save the test predictions
     """
     y_pred = test_model(model, X_test, y_test)
-    
+
+    model_path = model_path.replace("models", "predictions")
+    with open(f"{model_path}/y_test_{model_version}.pickle", "wb") as f:
+        pickle.dump(y_test, f)   
 
 
 def test_model(model, X_test, y_test):
@@ -117,9 +119,11 @@ if __name__ == '__main__':
     test = True
     y_data = target_creator(subject, test = test, merged = True)
     X_data = training_data_creator(subject, test = test)
-    epochs = 500
+    epochs = 3
     batch_size = 16
-    model_path = f"../OutData/{subject}/CNN"
+    learning_rate = 0.000001
+    patience = 3
+    model_path = f"../dataout/models/CNN/{subject}"
 
     input_shape = X_data[0].shape
     output_dim = y_data[0].shape
@@ -130,11 +134,22 @@ if __name__ == '__main__':
     del y_data
 
     check_for_GPU()
-    model = create_cnn_model(input_shape, output_dim)
-    model = train_model(model, model_path, X_train, y_train, X_val, y_val, epochs, batch_size,
-                        learning_rate = 0.0001)
+    model, model_version = create_cnn_model(input_shape = input_shape, 
+                                            output_dim = output_dim, 
+                                            model_path = model_path)
+    model = train_model(model = model, 
+                        model_path = model_path, 
+                        X_train = X_train, 
+                        y_train = y_train, 
+                        X_val = X_val, 
+                        y_val = y_val, 
+                        model_version = model_version,
+                        epochs = epochs, 
+                        batch_size = batch_size,
+                        learning_rate = learning_rate,
+                        patience=patience)
 
-    test_model(model, X_test, y_test, model_path)
+    save_test_pred_(model_path, X_test, y_test, model_version)
 
     
 

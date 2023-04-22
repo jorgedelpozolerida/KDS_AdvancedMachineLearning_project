@@ -132,3 +132,5 @@ dmypy.json
 # Ignore data files 
 # datain/
 Data
+*.h5
+*.pickle
