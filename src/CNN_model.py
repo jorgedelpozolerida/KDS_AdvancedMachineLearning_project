@@ -17,7 +17,8 @@ import pandas as pd                                                             
 import utils
 
 import tensorflow as tf
-from tensorflow.keras import layers, models
+from keras import layers, models
+import keras
 
 from generate_processed_data import target_creator, training_data_creator, create_train_test_split
 
@@ -25,17 +26,18 @@ from generate_processed_data import target_creator, training_data_creator, creat
 def create_cnn_model(input_shape, output_dim):
     model = models.Sequential([
         layers.Input(shape=input_shape),
-        layers.Conv2D(32, (3, 3), activation='relu', padding='same'),
+        layers.Conv2D(4, (5, 5), activation='relu', padding='same'),
         layers.MaxPooling2D((2, 2)),
-        layers.Conv2D(64, (3, 3), activation='relu', padding='same'),
+        layers.Conv2D(8, (5, 5), activation='relu', padding='same'),
         layers.MaxPooling2D((2, 2)),
-        layers.Conv2D(128, (3, 3), activation='relu', padding='same'),
+        layers.Conv2D(16, (5, 5), activation='relu', padding='same'),
         layers.MaxPooling2D((2, 2)),
-        layers.Conv2D(256, (3, 3), activation='relu', padding='same'),
+        layers.Conv2D(32, (5, 5), activation='relu', padding='same'),
         layers.MaxPooling2D((2, 2)),
         layers.Flatten(),
-        layers.Dense(512, activation='relu'),
-        layers.Dense(output_dim)
+        layers.Dense(128, activation='relu'),
+        layers.Dropout(0.5),
+        layers.Dense(output_dim[0])
     ])
 
     model.summary()
@@ -47,8 +49,9 @@ def train_model(model, X_train, y_train, X_val, y_val, epochs, batch_size):
     """
     Train the model
     """
+
     model.compile(optimizer='adam',
-                  loss=tf.keras.losses.SparseCategoricalCrossentropy(from_logits=True),
+                  loss= keras.losses.MeanSquaredError(),
                   metrics=['accuracy'])
 
     model.fit(X_train, y_train, epochs=epochs,
@@ -69,10 +72,13 @@ if __name__ == '__main__':
     
     subject = 'subj01'
     test = True
-    y_data = target_creator(subject, test = test)
+    y_data = target_creator(subject, test = test, merged = True)
     X_data = training_data_creator(subject, test = test)
+    epochs = 5
+    batch_size = 32
 
     input_shape = X_data[0].shape
+    output_dim = y_data[0].shape
 
     X_train, X_val, X_test, y_train, y_val, y_test = create_train_test_split(X_data, y_data, test_size=0.2, random_state=123)
 
