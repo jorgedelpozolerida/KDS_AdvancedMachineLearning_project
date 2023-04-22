@@ -20,6 +20,7 @@ import utils
 import tensorflow as tf
 from keras import layers, models
 import keras
+from utils import find_latest_model
 
 from generate_processed_data import target_creator, training_data_creator, create_train_test_split
 from keras.optimizers import Adam
@@ -55,28 +56,56 @@ def create_cnn_model(input_shape, output_dim):
     return model
 
 
-def train_model(model, X_train, y_train, X_val, y_val, epochs, batch_size,
-                learning_rate=0.001):
+def train_model(model, model_path, X_train, y_train, X_val, y_val, epochs, batch_size,
+                learning_rate=0.001, patience = 5):
     """
     Train the model
     """
 
     model.compile(optimizer= Adam(learning_rate = learning_rate),
                   loss= keras.losses.MeanSquaredError(),
-                  metrics=['accuracy'])
+                  metrics=['MSE','MAE'])
 
-    model.fit(X_train, y_train, epochs=epochs,
-              validation_data=(X_val, y_val), batch_size=batch_size)
+    es_callback = EarlyStopping(monitor='val_loss', mode='min', verbose=1, patience=patience , restore_best_weights = True)
+    cb_list = [es_callback]
+
+    # Train the model
+    model_history = model.fit(X_train, y_train, 
+                                epochs=epochs, batch_size=batch_size, 
+                                validation_data=(X_val, y_val), callbacks=cb_list)
+
+    
+
+    # print("model.keys():", model.History.keys())
+    epochs_trained = len(model_history.history['loss']) - patience
+    val_loss, val_mae, val_mse  = model.evaluate(X_val,  y_val,  verbose=1)
+    # Save the model
+
+
+    model.save(f"{model_path}/model_{find_latest_model()}.h5")
 
     return model
+
+
+def save_test_pred_(model_path, specific_model_path, specific_model_name):
+    """
+    Save the test predictions
+    """
+    y_pred = test_model(model, X_test, y_test)
+    
 
 
 def test_model(model, X_test, y_test):
     """
     Test the model
     """
-    test_loss, test_acc = model.evaluate(X_test, y_test)#, verbose=2)
-    print('\nTest accuracy:', test_acc)
+
+    # Evaluate the model
+    test_loss,test_mae,test_mse = model.evaluate(X_test, y_test, verbose=1)
+    y_pred = model.predict(X_test)
+    
+    return y_pred
+    
 
 
 if __name__ == '__main__':
@@ -87,6 +116,7 @@ if __name__ == '__main__':
     X_data = training_data_creator(subject, test = test)
     epochs = 500
     batch_size = 16
+    model_path = f"../OutData/{subject}/CNN"
 
     input_shape = X_data[0].shape
     output_dim = y_data[0].shape
@@ -98,10 +128,10 @@ if __name__ == '__main__':
 
     check_for_GPU()
     model = create_cnn_model(input_shape, output_dim)
-    model = train_model(model, X_train, y_train, X_val, y_val, epochs, batch_size,
+    model = train_model(model, model_path, X_train, y_train, X_val, y_val, epochs, batch_size,
                         learning_rate = 0.0001)
 
-    test_model(model, X_test, y_test)
+    test_model(model, X_test, y_test, model_path)
 
     
 

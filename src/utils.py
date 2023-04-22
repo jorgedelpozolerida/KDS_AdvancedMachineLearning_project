@@ -244,3 +244,19 @@ def map_fMRI_to_surface(subject, vertices, fmri_data, img_id, masks=None):
         response_maps[key] = fsaverage_response
 
     return response_maps
+
+
+# -----------------------------
+#  ML functions
+# -----------------------------
+
+
+def find_latest_model(model_path):
+        """
+        Find the latest model
+        """
+        model_list = os.listdir(model_path)
+        model_list = [int(model.split('_')[1].split('.')[0]) for model in model_list]
+        latest_model = max(model_list)
+        return latest_model
+
