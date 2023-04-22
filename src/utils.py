@@ -23,6 +23,10 @@ import logging  # NOQA E402
 import numpy as np  # NOQA E402
 import pandas as pd  # NOQA E402
 
+import generate_processed_data
+
+import json
+import re
 import cv2
 import pickle
 import nibabel as nib
@@ -45,7 +49,7 @@ DATAIN_PATH = os.path.join(
     os.path.abspath(os.path.join(THISFILE_PATH, os.pardir, os.pardir)), "Data"
 )
 DATAOUT_PATH = os.path.join(
-    os.path.abspath(os.path.join(THISFILE_PATH, os.pardir, os.pardir)), "Data"
+    os.path.abspath(os.path.join(THISFILE_PATH, os.pardir, os.pardir)), "dataout"
 )
 
 
@@ -61,13 +65,29 @@ def load_fMRIdata(subject,data_path=DATAIN_PATH):
     """
     Retrieves fMRI data for subject for both hemispheres in a dict
     """
-    # fmri_dir = f"../Data/{subject}/training_split/training_fmri"
+    keys = ['left', 'right']
+    fmri_data = {}
     fmri_dir = os.path.join(data_path, subject, "training_split", "training_fmri")
-    lh_fmri = np.load(os.path.join(fmri_dir, "lh_training_fmri.npy"))
-    rh_fmri = np.load(os.path.join(fmri_dir, "rh_training_fmri.npy"))
 
-    return {"left": lh_fmri, "right": rh_fmri}
+    for key in keys:
+        fmri = np.load(os.path.join(fmri_dir, f"{key[0]}h_training_fmri.npy"))
+        fmri_data[key] = fmri
+    return fmri_data
 
+def get_fMRI_shapes(subject,data_path=DATAIN_PATH):
+    """
+    Retrieves fMRI data shapes for subject for both hemispheres in a dict
+    """
+    fmri_dir = os.path.join(data_path, subject, "training_split", "training_fmri")
+    keys = ['left', 'right']
+    shapes = {}
+    
+    for key in keys:
+        file_path = os.path.join(fmri_dir,f"{key[0]}h_training_fmri.npy")
+        shape = np.load(file_path).shape
+        shapes[key] = shape
+
+    return shapes
 
 def load_allvertices(subject, data_path=DATAIN_PATH):
     """
@@ -162,6 +182,42 @@ def load_ROI_brainsurface_masks(subject, roi):
     return roi_brainsurfacemasks, roi_indices
 
 
+def load_predicted_data(subject, model_name, id):
+    '''
+    Returns predicted data for some model for subject in a dicitonary.
+    Assumed to be stored under dataout/predictions/{model_name}/{subject}
+    '''
+    data_dir = os.path.join(DATAOUT_PATH, 'predictions', model_name,  subject)
+    filenames = os.listdir(data_dir)
+    filename_with_start_id = next((filename for filename in filenames if re.match(r'^(\d+)_', filename) and int(re.match(r'^(\d+)_', filename).group(1)) == id), None)
+    file_path = os.path.join(data_dir, filename_with_start_id)
+    with open(file_path, 'rb') as f:
+        data = pickle.load(f)
+    
+    lh_data, rh_data = generate_processed_data.split_y_data(subject, data)
+      
+    return {'left': lh_data, 'right': rh_data}
+
+
+
+def get_file_with_id(id, folder_path):
+    """
+    Get the file name that starts with the given ID in the given folder.
+
+    Args:
+    id (int or str): The ID to search for.
+    folder_path (str): The path to the folder to search in.
+
+    Returns:
+    str: The file name that starts with the given ID, or None if no file is found.
+    """
+    pattern = re.compile(f"^{id}_")
+    for filename in os.listdir(folder_path):
+        if pattern.match(filename):
+            return os.path.join(folder_path, filename)
+    return None
+
+
 # -----------------------------
 # Visualization
 # -----------------------------
@@ -247,11 +303,19 @@ def map_fMRI_to_surface(subject, vertices, fmri_data, img_id, masks=None):
 
     return response_maps
 
+def ensure_dir(dir):
+    ''' 
+    Returns input dir and creates it if it does not exist
+    '''
+    if not os.path.exists(dir):
+        os.makedirs(dir)
+        print(f"Created following dir: {dir}")
+
+    return dir 
 
 # -----------------------------
 #  ML functions
 # -----------------------------
-
 
 def find_latest_model(model_path):
     """
@@ -271,11 +335,27 @@ def find_latest_model(model_path):
     return latest_model
 
 
-
-
 def check_for_GPU():
     """
     Check if GPU is available
     """
     print("Num GPUs Available: ", len(tf.config.experimental.list_physical_devices('GPU')))
     print("Num CPUs Available: ", len(tf.config.experimental.list_physical_devices('CPU')))
+
+
+def get_nextid(dir):
+    '''
+    Looks into files within dir that have a naming convention of id_XXX and
+    returns next available index (integer)
+    
+    Ex: inside some prediction folder 1_XXX.pickle, 2_XXX.pickle it returns 3
+    '''
+
+    filenames = os.listdir(dir)
+    # Get a list of IDs from the filenames
+    ids = [int(filename.split('_')[0]) for filename in filenames]
+    print(ids)
+    # Find the next available ID
+    next_id = max(ids) + 1
+
+    return next_id
