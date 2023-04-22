@@ -25,6 +25,9 @@ from utils import find_latest_model
 from generate_processed_data import target_creator, training_data_creator, create_train_test_split
 from keras.optimizers import Adam
 
+# import EarlyStopping
+from keras.callbacks import EarlyStopping
+
 
 def check_for_GPU():
     """
