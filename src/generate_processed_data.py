@@ -33,7 +33,7 @@ DATAIN_PATH = os.path.join(
     os.path.abspath(os.path.join(THISFILE_PATH, os.pardir, os.pardir)), "Data"
 )
 DATAOUT_PATH = os.path.join(
-    os.path.abspath(os.path.join(THISFILE_PATH, os.pardir, os.pardir)), "Data"
+    os.path.abspath(os.path.join(THISFILE_PATH, os.pardir, os.pardir)), "dataout"
 )
 
 
@@ -107,19 +107,19 @@ def training_data_creator(subject, DATAIN_PATH=DATAIN_PATH, test =False):
     return images
 
 
-def split_y_data(y_data: np.array(object)):
+def split_y_data(subject, y_data: np.array(object)):
     """
     Expected format: a numpy array of all the merged fmri data 
     E.g y_data shape: (N, 39548) , where N is the number of images
     """
-    len_of_left_side = 19004
-    left_y_data = []
-    right_y_data = []
-    for i in range(len(y_data)):
-        left_y_data.append(y_data[i][:len_of_left_side])
-        right_y_data.append(y_data[i][len_of_left_side:])
+    shapes = utils.get_fMRI_shapes(subject)
+    print(shapes)
+    len_of_left_side = shapes['left'][1] # get lh number of vertices
+
+    lh_y = y_data[:, :len_of_left_side]
+    rh_y = y_data[:, len_of_left_side:]
     
-    return y_data[0], y_data[1]
+    return lh_y, rh_y
 
 def merge_y_data(y_data: tuple):
     """
