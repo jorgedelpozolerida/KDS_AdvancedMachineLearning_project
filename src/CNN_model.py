@@ -19,8 +19,7 @@ import utils
 import tensorflow as tf
 from tensorflow.keras import layers, models
 
-from generate_processed_data import target_creator, training_data_creator
-from MLdata_processing import create_train_test_split
+from generate_processed_data import target_creator, training_data_creator, create_train_test_split
 
 
 def create_cnn_model(input_shape, output_dim):
@@ -69,8 +68,9 @@ def test_model(model, X_test, y_test):
 if __name__ == '__main__':
     
     subject = 'subj01'
-    y_data = target_creator(subject)
-    X_data = training_data_creator(subject)
+    test = True
+    y_data = target_creator(subject, test = test)
+    X_data = training_data_creator(subject, test = test)
 
     input_shape = X_data[0].shape
 
