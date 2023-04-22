@@ -21,6 +21,7 @@ from keras import layers, models
 import keras
 
 from generate_processed_data import target_creator, training_data_creator, create_train_test_split
+from keras.optimizers import Adam
 
 
 def check_for_GPU():
@@ -59,13 +60,13 @@ def train_model(model, X_train, y_train, X_val, y_val, epochs, batch_size,
     Train the model
     """
 
-    model.compile(optimizer='adam',
+    model.compile(optimizer= Adam(learning_rate = learning_rate),
                   loss= keras.losses.MeanSquaredError(),
                   metrics=['accuracy'])
 
     model.fit(X_train, y_train, epochs=epochs,
               validation_data=(X_val, y_val), batch_size=batch_size,
-              learning_rate=0.001, verbose=2)
+              verbose=2)
 
     return model
 
@@ -97,7 +98,8 @@ if __name__ == '__main__':
 
     check_for_GPU()
     model = create_cnn_model(input_shape, output_dim)
-    model = train_model(model, X_train, y_train, X_val, y_val, epochs, batch_size)
+    model = train_model(model, X_train, y_train, X_val, y_val, epochs, batch_size,
+                        learning_rate = 0.0001)
 
     test_model(model, X_test, y_test)
 
