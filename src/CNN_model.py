@@ -82,6 +82,7 @@ def train_model(model, model_path, X_train, y_train, X_val, model_version, y_val
                                 validation_data=(X_val, y_val), callbacks=cb_list)
 
     epochs_trained = len(model_history.history['loss']) - patience
+    print(f"Epochs Trained: {epochs_trained}")
     val_loss, val_mae, val_mse  = model.evaluate(X_val,  y_val,  verbose=1)
 
     model.save(f"{model_path}/model_{model_version}.h5")
@@ -116,13 +117,13 @@ def test_model(model, X_test, y_test):
 if __name__ == '__main__':
     
     subject = 'subj01'
-    test = True
+    test = False
     y_data = target_creator(subject, test = test, merged = True)
     X_data = training_data_creator(subject, test = test)
-    epochs = 3
-    batch_size = 16
+    epochs = 100
+    batch_size = 32
     learning_rate = 0.000001
-    patience = 3
+    patience = 5
     model_path = f"../dataout/models/CNN/{subject}"
 
     input_shape = X_data[0].shape
