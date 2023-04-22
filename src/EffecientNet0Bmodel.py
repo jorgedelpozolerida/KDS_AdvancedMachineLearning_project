@@ -30,7 +30,7 @@ from keras.callbacks import EarlyStopping
 from keras.applications import EfficientNetB0
 
 
-def create_cnn_model(input_shape, output_dim, model_path):
+def create_effecientnet0b_model(input_shape, output_dim, model_path):
     base_model = EfficientNetB0(weights='imagenet', include_top=False, input_shape=input_shape)
     x = layers.GlobalAveragePooling2D()(base_model.output)
     output_layer = layers.Dense(output_dim[0])(x)
@@ -115,9 +115,9 @@ if __name__ == '__main__':
     del y_data
 
     check_for_GPU()
-    model, model_version = create_cnn_model(input_shape = input_shape, 
-                                            output_dim = output_dim, 
-                                            model_path = model_path)
+    model, model_version = create_effecientnet0b_model(input_shape = input_shape, 
+                                                        output_dim = output_dim, 
+                                                        model_path = model_path)
 
     model = train_model(model = model, 
                         model_path = model_path, 
