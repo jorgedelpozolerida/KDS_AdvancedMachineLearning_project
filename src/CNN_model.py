@@ -111,7 +111,7 @@ def test_model(model, X_test, y_test):
 if __name__ == '__main__':
     
     subject = 'subj01'
-    test = False
+    test = True
     y_data = target_creator(subject, test = test, merged = True)
     X_data = training_data_creator(subject, test = test)
     epochs = 500
