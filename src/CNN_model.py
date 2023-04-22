@@ -9,7 +9,7 @@
 import os
 import sys
 import argparse
-os.environ['CUDA_VISIBLE_DEVICES'] = '-1' # forces CPU use because errors with GPU
+# os.environ['CUDA_VISIBLE_DEVICES'] = '-1' # forces CPU use because errors with GPU
 
 
 import logging                                                                      # NOQA E402
@@ -63,7 +63,7 @@ def train_model(model, X_train, y_train, X_val, y_val, epochs, batch_size,
 
     model.compile(optimizer= Adam(learning_rate = learning_rate),
                   loss= keras.losses.MeanSquaredError(),
-                  metrics=['accuracy'])
+                  metrics=['MSE','MAE'])
 
     model.fit(X_train, y_train, epochs=epochs,
               validation_data=(X_val, y_val), batch_size=batch_size)
@@ -82,7 +82,7 @@ def test_model(model, X_test, y_test):
 if __name__ == '__main__':
     
     subject = 'subj01'
-    test = False
+    test = True
     y_data = target_creator(subject, test = test, merged = True)
     X_data = training_data_creator(subject, test = test)
     epochs = 500
