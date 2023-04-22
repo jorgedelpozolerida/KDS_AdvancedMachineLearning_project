@@ -113,7 +113,6 @@ def split_y_data(subject, y_data: np.array(object)):
     E.g y_data shape: (N, 39548) , where N is the number of images
     """
     shapes = utils.get_fMRI_shapes(subject)
-    print(shapes)
     len_of_left_side = shapes['left'][1] # get lh number of vertices
 
     lh_y = y_data[:, :len_of_left_side]

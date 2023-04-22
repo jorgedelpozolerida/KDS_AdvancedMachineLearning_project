@@ -283,46 +283,25 @@ def map_fMRI_to_surface(subject, vertices, fmri_data, img_id, masks=None):
     return response_maps
 
 
-def ensure_dir(dir):
-    ''' 
-    Returns input dir and creates it if it does not exist
-    '''
-    if not os.path.exists(dir):
-        os.makedirs(dir)
-        print(f"Created following dir: {dir}")
-        
-    return dir 
-
 # -----------------------------
 #  ML functions
 # -----------------------------
 
 
 def find_latest_model(model_path):
-        """
-        Find the latest model
-        """
-        model_list = os.listdir(model_path)
-        model_list = [int(model.split('_')[1].split('.')[0]) for model in model_list]
-        latest_model = max(model_list)
-        return latest_model
+    """
+    Find the latest model
+    """
+    for part in ["models", "predictions"]:
+        tmp_model_path = model_path.replace("models", part)
+        if not os.path.exists(model_path):
+            os.makedirs(model_path)
 
+    model_list = os.listdir(model_path)
+    if len(model_list) == 0:
+        return 0
 
+    model_list = [int(model.split('_')[1].split(".")[0]) for model in model_list]
+    latest_model = max(model_list)
+    return latest_model
 
-def get_nextid(dir):
-    '''
-    Looks into files within dir that have a naming convention of id_XXX and
-    returns next available index (integer)
-    
-    Ex: inside some prediction folder 1_XXX.pickle, 2_XXX.pickle it returns 3
-    '''
-    
-    filenames = os.listdir(dir)
-    # Get a list of IDs from the filenames
-    ids = [int(filename.split('_')[0]) for filename in filenames]
-    print(ids)
-    # Find the next available ID
-    next_id = max(ids) + 1
-    
-    return next_id
-    
