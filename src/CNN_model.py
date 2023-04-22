@@ -23,6 +23,14 @@ import keras
 from generate_processed_data import target_creator, training_data_creator, create_train_test_split
 
 
+def check_for_GPU():
+    """
+    Check if GPU is available
+    """
+    print("Num GPUs Available: ", len(tf.config.experimental.list_physical_devices('GPU')))
+    print("Num CPUs Available: ", len(tf.config.experimental.list_physical_devices('CPU')))
+
+
 def create_cnn_model(input_shape, output_dim):
     model = models.Sequential([
         layers.Input(shape=input_shape),
@@ -45,7 +53,8 @@ def create_cnn_model(input_shape, output_dim):
     return model
 
 
-def train_model(model, X_train, y_train, X_val, y_val, epochs, batch_size):
+def train_model(model, X_train, y_train, X_val, y_val, epochs, batch_size,
+                learning_rate=0.001):
     """
     Train the model
     """
@@ -55,7 +64,8 @@ def train_model(model, X_train, y_train, X_val, y_val, epochs, batch_size):
                   metrics=['accuracy'])
 
     model.fit(X_train, y_train, epochs=epochs,
-              validation_data=(X_val, y_val), batch_size=batch_size)
+              validation_data=(X_val, y_val), batch_size=batch_size,
+              learning_rate=0.001, verbose=2)
 
     return model
 
@@ -74,18 +84,18 @@ if __name__ == '__main__':
     test = True
     y_data = target_creator(subject, test = test, merged = True)
     X_data = training_data_creator(subject, test = test)
-    epochs = 5
-    batch_size = 32
+    epochs = 500
+    batch_size = 16
 
     input_shape = X_data[0].shape
     output_dim = y_data[0].shape
-
     X_train, X_val, X_test, y_train, y_val, y_test = create_train_test_split(X_data, y_data, test_size=0.2, random_state=123)
 
     # Clear RAM
     del X_data
     del y_data
 
+    check_for_GPU()
     model = create_cnn_model(input_shape, output_dim)
     model = train_model(model, X_train, y_train, X_val, y_val, epochs, batch_size)
 
