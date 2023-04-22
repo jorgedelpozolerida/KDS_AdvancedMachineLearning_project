@@ -41,7 +41,7 @@ def create_cnn_model(input_shape, output_dim, model_path):
         layers.Conv2D(8, (5, 5), activation='relu', padding='same'),
         layers.MaxPooling2D((2, 2)),
         layers.Flatten(),
-        layers.Dense(128, activation='relu'),
+        layers.Dense(1024, activation='relu'),
         layers.Dropout(0.5),
         layers.Dense(output_dim[0])
     ])

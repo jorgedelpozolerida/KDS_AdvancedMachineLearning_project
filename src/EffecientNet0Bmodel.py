@@ -27,12 +27,13 @@ from generate_processed_data import target_creator, training_data_creator, creat
 from utils import check_for_GPU
 from keras.optimizers import Adam
 from keras.callbacks import EarlyStopping
+from keras.applications import EfficientNetB0
 
 
 def create_cnn_model(input_shape, output_dim, model_path):
     base_model = EfficientNetB0(weights='imagenet', include_top=False, input_shape=input_shape)
     x = layers.GlobalAveragePooling2D()(base_model.output)
-    output_layer = layers.Dense(output_dim)(x)
+    output_layer = layers.Dense(output_dim[0])(x)
     model = models.Model(inputs=base_model.inputs, outputs=output_layer)
     model.summary()
 
@@ -99,10 +100,10 @@ if __name__ == '__main__':
     test = True
     y_data = target_creator(subject, test = test, merged = True)
     X_data = training_data_creator(subject, test = test)
-    epochs = 3
+    epochs = 6
     batch_size = 32
     learning_rate = 0.000001
-    patience = 5
+    patience = 2
     model_path = f"../dataout/models/CNN/{subject}"
 
     input_shape = X_data[0].shape
