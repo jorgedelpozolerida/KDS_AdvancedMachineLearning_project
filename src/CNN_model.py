@@ -9,6 +9,7 @@
 import os
 import sys
 import argparse
+os.environ['CUDA_VISIBLE_DEVICES'] = '-1' # forces CPU use because errors with GPU
 
 
 import logging                                                                      # NOQA E402
@@ -65,8 +66,7 @@ def train_model(model, X_train, y_train, X_val, y_val, epochs, batch_size,
                   metrics=['accuracy'])
 
     model.fit(X_train, y_train, epochs=epochs,
-              validation_data=(X_val, y_val), batch_size=batch_size,
-              verbose=2)
+              validation_data=(X_val, y_val), batch_size=batch_size)
 
     return model
 
@@ -75,14 +75,14 @@ def test_model(model, X_test, y_test):
     """
     Test the model
     """
-    test_loss, test_acc = model.evaluate(X_test, y_test, verbose=2)
+    test_loss, test_acc = model.evaluate(X_test, y_test)#, verbose=2)
     print('\nTest accuracy:', test_acc)
 
 
 if __name__ == '__main__':
     
     subject = 'subj01'
-    test = True
+    test = False
     y_data = target_creator(subject, test = test, merged = True)
     X_data = training_data_creator(subject, test = test)
     epochs = 500
