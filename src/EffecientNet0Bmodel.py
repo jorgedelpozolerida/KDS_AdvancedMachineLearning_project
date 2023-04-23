@@ -9,7 +9,7 @@
 import os
 import sys
 import argparse
-# os.environ['CUDA_VISIBLE_DEVICES'] = '-1' # forces CPU use because errors with GPU
+os.environ['CUDA_VISIBLE_DEVICES'] = '-1' # forces CPU use because errors with GPU
 
 
 import logging                                                                      # NOQA E402
@@ -36,6 +36,7 @@ def create_effecientnet_model(input_shape, output_dim, model_path):
     base_model = EfficientNetB5(weights='imagenet', include_top=False, input_shape=input_shape)
     base_model.trainable = False
     x = layers.GlobalAveragePooling2D()(base_model.output)
+    x = layers.Dense(512, activation='relu')(x)
     output_layer = layers.Dense(output_dim[0])(x)
     model = models.Model(inputs=base_model.inputs, outputs=output_layer)
     model.summary()
@@ -100,7 +101,7 @@ def test_model(model, X_test, y_test):
 if __name__ == '__main__':
     
     subject = 'subj01'
-    test = False
+    test = True 
     y_data = target_creator(subject, test = test, merged = True)
     X_data = training_data_creator(subject, test = test)
     epochs = 200
