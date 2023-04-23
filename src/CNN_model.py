@@ -42,7 +42,7 @@ def create_cnn_model(input_shape, output_dim, model_path):
         layers.MaxPooling2D((2, 2)),
         layers.Flatten(),
         layers.Dense(1024, activation='relu'),
-        layers.Dropout(0.5),
+        # layers.Dropout(0.5),
         layers.Dense(output_dim[0])
     ])
 
