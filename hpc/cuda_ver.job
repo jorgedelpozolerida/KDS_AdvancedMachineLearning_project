@@ -1,11 +1,10 @@
 #!/bin/bash
 
 #SBATCH --job-name=simple        # Job name
-#SBATCH --output=/home/data_shares/group_jet/KDS_AdvancedMachineLearning_project/hpc/logs/cuda_ver.out     # Name of output file (%j expands to jobId)
-#SBATCH --output=/home/data_shares/group_jet/KDS_AdvancedMachineLearning_project/hpc/logs/cuda_ver.err 
+#SBATCH --output=KDS_AdvancedMachineLearning_project/hpc/logs/cuda_ver_%j.out     # Name of output file (%j expands to jobId)
 #SBATCH --cpus-per-task=1        # Schedule one core
 #SBATCH --time=00:01:00          # Run time (hh:mm:ss) - run for one hour max
 #SBATCH --gres=gpu               # Schedule a GPU, or more with gpu:2 etc
 #SBATCH --partition=brown        # Run on either the Red or Brown queue
 
-nvidia-smi
+nvidia-smi --query-gpu=name,memory.total,driver_version --format=csv

@@ -1,0 +1,9 @@
+matplotlib imported successfully!
+nibabel imported successfully!
+nilearn imported successfully!
+numpy imported successfully!
+pandas imported successfully!
+Traceback (most recent call last):
+  File "test_req.py", line 16, in <module>
+    import Pillow
+ModuleNotFoundError: No module named 'Pillow'

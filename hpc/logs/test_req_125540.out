@@ -1,0 +1,9 @@
+created virtual environment CPython3.8.6.final.0-64 in 37741ms
+  creator CPython3Posix(dest=/home/data_shares/group_jet/KDS_AdvancedMachineLearning_project/hpc/venv, clear=False, global=False)
+  seeder FromAppData(download=False, pip=bundle, setuptools=bundle, wheel=bundle, via=copy, app_data_dir=/home/thcl/.local/share/virtualenv)
+    added seed packages: pip==20.2.3, setuptools==50.3.0, wheel==0.35.1
+  activators BashActivator,CShellActivator,FishActivator,PowerShellActivator,PythonActivator,XonshActivator
+Traceback (most recent call last):
+  File "test_req.py", line 1, in <module>
+    import keras
+ModuleNotFoundError: No module named 'keras'

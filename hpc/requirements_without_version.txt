@@ -1,0 +1,10 @@
+keras
+matplotlib
+nibabel
+nilearn
+numpy
+pandas
+Pillow
+scikit_learn
+tensorflow==2.10.0
+tqdm
