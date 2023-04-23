@@ -1,7 +1,0 @@
-Fontconfig warning: ignoring UTF-8: not a valid region tag
-Traceback (most recent call last):
-  File "../src/CNN_model.py", line 18, in <module>
-    import utils
-  File "/home/data_shares/group_jet/KDS_AdvancedMachineLearning_project/src/utils.py", line 30, in <module>
-    import cv2
-ModuleNotFoundError: No module named 'cv2'
