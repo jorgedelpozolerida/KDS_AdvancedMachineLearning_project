@@ -41,8 +41,8 @@ def create_cnn_model(input_shape, output_dim, model_path):
         layers.Conv2D(8, (5, 5), activation='relu', padding='same'),
         layers.MaxPooling2D((2, 2)),
         layers.Flatten(),
-        layers.Dense(1024, activation='relu'),
-        layers.Dropout(0.5),
+        layers.Dense(512, activation='relu'),
+        # layers.Dropout(0.5),
         layers.Dense(output_dim[0])
     ])
 
@@ -111,10 +111,10 @@ if __name__ == '__main__':
     test = True
     y_data = target_creator(subject, test = test, merged = True)
     X_data = training_data_creator(subject, test = test)
-    epochs = 5
+    epochs = 200
     batch_size = 32
     learning_rate = 0.000001
-    patience = 2
+    patience = 5
     model_path = f"../dataout/models/CNN/{subject}"
 
     input_shape = X_data[0].shape

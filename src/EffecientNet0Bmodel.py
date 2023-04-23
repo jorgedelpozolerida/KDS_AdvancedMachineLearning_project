@@ -27,12 +27,16 @@ from generate_processed_data import target_creator, training_data_creator, creat
 from utils import check_for_GPU
 from keras.optimizers import Adam
 from keras.callbacks import EarlyStopping
-from keras.applications import EfficientNetB0
+from keras.applications import EfficientNetB0, EfficientNetB5
 
 
-def create_effecientnet0b_model(input_shape, output_dim, model_path):
-    base_model = EfficientNetB0(weights='imagenet', include_top=False, input_shape=input_shape)
+def create_effecientnet_model(input_shape, output_dim, model_path):
+    # base_model = EfficientNetB0(weights='imagenet', include_top=False, input_shape=input_shape)
+    # freeze the weights of the base model
+    base_model = EfficientNetB5(weights='imagenet', include_top=False, input_shape=input_shape)
+    base_model.trainable = False
     x = layers.GlobalAveragePooling2D()(base_model.output)
+    x = layers.Dense(512, activation='relu')(x)
     output_layer = layers.Dense(output_dim[0])(x)
     model = models.Model(inputs=base_model.inputs, outputs=output_layer)
     model.summary()
@@ -97,10 +101,10 @@ def test_model(model, X_test, y_test):
 if __name__ == '__main__':
     
     subject = 'subj01'
-    test = True
+    test = True 
     y_data = target_creator(subject, test = test, merged = True)
     X_data = training_data_creator(subject, test = test)
-    epochs = 5
+    epochs = 200
     batch_size = 32
     learning_rate = 0.000001
     patience = 2
@@ -115,7 +119,7 @@ if __name__ == '__main__':
     del y_data
 
     check_for_GPU()
-    model, model_version = create_effecientnet0b_model(input_shape = input_shape, 
+    model, model_version = create_effecientnet_model(input_shape = input_shape, 
                                                         output_dim = output_dim, 
                                                         model_path = model_path)
 

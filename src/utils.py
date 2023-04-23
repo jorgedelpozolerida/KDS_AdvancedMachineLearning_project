@@ -18,6 +18,8 @@ import sys
 import argparse
 import glob
 
+os.environ['CUDA_VISIBLE_DEVICES'] = '-1' # forces CPU use because errors with GPU
+
 
 import logging  # NOQA E402
 import numpy as np  # NOQA E402
