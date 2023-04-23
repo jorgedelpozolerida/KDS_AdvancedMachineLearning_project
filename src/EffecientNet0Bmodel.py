@@ -30,7 +30,7 @@ from keras.callbacks import EarlyStopping
 from keras.applications import EfficientNetB0, EfficientNetB5
 
 
-def create_effecientnet0b_model(input_shape, output_dim, model_path):
+def create_effecientnet_model(input_shape, output_dim, model_path):
     # base_model = EfficientNetB0(weights='imagenet', include_top=False, input_shape=input_shape)
     # freeze the weights of the base model
     base_model = EfficientNetB5(weights='imagenet', include_top=False, input_shape=input_shape)
@@ -118,7 +118,7 @@ if __name__ == '__main__':
     del y_data
 
     check_for_GPU()
-    model, model_version = create_effecientnet0b_model(input_shape = input_shape, 
+    model, model_version = create_effecientnet_model(input_shape = input_shape, 
                                                         output_dim = output_dim, 
                                                         model_path = model_path)
 
