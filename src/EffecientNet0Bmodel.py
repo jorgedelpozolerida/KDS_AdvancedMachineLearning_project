@@ -27,11 +27,14 @@ from generate_processed_data import target_creator, training_data_creator, creat
 from utils import check_for_GPU
 from keras.optimizers import Adam
 from keras.callbacks import EarlyStopping
-from keras.applications import EfficientNetB0
+from keras.applications import EfficientNetB0, EfficientNetB5
 
 
 def create_effecientnet0b_model(input_shape, output_dim, model_path):
-    base_model = EfficientNetB0(weights='imagenet', include_top=False, input_shape=input_shape)
+    # base_model = EfficientNetB0(weights='imagenet', include_top=False, input_shape=input_shape)
+    # freeze the weights of the base model
+    base_model = EfficientNetB5(weights='imagenet', include_top=False, input_shape=input_shape)
+    base_model.trainable = False
     x = layers.GlobalAveragePooling2D()(base_model.output)
     output_layer = layers.Dense(output_dim[0])(x)
     model = models.Model(inputs=base_model.inputs, outputs=output_layer)
