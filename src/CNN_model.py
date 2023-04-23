@@ -108,13 +108,13 @@ def test_model(model, X_test, y_test):
 if __name__ == '__main__':
     
     subject = 'subj01'
-    test = True
+    test = False
     y_data = target_creator(subject, test = test, merged = True)
     X_data = training_data_creator(subject, test = test)
-    epochs = 5
+    epochs = 200
     batch_size = 32
     learning_rate = 0.000001
-    patience = 2
+    patience = 5
     model_path = f"../dataout/models/CNN/{subject}"
 
     input_shape = X_data[0].shape
