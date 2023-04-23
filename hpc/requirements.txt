@@ -1,11 +1,11 @@
-keras # fejl
+keras
 tensorflow
 matplotlib
 nibabel
 nilearn
 numpy
 pandas
-Pillow # fejl
-sklearn # fejl 
+Pillow
+sklearn
 tqdm
 opencv-python

@@ -1,31 +1,61 @@
-import matplotlib
-print("matplotlib imported successfully!")
+try:
+    import matplotlib
+    print("matplotlib imported successfully!")
+except ImportError:
+    print("Failed to import matplotlib")
 
-import nibabel
-print("nibabel imported successfully!")
+try:
+    import nibabel
+    print("nibabel imported successfully!")
+except ImportError:
+    print("Failed to import nibabel")
 
-import nilearn
-print("nilearn imported successfully!")
+try:
+    import nilearn
+    print("nilearn imported successfully!")
+except ImportError:
+    print("Failed to import nilearn")
 
-import numpy
-print("numpy imported successfully!")
+try:
+    import numpy
+    print("numpy imported successfully!")
+except ImportError:
+    print("Failed to import numpy")
 
-import pandas
-print("pandas imported successfully!")
+try:
+    import pandas
+    print("pandas imported successfully!")
+except ImportError:
+    print("Failed to import pandas")
 
-import Pillow
-print("Pillow imported successfully!")
+try:
+    import PIL
+    print("PIL imported successfully!")
+except ImportError:
+    print("Failed to import PIL")
 
-import scikit_learn
-print("scikit_learn imported successfully!")
+try:
+    import sklearn
+    print("sklearn imported successfully!")
+except ImportError:
+    print("Failed to import sklearn")
 
-import keras
-print("keras imported successfully!")
+try:
+    import keras
+    print("keras imported successfully!")
+except ImportError:
+    print("Failed to import keras")
 
-import tensorflow
-print("tensorflow imported successfully!")
+try:
+    import tensorflow
+    print("tensorflow imported successfully!")
+except ImportError:
+    print("Failed to import tensorflow")
 
-import tqdm
-print("tqdm imported successfully!")
+try:
+    import tqdm
+    print("tqdm imported successfully!")
+except ImportError:
+    print("Failed to import tqdm")
 
 print("ALL PACKAGES IMPORTED!")
