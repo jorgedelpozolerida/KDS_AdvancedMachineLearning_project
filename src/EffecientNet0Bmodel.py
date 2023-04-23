@@ -9,7 +9,7 @@
 import os
 import sys
 import argparse
-os.environ['CUDA_VISIBLE_DEVICES'] = '-1' # forces CPU use because errors with GPU
+# os.environ['CUDA_VISIBLE_DEVICES'] = '-1' # forces CPU use because errors with GPU
 
 
 import logging                                                                      # NOQA E402
