@@ -1,0 +1,13 @@
+#!/bin/bash
+
+#SBATCH --job-name=simple        # Job name
+#SBATCH --output=logs/setup_%j.out     # Name of output file (%j expands to jobId)
+#SBATCH --cpus-per-task=2        # Schedule one core
+#SBATCH --time=01:00:00          # Run time (hh:mm:ss) - run for one hour max
+#SBATCH --partition=brown        # Run on either the Red or Brown queue
+
+module load Python/3.7.4-GCCcore-8.3.0
+module load CUDA/10.2.89-GCC-8.3.0
+virtualenv -p $(which python) venv_noah
+source venv_noah/bin/activate
+bash install.sh

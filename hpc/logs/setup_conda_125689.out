@@ -1,0 +1,14 @@
+ERROR: The install method you used for conda--probably either `pip install conda`
+or `easy_install conda`--is not compatible with using conda as an application.
+If your intention is to install conda as a standalone application, currently
+supported install methods include the Anaconda installer and the miniconda
+installer.  You can download the miniconda installer from
+https://conda.io/miniconda.html.
+
+ERROR: The install method you used for conda--probably either `pip install conda`
+or `easy_install conda`--is not compatible with using conda as an application.
+If your intention is to install conda as a standalone application, currently
+supported install methods include the Anaconda installer and the miniconda
+installer.  You can download the miniconda installer from
+https://conda.io/miniconda.html.
+
