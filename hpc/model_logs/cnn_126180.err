@@ -1,0 +1,16 @@
+2023-04-24 10:00:57.759670: I tensorflow/core/platform/cpu_feature_guard.cc:182] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
+To enable the following instructions: AVX2 FMA, in other operations, rebuild TensorFlow with the appropriate compiler flags.
+2023-04-24 10:01:10.122333: W tensorflow/compiler/tf2tensorrt/utils/py_utils.cc:38] TF-TRT Warning: Could not find TensorRT
+  0%|          | 0/9841 [00:00<?, ?it/s]  0%|          | 2/9841 [00:00<08:38, 18.99it/s]  0%|          | 5/9841 [00:00<06:32, 25.06it/s]  0%|          | 9/9841 [00:00<05:58, 27.39it/s]  0%|          | 13/9841 [00:00<05:15, 31.16it/s]  0%|          | 17/9841 [00:00<05:31, 29.59it/s]  0%|          | 22/9841 [00:00<04:54, 33.33it/s]  0%|          | 27/9841 [00:00<04:21, 37.48it/s]  0%|          | 31/9841 [00:00<04:21, 37.56it/s]  0%|          | 36/9841 [00:01<04:06, 39.81it/s]  0%|          | 42/9841 [00:01<03:46, 43.23it/s]  0%|          | 47/9841 [00:01<03:45, 43.36it/s]  1%|          | 52/9841 [00:01<03:49, 42.70it/s]  1%|          | 58/9841 [00:01<03:36, 45.20it/s]  1%|          | 64/9841 [00:01<03:28, 46.96it/s]  1%|          | 69/9841 [00:02<10:13, 15.92it/s]  1%|          | 73/9841 [00:03<17:08,  9.50it/s]  1%|          | 76/9841 [00:04<20:15,  8.03it/s]  1%|          | 78/9841 [00:04<19:07,  8.51it/s]  1%|          | 80/9841 [00:04<21:09,  7.69it/s]  1%|          | 85/9841 [00:04<14:00, 11.60it/s]  1%|          | 90/9841 [00:04<10:23, 15.64it/s]  1%|          | 96/9841 [00:04<07:42, 21.08it/s]  1%|          | 99/9841 [00:05<08:12, 19.76it/s]2023-04-24 10:01:47.046276: E tensorflow/compiler/xla/stream_executor/cuda/cuda_driver.cc:266] failed call to cuInit: CUDA_ERROR_NO_DEVICE: no CUDA-capable device is detected
+2023-04-24 10:01:47.046351: I tensorflow/compiler/xla/stream_executor/cuda/cuda_diagnostics.cc:168] retrieving CUDA diagnostic information for host: desktop18
+2023-04-24 10:01:47.046366: I tensorflow/compiler/xla/stream_executor/cuda/cuda_diagnostics.cc:175] hostname: desktop18
+2023-04-24 10:01:47.046519: I tensorflow/compiler/xla/stream_executor/cuda/cuda_diagnostics.cc:199] libcuda reported version is: 470.86.0
+2023-04-24 10:01:47.046576: I tensorflow/compiler/xla/stream_executor/cuda/cuda_diagnostics.cc:203] kernel reported version is: 470.86.0
+2023-04-24 10:01:47.046589: I tensorflow/compiler/xla/stream_executor/cuda/cuda_diagnostics.cc:309] kernel version seems to match DSO: 470.86.0
+
+Traceback (most recent call last):
+  File "../src/CNN_model.py", line 133, in <module>
+    model = train_model(model = model, 
+  File "../src/CNN_model.py", line 77, in train_model
+    val_loss, val_mae, val_mse  = model.evaluate(X_val,  y_val,  verbose=1)
+ValueError: too many values to unpack (expected 3)

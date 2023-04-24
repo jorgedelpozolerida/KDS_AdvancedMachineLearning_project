@@ -1,0 +1,5 @@
+2023-04-24 11:05:30.568887: W tensorflow/compiler/tf2tensorrt/utils/py_utils.cc:38] TF-TRT Warning: Could not find TensorRT
+Traceback (most recent call last):
+  File "CNN_model.py", line 148, in <module>
+    model = load_model('../dataout/models/CNN/subj01/model_1.h5')
+NameError: name 'load_model' is not defined

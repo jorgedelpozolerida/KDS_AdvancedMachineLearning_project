@@ -1,0 +1,16 @@
+
+The following have been reloaded with a version change:
+  1) TensorFlow/2.2.0-fosscuda-2019b-Python-3.7.4 => TensorFlow/2.3.1-fosscuda-2019b-Python-3.7.4
+
+Traceback (most recent call last):
+  File "../src/CNN_model.py", line 18, in <module>
+    import utils
+  File "/home/data_shares/group_jet/KDS_AdvancedMachineLearning_project/src/utils.py", line 38, in <module>
+    from nilearn import surface, datasets, plotting
+  File "/home/data_shares/group_jet/KDS_AdvancedMachineLearning_project/hpc/venv374/lib/python3.7/site-packages/nilearn/__init__.py", line 68, in <module>
+    _check_module_dependencies()
+  File "/home/data_shares/group_jet/KDS_AdvancedMachineLearning_project/hpc/venv374/lib/python3.7/site-packages/nilearn/version.py", line 182, in _check_module_dependencies
+    install_info=module_metadata.get('install_info'))
+  File "/home/data_shares/group_jet/KDS_AdvancedMachineLearning_project/hpc/venv374/lib/python3.7/site-packages/nilearn/version.py", line 99, in _import_module_with_version_check
+    raise ImportError(message)
+ImportError: A numpy version of at least 1.19 is required to use nilearn. 1.17.3 was found. Please upgrade numpy

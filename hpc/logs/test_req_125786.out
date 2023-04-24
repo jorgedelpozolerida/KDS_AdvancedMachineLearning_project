@@ -1,0 +1,12 @@
+
+TEST RESULTS:
+
+TensorFlow version: 2.3.1
+
+CUDA version: 10.2.0
+
+Device name: /physical_device:CPU:0
+Device type: CPU
+
+
+No GPU found. Please make sure that TensorFlow is installed with GPU support and that your GPU is properly configured.

@@ -1,0 +1,109 @@
+Lmod has detected the following error: The following module(s) are unknown:
+"TensorFlow/2.2.0-fosscuda-2019b-Python-3.7.4"
+
+Please check the spelling or version number. Also try "module spider ..."
+It is also possible your cache file is out-of-date; it may help to try:
+  $ module --ignore-cache load "TensorFlow/2.2.0-fosscuda-2019b-Python-3.7.4"
+
+Also make sure that all modulefiles written in TCL start with the string
+#%Module
+
+
+
+Pip list with only python 3.7.4, TF, Cuda
+Package                      Version
+---------------------------- ---------
+absl-py                      1.4.0
+appdirs                      1.4.4
+astunparse                   1.6.3
+cachetools                   5.3.0
+certifi                      2022.12.7
+charset-normalizer           3.1.0
+cycler                       0.11.0
+flatbuffers                  23.3.3
+fonttools                    4.38.0
+gast                         0.4.0
+google-auth                  2.17.3
+google-auth-oauthlib         0.4.6
+google-pasta                 0.2.0
+grpcio                       1.54.0
+h5py                         2.10.0
+idna                         3.4
+importlib-metadata           6.6.0
+joblib                       1.2.0
+keras                        2.11.0
+kiwisolver                   1.4.4
+libclang                     16.0.0
+lxml                         4.9.2
+Mako                         1.2.4
+Markdown                     3.4.3
+MarkupSafe                   2.1.2
+matplotlib                   3.5.3
+mpi4py                       3.0.2
+mpmath                       1.1.0
+nibabel                      4.0.2
+nilearn                      0.10.0
+numpy                        1.17.3
+oauthlib                     3.2.2
+opencv-python                4.7.0.72
+opt-einsum                   3.3.0
+packaging                    23.1
+pandas                       0.25.3
+Pillow                       9.5.0
+pip                          23.1.1
+platformdirs                 3.2.0
+protobuf                     3.19.6
+pyasn1                       0.5.0
+pyasn1-modules               0.3.0
+pycuda                       2022.1
+pyparsing                    3.0.9
+python-dateutil              2.8.2
+pytools                      2022.1.12
+pytz                         2023.3
+requests                     2.28.2
+requests-oauthlib            1.3.1
+rsa                          4.9
+scikit-learn                 1.0.2
+scipy                        1.3.1
+setuptools                   67.7.1
+six                          1.16.0
+tensorboard                  2.11.2
+tensorboard-data-server      0.6.1
+tensorboard-plugin-wit       1.8.1
+tensorflow                   2.11.0
+tensorflow-estimator         2.11.0
+tensorflow-io-gcs-filesystem 0.32.0
+termcolor                    2.2.0
+threadpoolctl                3.1.0
+tqdm                         4.65.0
+typing_extensions            4.5.0
+urllib3                      1.26.15
+Werkzeug                     2.2.3
+wheel                        0.40.0
+wrapt                        1.15.0
+zipp                         3.15.0
+2023-04-24 00:57:29.025560: I tensorflow/core/platform/cpu_feature_guard.cc:193] This TensorFlow binary is optimized with oneAPI Deep Neural Network Library (oneDNN) to use the following CPU instructions in performance-critical operations:  AVX2 FMA
+To enable them in other operations, rebuild TensorFlow with the appropriate compiler flags.
+2023-04-24 00:57:32.256747: W tensorflow/compiler/xla/stream_executor/platform/default/dso_loader.cc:64] Could not load dynamic library 'libcudart.so.11.0'; dlerror: libcudart.so.11.0: cannot open shared object file: No such file or directory; LD_LIBRARY_PATH: /opt/itu/easybuild/software/CUDA/10.2.89-GCC-8.3.0/nvvm/lib64:/opt/itu/easybuild/software/CUDA/10.2.89-GCC-8.3.0/extras/CUPTI/lib64:/opt/itu/easybuild/software/CUDA/10.2.89-GCC-8.3.0/lib64:/opt/itu/easybuild/software/Python/3.7.4-GCCcore-8.3.0/lib:/opt/itu/easybuild/software/TensorFlow/2.2.0-fosscuda-2019b-Python-3.7.4/lib:/opt/itu/easybuild/software/NCCL/2.4.8-gcccuda-2019b/lib:/opt/itu/easybuild/software/cuDNN/7.6.4.38-gcccuda-2019b/lib64:/opt/itu/easybuild/software/HDF5/1.10.5-gompic-2019b/lib:/opt/itu/easybuild/software/Szip/2.1.1-GCCcore-8.3.0/lib:/opt/itu/easybuild/software/SciPy-bundle/2019.10-fosscuda-2019b-Python-3.7.4/lib/python3.7/site-packages/numpy/core/lib:/opt/itu/easybuild/software/SciPy-bundle/2019.10-fosscuda-2019b-Python-3.7.4/lib:/opt/itu/easybuild/software/libffi/3.2.1-GCCcore-8.3.0/lib64:/opt/itu/easybuild/software/libffi/3.2.1-GCCcore-8.3.0/lib:/opt/itu/easybuild/software/GMP/6.1.2-GCCcore-8.3.0/lib:/opt/itu/easybuild/software/SQLite/3.29.0-GCCcore-8.3.0/lib:/opt/itu/easybuild/software/Tcl/8.6.9-GCCcore-8.3.0/lib:/opt/itu/easybuild/software/libreadline/8.0-GCCcore-8.3.0/lib:/opt/itu/easybuild/software/ncurses/6.1-GCCcore-8.3.0/lib:/opt/itu/easybuild/software/bzip2/1.0.8-GCCcore-8.3.0/lib:/opt/itu/easybuild/software/ScaLAPACK/2.0.2-gompic-2019b/lib:/opt/itu/easybuild/software/FFTW/3.3.8-gompic-2019b/lib:/opt/itu/easybuild/software/OpenBLAS/0.3.7-GCC-8.3.0/lib:/opt/itu/easybuild/software/OpenMPI/3.1.4-gcccuda-2019b/lib:/opt/itu/easybuild/software/hwloc/1.11.12-GCCcore-8.3.0/lib:/opt/itu/easybuild/software/libpciaccess/0.14-GCCcore-8.3.0/lib:/opt/itu/easybuild/software/libxml2/2.9.9-GCCcore-8.3.0/lib:/opt/itu/easybuild/software/XZ/5.2.4-GCCcore-8.3.0/lib:/opt/itu/easybuild/software/numactl/2.0.12-GCCcore-8.3.0/lib:/opt/itu/easybuild/software/binutils/2.32-GCCcore-8.3.0/lib:/opt/itu/easybuild/software/zlib/1.2.11-GCCcore-8.3.0/lib:/opt/itu/easybuild/software/GCCcore/8.3.0/lib64:/opt/itu/easybuild/software/GCCcore/8.3.0/lib
+2023-04-24 00:57:32.256951: I tensorflow/compiler/xla/stream_executor/cuda/cudart_stub.cc:29] Ignore above cudart dlerror if you do not have a GPU set up on your machine.
+RuntimeError: module compiled against API version 0xe but this version of numpy is 0xd
+ImportError: numpy.core.multiarray failed to import
+
+The above exception was the direct cause of the following exception:
+
+SystemError: <built-in method __contains__ of dict object at 0x7ff3f25efd70> returned a result with an error set
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "test_gpu.py", line 1, in <module>
+    import tensorflow as tf
+  File "/home/data_shares/group_jet/KDS_AdvancedMachineLearning_project/hpc/venv374/lib/python3.7/site-packages/tensorflow/__init__.py", line 37, in <module>
+    from tensorflow.python.tools import module_util as _module_util
+  File "/home/data_shares/group_jet/KDS_AdvancedMachineLearning_project/hpc/venv374/lib/python3.7/site-packages/tensorflow/python/__init__.py", line 37, in <module>
+    from tensorflow.python.eager import context
+  File "/home/data_shares/group_jet/KDS_AdvancedMachineLearning_project/hpc/venv374/lib/python3.7/site-packages/tensorflow/python/eager/context.py", line 34, in <module>
+    from tensorflow.python.client import pywrap_tf_session
+  File "/home/data_shares/group_jet/KDS_AdvancedMachineLearning_project/hpc/venv374/lib/python3.7/site-packages/tensorflow/python/client/pywrap_tf_session.py", line 19, in <module>
+    from tensorflow.python.client._pywrap_tf_session import *
+ImportError: initialization failed
