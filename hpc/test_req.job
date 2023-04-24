@@ -1,23 +1,25 @@
 #!/bin/bash
 
 #SBATCH --job-name=simple        # Job name
-#SBATCH --output=logs/test_req_%j.out     # Name of output file (%j expands to jobId)
-#SBATCH --cpus-per-task=4        # Schedule one core
+#SBATCH --output=logs/test_req_piplist9.out     # Name of output file (%j expands to jobId)
+#SBATCH --cpus-per-task=1        # Schedule one core
 #SBATCH --time=00:20:00          # Run time (hh:mm:ss) - run for one hour max
-#SBATCH --gres=gpu               # Schedule a GPU, or more with gpu:2 etc
+#SBATCH --gres=gpu:1               # Schedule a GPU, or more with gpu:2 etc
 #SBATCH --partition=brown        # Run on either the Red or Brown queue
 
 # load modules
 module load Python/3.7.4-GCCcore-8.3.0
-module load CUDA/10.1.243-GCC-8.3.0
-module load TensorFlow/2.2.0-fosscuda-2019b-Python-3.7.4
-
-# I tried these as well
-# module load CUDA/10.2.89-GCC-8.3.0
-# module load TensorFlow/2.3.1-foss-2019b-Python-3.7.4 
+module load CUDA/10.2.89-GCC-8.3.0
+module load TensorFlow/2.3.1-fosscuda-2019b-Python-3.7.4
+# module load TensorFlow/2.2.0-fosscuda-2019b-Python-3.7.4
 
 # activate venv
 source venv374/bin/activate
 
 # run python file
+# python test_gpu.py
+echo "Pip list with only python 3.7.4, TF, Cuda"
+
+pip list
+
 python test_gpu.py
