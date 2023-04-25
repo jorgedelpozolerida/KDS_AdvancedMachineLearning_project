@@ -134,3 +134,5 @@ dmypy.json
 Data
 *.h5
 *.pickle
+folder.py
+folderstructure.sh
