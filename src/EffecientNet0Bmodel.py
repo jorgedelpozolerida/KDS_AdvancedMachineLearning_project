@@ -71,7 +71,7 @@ def train_model(model, model_path, X_train, y_train, X_val, model_version, y_val
 
     val_loss, val_mae, val_mse, val_mape = model.evaluate(X_val,  y_val,  verbose=1)
 
-    model.save(f"{model_path}/model_{model_version}.h5")
+    # model.save(f"{model_path}/model_{model_version}.h5")
 
     return model
 
@@ -107,7 +107,7 @@ if __name__ == '__main__':
     test = False 
     y_data = target_creator(subject, test = test, merged = True)
     X_data = training_data_creator(subject, test = test)
-    epochs = 2
+    epochs = 15
     batch_size = 32
     learning_rate = 0.000001
     patience = 3
