@@ -1,0 +1,21 @@
+
+The following have been reloaded with a version change:
+  1) CUDA/10.2.89-GCC-8.3.0 => CUDA/11.1.1-GCC-10.2.0
+  2) GCC/8.3.0 => GCC/10.2.0
+  3) GCCcore/8.3.0 => GCCcore/10.2.0
+  4) binutils/2.32-GCCcore-8.3.0 => binutils/2.35-GCCcore-10.2.0
+  5) zlib/1.2.11-GCCcore-8.3.0 => zlib/1.2.11-GCCcore-10.2.0
+
+
+The following have been reloaded with a version change:
+  1) GCCcore/10.2.0 => GCCcore/8.3.0
+  2) TensorFlow/2.2.0-fosscuda-2019b-Python-3.7.4 => TensorFlow/2.3.1-fosscuda-2019b-Python-3.7.4
+  3) zlib/1.2.11-GCCcore-10.2.0 => zlib/1.2.11-GCCcore-8.3.0
+
+2023-04-24 01:30:39.455076: W tensorflow/stream_executor/platform/default/dso_loader.cc:59] Could not load dynamic library 'libcudart.so.10.1'; dlerror: libcudart.so.10.1: cannot open shared object file: No such file or directory; LD_LIBRARY_PATH: /opt/itu/easybuild/software/snappy/1.1.7-GCCcore-8.3.0/lib:/opt/itu/easybuild/software/libpng/1.6.37-GCCcore-8.3.0/lib:/opt/itu/easybuild/software/protobuf/3.10.0-GCCcore-8.3.0/lib64:/opt/itu/easybuild/software/PCRE/8.43-GCCcore-8.3.0/lib:/opt/itu/easybuild/software/nsync/1.24.0-GCCcore-8.3.0/lib:/opt/itu/easybuild/software/LMDB/0.9.24-GCCcore-8.3.0/lib:/opt/itu/easybuild/software/libjpeg-turbo/2.0.3-GCCcore-8.3.0/lib64:/opt/itu/easybuild/software/JsonCpp/1.9.3-GCCcore-8.3.0/lib:/opt/itu/easybuild/software/ICU/64.2-GCCcore-8.3.0/lib:/opt/itu/easybuild/software/giflib/5.2.1-GCCcore-8.3.0/lib:/opt/itu/easybuild/software/flatbuffers/1.12.0-GCCcore-8.3.0/lib:/opt/itu/easybuild/software/double-conversion/3.1.4-GCCcore-8.3.0/lib:/opt/itu/easybuild/software/cURL/7.66.0-GCCcore-8.3.0/lib:/opt/itu/easybuild/software/zlib/1.2.11-GCCcore-8.3.0/lib:/opt/itu/easybuild/software/GCCcore/8.3.0/lib64:/opt/itu/easybuild/software/GCCcore/8.3.0/lib:/opt/itu/easybuild/software/CUDAcore/11.1.1/nvvm/lib64:/opt/itu/easybuild/software/CUDAcore/11.1.1/extras/CUPTI/lib64:/opt/itu/easybuild/software/CUDAcore/11.1.1/lib:/opt/itu/easybuild/software/binutils/2.35-GCCcore-10.2.0/lib:/opt/itu/easybuild/software/Python/3.7.4-GCCcore-8.3.0/lib:/opt/itu/easybuild/software/TensorFlow/2.2.0-fosscuda-2019b-Python-3.7.4/lib:/opt/itu/easybuild/software/NCCL/2.4.8-gcccuda-2019b/lib:/opt/itu/easybuild/software/cuDNN/7.6.4.38-gcccuda-2019b/lib64:/opt/itu/easybuild/software/HDF5/1.10.5-gompic-2019b/lib:/opt/itu/easybuild/software/Szip/2.1.1-GCCcore-8.3.0/lib:/opt/itu/easybuild/software/SciPy-bundle/2019.10-fosscuda-2019b-Python-3.7.4/lib/python3.7/site-packages/numpy/core/lib:/opt/itu/easybuild/software/SciPy-bundle/2019.10-fosscuda-2019b-Python-3.7.4/lib:/opt/itu/easybuild/software/libffi/3.2.1-GCCcore-8.3.0/lib64:/opt/itu/easybuild/software/libffi/3.2.1-GCCcore-8.3.0/lib:/opt/itu/easybuild/software/GMP/6.1.2-GCCcore-8.3.0/lib:/opt/itu/easybuild/software/SQLite/3.29.0-GCCcore-8.3.0/lib:/opt/itu/easybuild/software/Tcl/8.6.9-GCCcore-8.3.0/lib:/opt/itu/easybuild/software/libreadline/8.0-GCCcore-8.3.0/lib:/opt/itu/easybuild/software/ncurses/6.1-GCCcore-8.3.0/lib:/opt/itu/easybuild/software/bzip2/1.0.8-GCCcore-8.3.0/lib:/opt/itu/easybuild/software/ScaLAPACK/2.0.2-gompic-2019b/lib:/opt/itu/easybuild/software/FFTW/3.3.8-gompic-2019b/lib:/opt/itu/easybuild/software/OpenBLAS/0.3.7-GCC-8.3.0/lib:/opt/itu/easybuild/software/OpenMPI/3.1.4-gcccuda-2019b/lib:/opt/itu/easybuild/software/hwloc/1.11.12-GCCcore-8.3.0/lib:/opt/itu/easybuild/software/libpciaccess/0.14-GCCcore-8.3.0/lib:/opt/itu/easybuild/software/libxml2/2.9.9-GCCcore-8.3.0/lib:/opt/itu/easybuild/software/XZ/5.2.4-GCCcore-8.3.0/lib:/opt/itu/easybuild/software/numactl/2.0.12-GCCcore-8.3.0/lib
+2023-04-24 01:30:39.455121: I tensorflow/stream_executor/cuda/cudart_stub.cc:29] Ignore above cudart dlerror if you do not have a GPU set up on your machine.
+nvcc: NVIDIA (R) Cuda compiler driver
+Copyright (c) 2005-2020 NVIDIA Corporation
+Built on Mon_Oct_12_20:09:46_PDT_2020
+Cuda compilation tools, release 11.1, V11.1.105
+Build cuda_11.1.TC455_06.29190527_0

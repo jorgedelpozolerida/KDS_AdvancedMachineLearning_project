@@ -1,0 +1,226 @@
+created virtual environment CPython3.8.6.final.0-64 in 43996ms
+  creator CPython3Posix(dest=/home/data_shares/group_jet/KDS_AdvancedMachineLearning_project/hpc/venv, clear=False, global=False)
+  seeder FromAppData(download=False, pip=bundle, setuptools=bundle, wheel=bundle, via=copy, app_data_dir=/home/thcl/.local/share/virtualenv)
+    added seed packages: pip==23.0.1, setuptools==50.3.0, wheel==0.40.0
+  activators BashActivator,CShellActivator,FishActivator,PowerShellActivator,PythonActivator,XonshActivator
+Requirement already satisfied: pip in ./venv/lib/python3.8/site-packages (23.0.1)
+Collecting pip
+  Using cached pip-23.1.1-py3-none-any.whl (2.1 MB)
+Installing collected packages: pip
+  Attempting uninstall: pip
+    Found existing installation: pip 23.0.1
+    Uninstalling pip-23.0.1:
+      Successfully uninstalled pip-23.0.1
+Successfully installed pip-23.1.1
+
+
+Installing package keras==2.10.0
+
+Collecting keras==2.10.0
+  Using cached keras-2.10.0-py2.py3-none-any.whl (1.7 MB)
+Installing collected packages: keras
+Successfully installed keras-2.10.0
+
+
+Installing package tensorflow==2.10.0
+
+Collecting tensorflow==2.10.0
+  Using cached tensorflow-2.10.0-cp38-cp38-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (578.1 MB)
+Collecting absl-py>=1.0.0 (from tensorflow==2.10.0)
+  Using cached absl_py-1.4.0-py3-none-any.whl (126 kB)
+Collecting astunparse>=1.6.0 (from tensorflow==2.10.0)
+  Using cached astunparse-1.6.3-py2.py3-none-any.whl (12 kB)
+Collecting flatbuffers>=2.0 (from tensorflow==2.10.0)
+  Using cached flatbuffers-23.3.3-py2.py3-none-any.whl (26 kB)
+Collecting gast<=0.4.0,>=0.2.1 (from tensorflow==2.10.0)
+  Using cached gast-0.4.0-py3-none-any.whl (9.8 kB)
+Collecting google-pasta>=0.1.1 (from tensorflow==2.10.0)
+  Using cached google_pasta-0.2.0-py3-none-any.whl (57 kB)
+Collecting grpcio<2.0,>=1.24.3 (from tensorflow==2.10.0)
+  Using cached grpcio-1.54.0-cp38-cp38-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (5.1 MB)
+Collecting h5py>=2.9.0 (from tensorflow==2.10.0)
+  Using cached h5py-3.8.0-cp38-cp38-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (4.7 MB)
+Requirement already satisfied: keras<2.11,>=2.10.0 in ./venv/lib/python3.8/site-packages (from tensorflow==2.10.0) (2.10.0)
+Collecting keras-preprocessing>=1.1.1 (from tensorflow==2.10.0)
+  Using cached Keras_Preprocessing-1.1.2-py2.py3-none-any.whl (42 kB)
+Collecting libclang>=13.0.0 (from tensorflow==2.10.0)
+  Using cached libclang-16.0.0-py2.py3-none-manylinux2010_x86_64.whl (22.9 MB)
+Collecting numpy>=1.20 (from tensorflow==2.10.0)
+  Using cached numpy-1.24.3-cp38-cp38-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (17.3 MB)
+Collecting opt-einsum>=2.3.2 (from tensorflow==2.10.0)
+  Using cached opt_einsum-3.3.0-py3-none-any.whl (65 kB)
+Collecting packaging (from tensorflow==2.10.0)
+  Using cached packaging-23.1-py3-none-any.whl (48 kB)
+Collecting protobuf<3.20,>=3.9.2 (from tensorflow==2.10.0)
+  Using cached protobuf-3.19.6-cp38-cp38-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (1.1 MB)
+Requirement already satisfied: setuptools in ./venv/lib/python3.8/site-packages (from tensorflow==2.10.0) (50.3.0)
+Collecting six>=1.12.0 (from tensorflow==2.10.0)
+  Using cached six-1.16.0-py2.py3-none-any.whl (11 kB)
+Collecting tensorboard<2.11,>=2.10 (from tensorflow==2.10.0)
+  Using cached tensorboard-2.10.1-py3-none-any.whl (5.9 MB)
+Collecting tensorflow-io-gcs-filesystem>=0.23.1 (from tensorflow==2.10.0)
+  Using cached tensorflow_io_gcs_filesystem-0.32.0-cp38-cp38-manylinux_2_12_x86_64.manylinux2010_x86_64.whl (2.4 MB)
+Collecting tensorflow-estimator<2.11,>=2.10.0 (from tensorflow==2.10.0)
+  Using cached tensorflow_estimator-2.10.0-py2.py3-none-any.whl (438 kB)
+Collecting termcolor>=1.1.0 (from tensorflow==2.10.0)
+  Using cached termcolor-2.2.0-py3-none-any.whl (6.6 kB)
+Collecting typing-extensions>=3.6.6 (from tensorflow==2.10.0)
+  Using cached typing_extensions-4.5.0-py3-none-any.whl (27 kB)
+Collecting wrapt>=1.11.0 (from tensorflow==2.10.0)
+  Using cached wrapt-1.15.0-cp38-cp38-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl (81 kB)
+Requirement already satisfied: wheel<1.0,>=0.23.0 in ./venv/lib/python3.8/site-packages (from astunparse>=1.6.0->tensorflow==2.10.0) (0.40.0)
+Collecting google-auth<3,>=1.6.3 (from tensorboard<2.11,>=2.10->tensorflow==2.10.0)
+  Using cached google_auth-2.17.3-py2.py3-none-any.whl (178 kB)
+Collecting google-auth-oauthlib<0.5,>=0.4.1 (from tensorboard<2.11,>=2.10->tensorflow==2.10.0)
+  Using cached google_auth_oauthlib-0.4.6-py2.py3-none-any.whl (18 kB)
+Collecting markdown>=2.6.8 (from tensorboard<2.11,>=2.10->tensorflow==2.10.0)
+  Using cached Markdown-3.4.3-py3-none-any.whl (93 kB)
+Collecting requests<3,>=2.21.0 (from tensorboard<2.11,>=2.10->tensorflow==2.10.0)
+  Using cached requests-2.28.2-py3-none-any.whl (62 kB)
+Collecting tensorboard-data-server<0.7.0,>=0.6.0 (from tensorboard<2.11,>=2.10->tensorflow==2.10.0)
+  Using cached tensorboard_data_server-0.6.1-py3-none-manylinux2010_x86_64.whl (4.9 MB)
+Collecting tensorboard-plugin-wit>=1.6.0 (from tensorboard<2.11,>=2.10->tensorflow==2.10.0)
+  Using cached tensorboard_plugin_wit-1.8.1-py3-none-any.whl (781 kB)
+Collecting werkzeug>=1.0.1 (from tensorboard<2.11,>=2.10->tensorflow==2.10.0)
+  Using cached Werkzeug-2.2.3-py3-none-any.whl (233 kB)
+Collecting cachetools<6.0,>=2.0.0 (from google-auth<3,>=1.6.3->tensorboard<2.11,>=2.10->tensorflow==2.10.0)
+  Using cached cachetools-5.3.0-py3-none-any.whl (9.3 kB)
+Collecting pyasn1-modules>=0.2.1 (from google-auth<3,>=1.6.3->tensorboard<2.11,>=2.10->tensorflow==2.10.0)
+  Using cached pyasn1_modules-0.3.0-py2.py3-none-any.whl (181 kB)
+Collecting rsa<5,>=3.1.4 (from google-auth<3,>=1.6.3->tensorboard<2.11,>=2.10->tensorflow==2.10.0)
+  Using cached rsa-4.9-py3-none-any.whl (34 kB)
+Collecting requests-oauthlib>=0.7.0 (from google-auth-oauthlib<0.5,>=0.4.1->tensorboard<2.11,>=2.10->tensorflow==2.10.0)
+  Using cached requests_oauthlib-1.3.1-py2.py3-none-any.whl (23 kB)
+Collecting importlib-metadata>=4.4 (from markdown>=2.6.8->tensorboard<2.11,>=2.10->tensorflow==2.10.0)
+  Using cached importlib_metadata-6.6.0-py3-none-any.whl (22 kB)
+Collecting charset-normalizer<4,>=2 (from requests<3,>=2.21.0->tensorboard<2.11,>=2.10->tensorflow==2.10.0)
+  Using cached charset_normalizer-3.1.0-cp38-cp38-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (195 kB)
+Collecting idna<4,>=2.5 (from requests<3,>=2.21.0->tensorboard<2.11,>=2.10->tensorflow==2.10.0)
+  Using cached idna-3.4-py3-none-any.whl (61 kB)
+Collecting urllib3<1.27,>=1.21.1 (from requests<3,>=2.21.0->tensorboard<2.11,>=2.10->tensorflow==2.10.0)
+  Using cached urllib3-1.26.15-py2.py3-none-any.whl (140 kB)
+Collecting certifi>=2017.4.17 (from requests<3,>=2.21.0->tensorboard<2.11,>=2.10->tensorflow==2.10.0)
+  Using cached certifi-2022.12.7-py3-none-any.whl (155 kB)
+Collecting MarkupSafe>=2.1.1 (from werkzeug>=1.0.1->tensorboard<2.11,>=2.10->tensorflow==2.10.0)
+  Using cached MarkupSafe-2.1.2-cp38-cp38-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (25 kB)
+Collecting zipp>=0.5 (from importlib-metadata>=4.4->markdown>=2.6.8->tensorboard<2.11,>=2.10->tensorflow==2.10.0)
+  Using cached zipp-3.15.0-py3-none-any.whl (6.8 kB)
+Collecting pyasn1<0.6.0,>=0.4.6 (from pyasn1-modules>=0.2.1->google-auth<3,>=1.6.3->tensorboard<2.11,>=2.10->tensorflow==2.10.0)
+  Using cached pyasn1-0.5.0-py2.py3-none-any.whl (83 kB)
+Collecting oauthlib>=3.0.0 (from requests-oauthlib>=0.7.0->google-auth-oauthlib<0.5,>=0.4.1->tensorboard<2.11,>=2.10->tensorflow==2.10.0)
+  Using cached oauthlib-3.2.2-py3-none-any.whl (151 kB)
+Installing collected packages: tensorboard-plugin-wit, libclang, flatbuffers, zipp, wrapt, urllib3, typing-extensions, termcolor, tensorflow-io-gcs-filesystem, tensorflow-estimator, tensorboard-data-server, six, pyasn1, protobuf, packaging, oauthlib, numpy, MarkupSafe, idna, grpcio, gast, charset-normalizer, certifi, cachetools, absl-py, werkzeug, rsa, requests, pyasn1-modules, opt-einsum, keras-preprocessing, importlib-metadata, h5py, google-pasta, astunparse, requests-oauthlib, markdown, google-auth, google-auth-oauthlib, tensorboard, tensorflow
+Successfully installed MarkupSafe-2.1.2 absl-py-1.4.0 astunparse-1.6.3 cachetools-5.3.0 certifi-2022.12.7 charset-normalizer-3.1.0 flatbuffers-23.3.3 gast-0.4.0 google-auth-2.17.3 google-auth-oauthlib-0.4.6 google-pasta-0.2.0 grpcio-1.54.0 h5py-3.8.0 idna-3.4 importlib-metadata-6.6.0 keras-preprocessing-1.1.2 libclang-16.0.0 markdown-3.4.3 numpy-1.24.3 oauthlib-3.2.2 opt-einsum-3.3.0 packaging-23.1 protobuf-3.19.6 pyasn1-0.5.0 pyasn1-modules-0.3.0 requests-2.28.2 requests-oauthlib-1.3.1 rsa-4.9 six-1.16.0 tensorboard-2.10.1 tensorboard-data-server-0.6.1 tensorboard-plugin-wit-1.8.1 tensorflow-2.10.0 tensorflow-estimator-2.10.0 tensorflow-io-gcs-filesystem-0.32.0 termcolor-2.2.0 typing-extensions-4.5.0 urllib3-1.26.15 werkzeug-2.2.3 wrapt-1.15.0 zipp-3.15.0
+
+
+Installing package matplotlib
+
+Collecting matplotlib
+  Using cached matplotlib-3.7.1-cp38-cp38-manylinux_2_12_x86_64.manylinux2010_x86_64.whl (9.2 MB)
+Collecting contourpy>=1.0.1 (from matplotlib)
+  Using cached contourpy-1.0.7-cp38-cp38-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (300 kB)
+Collecting cycler>=0.10 (from matplotlib)
+  Using cached cycler-0.11.0-py3-none-any.whl (6.4 kB)
+Collecting fonttools>=4.22.0 (from matplotlib)
+  Using cached fonttools-4.39.3-py3-none-any.whl (1.0 MB)
+Collecting kiwisolver>=1.0.1 (from matplotlib)
+  Using cached kiwisolver-1.4.4-cp38-cp38-manylinux_2_5_x86_64.manylinux1_x86_64.whl (1.2 MB)
+Requirement already satisfied: numpy>=1.20 in ./venv/lib/python3.8/site-packages (from matplotlib) (1.24.3)
+Requirement already satisfied: packaging>=20.0 in ./venv/lib/python3.8/site-packages (from matplotlib) (23.1)
+Collecting pillow>=6.2.0 (from matplotlib)
+  Using cached Pillow-9.5.0-cp38-cp38-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (3.3 MB)
+Collecting pyparsing>=2.3.1 (from matplotlib)
+  Using cached pyparsing-3.0.9-py3-none-any.whl (98 kB)
+Collecting python-dateutil>=2.7 (from matplotlib)
+  Using cached python_dateutil-2.8.2-py2.py3-none-any.whl (247 kB)
+Collecting importlib-resources>=3.2.0 (from matplotlib)
+  Using cached importlib_resources-5.12.0-py3-none-any.whl (36 kB)
+Requirement already satisfied: zipp>=3.1.0 in ./venv/lib/python3.8/site-packages (from importlib-resources>=3.2.0->matplotlib) (3.15.0)
+Requirement already satisfied: six>=1.5 in ./venv/lib/python3.8/site-packages (from python-dateutil>=2.7->matplotlib) (1.16.0)
+Installing collected packages: python-dateutil, pyparsing, pillow, kiwisolver, importlib-resources, fonttools, cycler, contourpy, matplotlib
+Successfully installed contourpy-1.0.7 cycler-0.11.0 fonttools-4.39.3 importlib-resources-5.12.0 kiwisolver-1.4.4 matplotlib-3.7.1 pillow-9.5.0 pyparsing-3.0.9 python-dateutil-2.8.2
+
+
+Installing package nibabel
+
+Collecting nibabel
+  Using cached nibabel-5.1.0-py3-none-any.whl (3.3 MB)
+Requirement already satisfied: importlib-resources>=1.3 in ./venv/lib/python3.8/site-packages (from nibabel) (5.12.0)
+Requirement already satisfied: numpy>=1.19 in ./venv/lib/python3.8/site-packages (from nibabel) (1.24.3)
+Requirement already satisfied: packaging>=17 in ./venv/lib/python3.8/site-packages (from nibabel) (23.1)
+Requirement already satisfied: zipp>=3.1.0 in ./venv/lib/python3.8/site-packages (from importlib-resources>=1.3->nibabel) (3.15.0)
+Installing collected packages: nibabel
+Successfully installed nibabel-5.1.0
+
+
+Installing package nilearn
+
+Collecting nilearn
+  Using cached nilearn-0.10.0-py3-none-any.whl (9.6 MB)
+Collecting joblib>=1.0.0 (from nilearn)
+  Using cached joblib-1.2.0-py3-none-any.whl (297 kB)
+Collecting lxml (from nilearn)
+  Using cached lxml-4.9.2-cp38-cp38-manylinux_2_17_x86_64.manylinux2014_x86_64.manylinux_2_24_x86_64.whl (7.1 MB)
+Requirement already satisfied: nibabel>=3.2.0 in ./venv/lib/python3.8/site-packages (from nilearn) (5.1.0)
+Requirement already satisfied: numpy>=1.19.0 in ./venv/lib/python3.8/site-packages (from nilearn) (1.24.3)
+Collecting pandas>=1.1.5 (from nilearn)
+  Using cached pandas-2.0.0-cp38-cp38-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (12.3 MB)
+Requirement already satisfied: requests>=2.25.0 in ./venv/lib/python3.8/site-packages (from nilearn) (2.28.2)
+Collecting scikit-learn>=1.0.0 (from nilearn)
+  Using cached scikit_learn-1.2.2-cp38-cp38-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (9.8 MB)
+Collecting scipy>=1.6.0 (from nilearn)
+  Using cached scipy-1.10.1-cp38-cp38-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (34.5 MB)
+Requirement already satisfied: importlib-resources>=1.3 in ./venv/lib/python3.8/site-packages (from nibabel>=3.2.0->nilearn) (5.12.0)
+Requirement already satisfied: packaging>=17 in ./venv/lib/python3.8/site-packages (from nibabel>=3.2.0->nilearn) (23.1)
+Requirement already satisfied: python-dateutil>=2.8.2 in ./venv/lib/python3.8/site-packages (from pandas>=1.1.5->nilearn) (2.8.2)
+Collecting pytz>=2020.1 (from pandas>=1.1.5->nilearn)
+  Using cached pytz-2023.3-py2.py3-none-any.whl (502 kB)
+Collecting tzdata>=2022.1 (from pandas>=1.1.5->nilearn)
+  Using cached tzdata-2023.3-py2.py3-none-any.whl (341 kB)
+Requirement already satisfied: charset-normalizer<4,>=2 in ./venv/lib/python3.8/site-packages (from requests>=2.25.0->nilearn) (3.1.0)
+Requirement already satisfied: idna<4,>=2.5 in ./venv/lib/python3.8/site-packages (from requests>=2.25.0->nilearn) (3.4)
+Requirement already satisfied: urllib3<1.27,>=1.21.1 in ./venv/lib/python3.8/site-packages (from requests>=2.25.0->nilearn) (1.26.15)
+Requirement already satisfied: certifi>=2017.4.17 in ./venv/lib/python3.8/site-packages (from requests>=2.25.0->nilearn) (2022.12.7)
+Collecting threadpoolctl>=2.0.0 (from scikit-learn>=1.0.0->nilearn)
+  Using cached threadpoolctl-3.1.0-py3-none-any.whl (14 kB)
+Requirement already satisfied: zipp>=3.1.0 in ./venv/lib/python3.8/site-packages (from importlib-resources>=1.3->nibabel>=3.2.0->nilearn) (3.15.0)
+Requirement already satisfied: six>=1.5 in ./venv/lib/python3.8/site-packages (from python-dateutil>=2.8.2->pandas>=1.1.5->nilearn) (1.16.0)
+Installing collected packages: pytz, tzdata, threadpoolctl, scipy, lxml, joblib, scikit-learn, pandas, nilearn
+Successfully installed joblib-1.2.0 lxml-4.9.2 nilearn-0.10.0 pandas-2.0.0 pytz-2023.3 scikit-learn-1.2.2 scipy-1.10.1 threadpoolctl-3.1.0 tzdata-2023.3
+
+
+Installing package numpy
+
+Requirement already satisfied: numpy in ./venv/lib/python3.8/site-packages (1.24.3)
+
+
+Installing package pandas
+
+Requirement already satisfied: pandas in ./venv/lib/python3.8/site-packages (2.0.0)
+Requirement already satisfied: python-dateutil>=2.8.2 in ./venv/lib/python3.8/site-packages (from pandas) (2.8.2)
+Requirement already satisfied: pytz>=2020.1 in ./venv/lib/python3.8/site-packages (from pandas) (2023.3)
+Requirement already satisfied: tzdata>=2022.1 in ./venv/lib/python3.8/site-packages (from pandas) (2023.3)
+Requirement already satisfied: numpy>=1.20.3 in ./venv/lib/python3.8/site-packages (from pandas) (1.24.3)
+Requirement already satisfied: six>=1.5 in ./venv/lib/python3.8/site-packages (from python-dateutil>=2.8.2->pandas) (1.16.0)
+
+
+Installing package Pillow
+
+Requirement already satisfied: Pillow in ./venv/lib/python3.8/site-packages (9.5.0)
+
+
+Installing package scikit_learn
+
+Requirement already satisfied: scikit_learn in ./venv/lib/python3.8/site-packages (1.2.2)
+Requirement already satisfied: numpy>=1.17.3 in ./venv/lib/python3.8/site-packages (from scikit_learn) (1.24.3)
+Requirement already satisfied: scipy>=1.3.2 in ./venv/lib/python3.8/site-packages (from scikit_learn) (1.10.1)
+Requirement already satisfied: joblib>=1.1.1 in ./venv/lib/python3.8/site-packages (from scikit_learn) (1.2.0)
+Requirement already satisfied: threadpoolctl>=2.0.0 in ./venv/lib/python3.8/site-packages (from scikit_learn) (3.1.0)
+
+
+Installing package tqdm
+
+Collecting tqdm
+  Using cached tqdm-4.65.0-py3-none-any.whl (77 kB)
+Installing collected packages: tqdm
+Successfully installed tqdm-4.65.0

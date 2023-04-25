@@ -6,14 +6,10 @@
 #SBATCH --time=01:00:00          # Run time (hh:mm:ss) - run for one hour max
 #SBATCH --partition=brown        # Run on either the Red or Brown queue
 
-# load modules
-module load Python/3.8.6-GCCcore-10.2.0
-module load CUDA/11.1.1-GCC-10.2.0 
+module load Python/3.7.4-GCCcore-8.3.0
+module load CUDA/10.2.89-GCC-8.3.0
 
-# ONLY COMMENT OUT THIS LINE IF YOU WANT TO MAKE A NEW VENV.
-virtualenv -p $(which python) venv  
+# virtualenv -p $(which python) venv374
 
-# Install packages
-source venv/bin/activate
-pip install --upgrade pip
+source venv_noah/bin/activate
 bash install.sh

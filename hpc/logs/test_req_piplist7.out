@@ -1,0 +1,127 @@
+
+The following have been reloaded with a version change:
+  1) CUDA/10.1.243-GCC-8.3.0 => CUDA/10.2.89-GCC-8.3.0
+
+
+The following have been reloaded with a version change:
+  1) TensorFlow/2.2.0-fosscuda-2019b-Python-3.7.4 => TensorFlow/2.1.0-fosscuda-2019b-Python-3.7.4
+
+Pip list with only python 3.7.4, cuda and tensorflow
+Package                      Version
+---------------------------- ---------
+absl-py                      0.8.1
+appdirs                      1.4.4
+astor                        0.8.0
+astunparse                   1.6.3
+cachetools                   3.1.1
+certifi                      2022.12.7
+charset-normalizer           3.1.0
+cycler                       0.11.0
+flatbuffers                  23.3.3
+fonttools                    4.38.0
+gast                         0.2.2
+google-auth                  1.7.1
+google-auth-oauthlib         0.4.1
+google-pasta                 0.1.8
+grpcio                       1.25.0
+h5py                         2.10.0
+idna                         3.4
+importlib-metadata           6.6.0
+joblib                       1.2.0
+keras                        2.11.0
+Keras-Applications           1.0.8
+Keras-Preprocessing          1.1.0
+kiwisolver                   1.4.4
+libclang                     16.0.0
+lxml                         4.9.2
+Mako                         1.2.4
+Markdown                     3.1.1
+MarkupSafe                   2.1.2
+matplotlib                   3.5.3
+mpi4py                       3.0.2
+mpmath                       1.1.0
+nibabel                      4.0.2
+nilearn                      0.10.0
+numpy                        1.17.3
+oauthlib                     3.1.0
+opencv-python                4.7.0.72
+opt-einsum                   3.1.0
+packaging                    23.1
+pandas                       0.25.3
+Pillow                       9.5.0
+pip                          23.1.1
+platformdirs                 3.2.0
+protobuf                     3.10.0
+pyasn1                       0.5.0
+pyasn1-modules               0.2.7
+pycuda                       2022.1
+pyparsing                    3.0.9
+python-dateutil              2.8.2
+pytools                      2022.1.12
+pytz                         2023.3
+requests                     2.28.2
+requests-oauthlib            1.3.0
+rsa                          4.0
+scikit-learn                 1.0.2
+scipy                        1.4.1
+setuptools                   67.7.1
+six                          1.16.0
+tensorboard                  2.1.0
+tensorboard-data-server      0.6.1
+tensorboard-plugin-wit       1.8.1
+tensorflow                   2.1.0
+tensorflow-estimator         2.1.0
+tensorflow-io-gcs-filesystem 0.32.0
+termcolor                    1.1.0
+threadpoolctl                3.1.0
+tqdm                         4.65.0
+typing_extensions            4.5.0
+urllib3                      1.26.15
+Werkzeug                     0.16.0
+wheel                        0.40.0
+wrapt                        1.11.2
+zipp                         3.15.0
+2023-04-24 00:32:41.030092: W tensorflow/stream_executor/platform/default/dso_loader.cc:55] Could not load dynamic library 'libcudart.so.10.1'; dlerror: libcudart.so.10.1: cannot open shared object file: No such file or directory; LD_LIBRARY_PATH: /opt/itu/easybuild/software/TensorFlow/2.1.0-fosscuda-2019b-Python-3.7.4/lib:/opt/itu/easybuild/software/CUDA/10.2.89-GCC-8.3.0/nvvm/lib64:/opt/itu/easybuild/software/CUDA/10.2.89-GCC-8.3.0/extras/CUPTI/lib64:/opt/itu/easybuild/software/CUDA/10.2.89-GCC-8.3.0/lib64:/opt/itu/easybuild/software/Python/3.7.4-GCCcore-8.3.0/lib:/opt/itu/easybuild/software/TensorFlow/2.2.0-fosscuda-2019b-Python-3.7.4/lib:/opt/itu/easybuild/software/NCCL/2.4.8-gcccuda-2019b/lib:/opt/itu/easybuild/software/cuDNN/7.6.4.38-gcccuda-2019b/lib64:/opt/itu/easybuild/software/HDF5/1.10.5-gompic-2019b/lib:/opt/itu/easybuild/software/Szip/2.1.1-GCCcore-8.3.0/lib:/opt/itu/easybuild/software/SciPy-bundle/2019.10-fosscuda-2019b-Python-3.7.4/lib/python3.7/site-packages/numpy/core/lib:/opt/itu/easybuild/software/SciPy-bundle/2019.10-fosscuda-2019b-Python-3.7.4/lib:/opt/itu/easybuild/software/ScaLAPACK/2.0.2-gompic-2019b/lib:/opt/itu/easybuild/software/FFTW/3.3.8-gompic-2019b/lib:/opt/itu/easybuild/software/OpenBLAS/0.3.7-GCC-8.3.0/lib:/opt/itu/easybuild/software/OpenMPI/3.1.4-gcccuda-2019b/lib:/opt/itu/easybuild/software/hwloc/1.11.12-GCCcore-8.3.0/lib:/opt/itu/easybuild/software/libpciaccess/0.14-GCCcore-8.3.0/lib:/opt/itu/easybuild/software/libxml2/2.9.9-GCCcore-8.3.0/lib:/opt/itu/easybuild/software/numactl/2.0.12-GCCcore-8.3.0/lib:/opt/itu/easybuild/software/libffi/3.2.1-GCCcore-8.3.0/lib64:/opt/itu/easybuild/software/libffi/3.2.1-GCCcore-8.3.0/lib:/opt/itu/easybuild/software/GMP/6.1.2-GCCcore-8.3.0/lib:/opt/itu/easybuild/software/XZ/5.2.4-GCCcore-8.3.0/lib:/opt/itu/easybuild/software/SQLite/3.29.0-GCCcore-8.3.0/lib:/opt/itu/easybuild/software/Tcl/8.6.9-GCCcore-8.3.0/lib:/opt/itu/easybuild/software/libreadline/8.0-GCCcore-8.3.0/lib:/opt/itu/easybuild/software/ncurses/6.1-GCCcore-8.3.0/lib:/opt/itu/easybuild/software/bzip2/1.0.8-GCCcore-8.3.0/lib:/opt/itu/easybuild/software/binutils/2.32-GCCcore-8.3.0/lib:/opt/itu/easybuild/software/zlib/1.2.11-GCCcore-8.3.0/lib:/opt/itu/easybuild/software/GCCcore/8.3.0/lib64:/opt/itu/easybuild/software/GCCcore/8.3.0/lib
+2023-04-24 00:32:41.030305: I tensorflow/stream_executor/cuda/cudart_stub.cc:29] Ignore above cudart dlerror if you do not have a GPU set up on your machine.
+2023-04-24 00:32:52.588523: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library libcuda.so.1
+2023-04-24 00:32:53.232359: I tensorflow/stream_executor/cuda/cuda_gpu_executor.cc:981] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero
+2023-04-24 00:32:53.232921: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1555] Found device 0 with properties: 
+pciBusID: 0000:01:00.0 name: NVIDIA GeForce RTX 2070 computeCapability: 7.5
+coreClock: 1.62GHz coreCount: 36 deviceMemorySize: 7.79GiB deviceMemoryBandwidth: 417.29GiB/s
+2023-04-24 00:32:53.233438: W tensorflow/stream_executor/platform/default/dso_loader.cc:55] Could not load dynamic library 'libcudart.so.10.1'; dlerror: libcudart.so.10.1: cannot open shared object file: No such file or directory; LD_LIBRARY_PATH: /opt/itu/easybuild/software/TensorFlow/2.1.0-fosscuda-2019b-Python-3.7.4/lib:/opt/itu/easybuild/software/CUDA/10.2.89-GCC-8.3.0/nvvm/lib64:/opt/itu/easybuild/software/CUDA/10.2.89-GCC-8.3.0/extras/CUPTI/lib64:/opt/itu/easybuild/software/CUDA/10.2.89-GCC-8.3.0/lib64:/opt/itu/easybuild/software/Python/3.7.4-GCCcore-8.3.0/lib:/opt/itu/easybuild/software/TensorFlow/2.2.0-fosscuda-2019b-Python-3.7.4/lib:/opt/itu/easybuild/software/NCCL/2.4.8-gcccuda-2019b/lib:/opt/itu/easybuild/software/cuDNN/7.6.4.38-gcccuda-2019b/lib64:/opt/itu/easybuild/software/HDF5/1.10.5-gompic-2019b/lib:/opt/itu/easybuild/software/Szip/2.1.1-GCCcore-8.3.0/lib:/opt/itu/easybuild/software/SciPy-bundle/2019.10-fosscuda-2019b-Python-3.7.4/lib/python3.7/site-packages/numpy/core/lib:/opt/itu/easybuild/software/SciPy-bundle/2019.10-fosscuda-2019b-Python-3.7.4/lib:/opt/itu/easybuild/software/ScaLAPACK/2.0.2-gompic-2019b/lib:/opt/itu/easybuild/software/FFTW/3.3.8-gompic-2019b/lib:/opt/itu/easybuild/software/OpenBLAS/0.3.7-GCC-8.3.0/lib:/opt/itu/easybuild/software/OpenMPI/3.1.4-gcccuda-2019b/lib:/opt/itu/easybuild/software/hwloc/1.11.12-GCCcore-8.3.0/lib:/opt/itu/easybuild/software/libpciaccess/0.14-GCCcore-8.3.0/lib:/opt/itu/easybuild/software/libxml2/2.9.9-GCCcore-8.3.0/lib:/opt/itu/easybuild/software/numactl/2.0.12-GCCcore-8.3.0/lib:/opt/itu/easybuild/software/libffi/3.2.1-GCCcore-8.3.0/lib64:/opt/itu/easybuild/software/libffi/3.2.1-GCCcore-8.3.0/lib:/opt/itu/easybuild/software/GMP/6.1.2-GCCcore-8.3.0/lib:/opt/itu/easybuild/software/XZ/5.2.4-GCCcore-8.3.0/lib:/opt/itu/easybuild/software/SQLite/3.29.0-GCCcore-8.3.0/lib:/opt/itu/easybuild/software/Tcl/8.6.9-GCCcore-8.3.0/lib:/opt/itu/easybuild/software/libreadline/8.0-GCCcore-8.3.0/lib:/opt/itu/easybuild/software/ncurses/6.1-GCCcore-8.3.0/lib:/opt/itu/easybuild/software/bzip2/1.0.8-GCCcore-8.3.0/lib:/opt/itu/easybuild/software/binutils/2.32-GCCcore-8.3.0/lib:/opt/itu/easybuild/software/zlib/1.2.11-GCCcore-8.3.0/lib:/opt/itu/easybuild/software/GCCcore/8.3.0/lib64:/opt/itu/easybuild/software/GCCcore/8.3.0/lib
+2023-04-24 00:32:53.606282: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library libcublas.so.10
+2023-04-24 00:32:54.153373: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library libcufft.so.10
+2023-04-24 00:32:54.153497: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library libcurand.so.10
+2023-04-24 00:32:54.603877: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library libcusolver.so.10
+2023-04-24 00:32:55.032313: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library libcusparse.so.10
+2023-04-24 00:32:55.727946: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library libcudnn.so.7
+2023-04-24 00:32:55.727982: W tensorflow/core/common_runtime/gpu/gpu_device.cc:1592] Cannot dlopen some GPU libraries. Please make sure the missing libraries mentioned above are installed properly if you would like to use GPU. Follow the guide at https://www.tensorflow.org/install/gpu for how to download and setup the required libraries for your platform.
+Skipping registering GPU devices...
+2023-04-24 00:32:55.735136: I tensorflow/stream_executor/cuda/cuda_gpu_executor.cc:981] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero
+2023-04-24 00:32:55.735624: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1555] Found device 0 with properties: 
+pciBusID: 0000:01:00.0 name: NVIDIA GeForce RTX 2070 computeCapability: 7.5
+coreClock: 1.62GHz coreCount: 36 deviceMemorySize: 7.79GiB deviceMemoryBandwidth: 417.29GiB/s
+2023-04-24 00:32:55.735871: W tensorflow/stream_executor/platform/default/dso_loader.cc:55] Could not load dynamic library 'libcudart.so.10.1'; dlerror: libcudart.so.10.1: cannot open shared object file: No such file or directory; LD_LIBRARY_PATH: /opt/itu/easybuild/software/TensorFlow/2.1.0-fosscuda-2019b-Python-3.7.4/lib:/opt/itu/easybuild/software/CUDA/10.2.89-GCC-8.3.0/nvvm/lib64:/opt/itu/easybuild/software/CUDA/10.2.89-GCC-8.3.0/extras/CUPTI/lib64:/opt/itu/easybuild/software/CUDA/10.2.89-GCC-8.3.0/lib64:/opt/itu/easybuild/software/Python/3.7.4-GCCcore-8.3.0/lib:/opt/itu/easybuild/software/TensorFlow/2.2.0-fosscuda-2019b-Python-3.7.4/lib:/opt/itu/easybuild/software/NCCL/2.4.8-gcccuda-2019b/lib:/opt/itu/easybuild/software/cuDNN/7.6.4.38-gcccuda-2019b/lib64:/opt/itu/easybuild/software/HDF5/1.10.5-gompic-2019b/lib:/opt/itu/easybuild/software/Szip/2.1.1-GCCcore-8.3.0/lib:/opt/itu/easybuild/software/SciPy-bundle/2019.10-fosscuda-2019b-Python-3.7.4/lib/python3.7/site-packages/numpy/core/lib:/opt/itu/easybuild/software/SciPy-bundle/2019.10-fosscuda-2019b-Python-3.7.4/lib:/opt/itu/easybuild/software/ScaLAPACK/2.0.2-gompic-2019b/lib:/opt/itu/easybuild/software/FFTW/3.3.8-gompic-2019b/lib:/opt/itu/easybuild/software/OpenBLAS/0.3.7-GCC-8.3.0/lib:/opt/itu/easybuild/software/OpenMPI/3.1.4-gcccuda-2019b/lib:/opt/itu/easybuild/software/hwloc/1.11.12-GCCcore-8.3.0/lib:/opt/itu/easybuild/software/libpciaccess/0.14-GCCcore-8.3.0/lib:/opt/itu/easybuild/software/libxml2/2.9.9-GCCcore-8.3.0/lib:/opt/itu/easybuild/software/numactl/2.0.12-GCCcore-8.3.0/lib:/opt/itu/easybuild/software/libffi/3.2.1-GCCcore-8.3.0/lib64:/opt/itu/easybuild/software/libffi/3.2.1-GCCcore-8.3.0/lib:/opt/itu/easybuild/software/GMP/6.1.2-GCCcore-8.3.0/lib:/opt/itu/easybuild/software/XZ/5.2.4-GCCcore-8.3.0/lib:/opt/itu/easybuild/software/SQLite/3.29.0-GCCcore-8.3.0/lib:/opt/itu/easybuild/software/Tcl/8.6.9-GCCcore-8.3.0/lib:/opt/itu/easybuild/software/libreadline/8.0-GCCcore-8.3.0/lib:/opt/itu/easybuild/software/ncurses/6.1-GCCcore-8.3.0/lib:/opt/itu/easybuild/software/bzip2/1.0.8-GCCcore-8.3.0/lib:/opt/itu/easybuild/software/binutils/2.32-GCCcore-8.3.0/lib:/opt/itu/easybuild/software/zlib/1.2.11-GCCcore-8.3.0/lib:/opt/itu/easybuild/software/GCCcore/8.3.0/lib64:/opt/itu/easybuild/software/GCCcore/8.3.0/lib
+2023-04-24 00:32:55.735919: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library libcublas.so.10
+2023-04-24 00:32:55.735936: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library libcufft.so.10
+2023-04-24 00:32:55.735951: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library libcurand.so.10
+2023-04-24 00:32:55.735964: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library libcusolver.so.10
+2023-04-24 00:32:55.735979: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library libcusparse.so.10
+2023-04-24 00:32:55.735992: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library libcudnn.so.7
+2023-04-24 00:32:55.735999: W tensorflow/core/common_runtime/gpu/gpu_device.cc:1592] Cannot dlopen some GPU libraries. Please make sure the missing libraries mentioned above are installed properly if you would like to use GPU. Follow the guide at https://www.tensorflow.org/install/gpu for how to download and setup the required libraries for your platform.
+Skipping registering GPU devices...
+2023-04-24 00:32:55.801569: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1096] Device interconnect StreamExecutor with strength 1 edge matrix:
+2023-04-24 00:32:55.801606: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1102]      0 
+2023-04-24 00:32:55.801613: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1115] 0:   N 
+
+TEST RESULTS:
+
+TensorFlow version: 2.1.0
+
+CUDA version: 10.2.0
+
+Device name: /physical_device:CPU:0
+Device type: CPU
+
+
+No GPU found. Please make sure that TensorFlow is installed with GPU support and that your GPU is properly configured.

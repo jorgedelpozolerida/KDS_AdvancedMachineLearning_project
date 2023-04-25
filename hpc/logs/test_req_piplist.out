@@ -1,0 +1,101 @@
+Pip list WITHOUT TensorFlow/2.2.0-fosscuda-2019b-Python-3.7.4
+Package                      Version
+---------------------------- ---------
+absl-py                      1.4.0
+appdirs                      1.4.4
+astunparse                   1.6.3
+cachetools                   5.3.0
+certifi                      2022.12.7
+charset-normalizer           3.1.0
+cycler                       0.11.0
+flatbuffers                  23.3.3
+fonttools                    4.38.0
+gast                         0.4.0
+google-auth                  2.17.3
+google-auth-oauthlib         0.4.6
+google-pasta                 0.2.0
+grpcio                       1.54.0
+h5py                         3.8.0
+idna                         3.4
+importlib-metadata           6.6.0
+joblib                       1.2.0
+keras                        2.11.0
+kiwisolver                   1.4.4
+libclang                     16.0.0
+lxml                         4.9.2
+Mako                         1.2.4
+Markdown                     3.4.3
+MarkupSafe                   2.1.2
+matplotlib                   3.5.3
+nibabel                      4.0.2
+nilearn                      0.10.0
+numpy                        1.21.6
+oauthlib                     3.2.2
+opencv-python                4.7.0.72
+opt-einsum                   3.3.0
+packaging                    23.1
+pandas                       1.3.5
+Pillow                       9.5.0
+pip                          23.1.1
+platformdirs                 3.2.0
+protobuf                     3.19.6
+pyasn1                       0.5.0
+pyasn1-modules               0.3.0
+pycuda                       2022.1
+pyparsing                    3.0.9
+python-dateutil              2.8.2
+pytools                      2022.1.12
+pytz                         2023.3
+requests                     2.28.2
+requests-oauthlib            1.3.1
+rsa                          4.9
+scikit-learn                 1.0.2
+scipy                        1.7.3
+setuptools                   67.7.1
+six                          1.16.0
+tensorboard                  2.11.2
+tensorboard-data-server      0.6.1
+tensorboard-plugin-wit       1.8.1
+tensorflow                   2.11.0
+tensorflow-estimator         2.11.0
+tensorflow-io-gcs-filesystem 0.32.0
+termcolor                    2.2.0
+threadpoolctl                3.1.0
+tqdm                         4.65.0
+typing_extensions            4.5.0
+urllib3                      1.26.15
+Werkzeug                     2.2.3
+wheel                        0.40.0
+wrapt                        1.15.0
+zipp                         3.15.0
+2023-04-23 23:57:36.723739: I tensorflow/core/platform/cpu_feature_guard.cc:193] This TensorFlow binary is optimized with oneAPI Deep Neural Network Library (oneDNN) to use the following CPU instructions in performance-critical operations:  AVX2 FMA
+To enable them in other operations, rebuild TensorFlow with the appropriate compiler flags.
+2023-04-23 23:57:37.393830: W tensorflow/compiler/xla/stream_executor/platform/default/dso_loader.cc:64] Could not load dynamic library 'libcudart.so.11.0'; dlerror: libcudart.so.11.0: cannot open shared object file: No such file or directory; LD_LIBRARY_PATH: /opt/itu/easybuild/software/CUDA/10.1.243-GCC-8.3.0/nvvm/lib64:/opt/itu/easybuild/software/CUDA/10.1.243-GCC-8.3.0/extras/CUPTI/lib64:/opt/itu/easybuild/software/CUDA/10.1.243-GCC-8.3.0/lib64:/opt/itu/easybuild/software/Python/3.7.4-GCCcore-8.3.0/lib:/opt/itu/easybuild/software/libffi/3.2.1-GCCcore-8.3.0/lib64:/opt/itu/easybuild/software/libffi/3.2.1-GCCcore-8.3.0/lib:/opt/itu/easybuild/software/GMP/6.1.2-GCCcore-8.3.0/lib:/opt/itu/easybuild/software/XZ/5.2.4-GCCcore-8.3.0/lib:/opt/itu/easybuild/software/SQLite/3.29.0-GCCcore-8.3.0/lib:/opt/itu/easybuild/software/Tcl/8.6.9-GCCcore-8.3.0/lib:/opt/itu/easybuild/software/libreadline/8.0-GCCcore-8.3.0/lib:/opt/itu/easybuild/software/ncurses/6.1-GCCcore-8.3.0/lib:/opt/itu/easybuild/software/bzip2/1.0.8-GCCcore-8.3.0/lib:/opt/itu/easybuild/software/binutils/2.32-GCCcore-8.3.0/lib:/opt/itu/easybuild/software/zlib/1.2.11-GCCcore-8.3.0/lib:/opt/itu/easybuild/software/GCCcore/8.3.0/lib64:/opt/itu/easybuild/software/GCCcore/8.3.0/lib:/opt/ohpc/pub/mpi/openmpi3-gnu8/3.1.4/lib:/opt/ohpc/pub/compiler/gcc/8.3.0/lib64
+2023-04-23 23:57:37.393875: I tensorflow/compiler/xla/stream_executor/cuda/cudart_stub.cc:29] Ignore above cudart dlerror if you do not have a GPU set up on your machine.
+2023-04-23 23:57:39.457951: W tensorflow/compiler/xla/stream_executor/platform/default/dso_loader.cc:64] Could not load dynamic library 'libnvinfer.so.7'; dlerror: libnvinfer.so.7: cannot open shared object file: No such file or directory; LD_LIBRARY_PATH: /opt/itu/easybuild/software/CUDA/10.1.243-GCC-8.3.0/nvvm/lib64:/opt/itu/easybuild/software/CUDA/10.1.243-GCC-8.3.0/extras/CUPTI/lib64:/opt/itu/easybuild/software/CUDA/10.1.243-GCC-8.3.0/lib64:/opt/itu/easybuild/software/Python/3.7.4-GCCcore-8.3.0/lib:/opt/itu/easybuild/software/libffi/3.2.1-GCCcore-8.3.0/lib64:/opt/itu/easybuild/software/libffi/3.2.1-GCCcore-8.3.0/lib:/opt/itu/easybuild/software/GMP/6.1.2-GCCcore-8.3.0/lib:/opt/itu/easybuild/software/XZ/5.2.4-GCCcore-8.3.0/lib:/opt/itu/easybuild/software/SQLite/3.29.0-GCCcore-8.3.0/lib:/opt/itu/easybuild/software/Tcl/8.6.9-GCCcore-8.3.0/lib:/opt/itu/easybuild/software/libreadline/8.0-GCCcore-8.3.0/lib:/opt/itu/easybuild/software/ncurses/6.1-GCCcore-8.3.0/lib:/opt/itu/easybuild/software/bzip2/1.0.8-GCCcore-8.3.0/lib:/opt/itu/easybuild/software/binutils/2.32-GCCcore-8.3.0/lib:/opt/itu/easybuild/software/zlib/1.2.11-GCCcore-8.3.0/lib:/opt/itu/easybuild/software/GCCcore/8.3.0/lib64:/opt/itu/easybuild/software/GCCcore/8.3.0/lib:/opt/ohpc/pub/mpi/openmpi3-gnu8/3.1.4/lib:/opt/ohpc/pub/compiler/gcc/8.3.0/lib64
+2023-04-23 23:57:39.460085: W tensorflow/compiler/xla/stream_executor/platform/default/dso_loader.cc:64] Could not load dynamic library 'libnvinfer_plugin.so.7'; dlerror: libnvinfer_plugin.so.7: cannot open shared object file: No such file or directory; LD_LIBRARY_PATH: /opt/itu/easybuild/software/CUDA/10.1.243-GCC-8.3.0/nvvm/lib64:/opt/itu/easybuild/software/CUDA/10.1.243-GCC-8.3.0/extras/CUPTI/lib64:/opt/itu/easybuild/software/CUDA/10.1.243-GCC-8.3.0/lib64:/opt/itu/easybuild/software/Python/3.7.4-GCCcore-8.3.0/lib:/opt/itu/easybuild/software/libffi/3.2.1-GCCcore-8.3.0/lib64:/opt/itu/easybuild/software/libffi/3.2.1-GCCcore-8.3.0/lib:/opt/itu/easybuild/software/GMP/6.1.2-GCCcore-8.3.0/lib:/opt/itu/easybuild/software/XZ/5.2.4-GCCcore-8.3.0/lib:/opt/itu/easybuild/software/SQLite/3.29.0-GCCcore-8.3.0/lib:/opt/itu/easybuild/software/Tcl/8.6.9-GCCcore-8.3.0/lib:/opt/itu/easybuild/software/libreadline/8.0-GCCcore-8.3.0/lib:/opt/itu/easybuild/software/ncurses/6.1-GCCcore-8.3.0/lib:/opt/itu/easybuild/software/bzip2/1.0.8-GCCcore-8.3.0/lib:/opt/itu/easybuild/software/binutils/2.32-GCCcore-8.3.0/lib:/opt/itu/easybuild/software/zlib/1.2.11-GCCcore-8.3.0/lib:/opt/itu/easybuild/software/GCCcore/8.3.0/lib64:/opt/itu/easybuild/software/GCCcore/8.3.0/lib:/opt/ohpc/pub/mpi/openmpi3-gnu8/3.1.4/lib:/opt/ohpc/pub/compiler/gcc/8.3.0/lib64
+2023-04-23 23:57:39.460103: W tensorflow/compiler/tf2tensorrt/utils/py_utils.cc:38] TF-TRT Warning: Cannot dlopen some TensorRT libraries. If you would like to use Nvidia GPU with TensorRT, please make sure the missing libraries mentioned above are installed properly.
+2023-04-23 23:57:43.650321: W tensorflow/compiler/xla/stream_executor/platform/default/dso_loader.cc:64] Could not load dynamic library 'libcudart.so.11.0'; dlerror: libcudart.so.11.0: cannot open shared object file: No such file or directory; LD_LIBRARY_PATH: /opt/itu/easybuild/software/CUDA/10.1.243-GCC-8.3.0/nvvm/lib64:/opt/itu/easybuild/software/CUDA/10.1.243-GCC-8.3.0/extras/CUPTI/lib64:/opt/itu/easybuild/software/CUDA/10.1.243-GCC-8.3.0/lib64:/opt/itu/easybuild/software/Python/3.7.4-GCCcore-8.3.0/lib:/opt/itu/easybuild/software/libffi/3.2.1-GCCcore-8.3.0/lib64:/opt/itu/easybuild/software/libffi/3.2.1-GCCcore-8.3.0/lib:/opt/itu/easybuild/software/GMP/6.1.2-GCCcore-8.3.0/lib:/opt/itu/easybuild/software/XZ/5.2.4-GCCcore-8.3.0/lib:/opt/itu/easybuild/software/SQLite/3.29.0-GCCcore-8.3.0/lib:/opt/itu/easybuild/software/Tcl/8.6.9-GCCcore-8.3.0/lib:/opt/itu/easybuild/software/libreadline/8.0-GCCcore-8.3.0/lib:/opt/itu/easybuild/software/ncurses/6.1-GCCcore-8.3.0/lib:/opt/itu/easybuild/software/bzip2/1.0.8-GCCcore-8.3.0/lib:/opt/itu/easybuild/software/binutils/2.32-GCCcore-8.3.0/lib:/opt/itu/easybuild/software/zlib/1.2.11-GCCcore-8.3.0/lib:/opt/itu/easybuild/software/GCCcore/8.3.0/lib64:/opt/itu/easybuild/software/GCCcore/8.3.0/lib:/opt/ohpc/pub/mpi/openmpi3-gnu8/3.1.4/lib:/opt/ohpc/pub/compiler/gcc/8.3.0/lib64
+2023-04-23 23:57:43.653970: W tensorflow/compiler/xla/stream_executor/platform/default/dso_loader.cc:64] Could not load dynamic library 'libcublas.so.11'; dlerror: libcublas.so.11: cannot open shared object file: No such file or directory; LD_LIBRARY_PATH: /opt/itu/easybuild/software/CUDA/10.1.243-GCC-8.3.0/nvvm/lib64:/opt/itu/easybuild/software/CUDA/10.1.243-GCC-8.3.0/extras/CUPTI/lib64:/opt/itu/easybuild/software/CUDA/10.1.243-GCC-8.3.0/lib64:/opt/itu/easybuild/software/Python/3.7.4-GCCcore-8.3.0/lib:/opt/itu/easybuild/software/libffi/3.2.1-GCCcore-8.3.0/lib64:/opt/itu/easybuild/software/libffi/3.2.1-GCCcore-8.3.0/lib:/opt/itu/easybuild/software/GMP/6.1.2-GCCcore-8.3.0/lib:/opt/itu/easybuild/software/XZ/5.2.4-GCCcore-8.3.0/lib:/opt/itu/easybuild/software/SQLite/3.29.0-GCCcore-8.3.0/lib:/opt/itu/easybuild/software/Tcl/8.6.9-GCCcore-8.3.0/lib:/opt/itu/easybuild/software/libreadline/8.0-GCCcore-8.3.0/lib:/opt/itu/easybuild/software/ncurses/6.1-GCCcore-8.3.0/lib:/opt/itu/easybuild/software/bzip2/1.0.8-GCCcore-8.3.0/lib:/opt/itu/easybuild/software/binutils/2.32-GCCcore-8.3.0/lib:/opt/itu/easybuild/software/zlib/1.2.11-GCCcore-8.3.0/lib:/opt/itu/easybuild/software/GCCcore/8.3.0/lib64:/opt/itu/easybuild/software/GCCcore/8.3.0/lib:/opt/ohpc/pub/mpi/openmpi3-gnu8/3.1.4/lib:/opt/ohpc/pub/compiler/gcc/8.3.0/lib64
+2023-04-23 23:57:43.656559: W tensorflow/compiler/xla/stream_executor/platform/default/dso_loader.cc:64] Could not load dynamic library 'libcublasLt.so.11'; dlerror: libcublasLt.so.11: cannot open shared object file: No such file or directory; LD_LIBRARY_PATH: /opt/itu/easybuild/software/CUDA/10.1.243-GCC-8.3.0/nvvm/lib64:/opt/itu/easybuild/software/CUDA/10.1.243-GCC-8.3.0/extras/CUPTI/lib64:/opt/itu/easybuild/software/CUDA/10.1.243-GCC-8.3.0/lib64:/opt/itu/easybuild/software/Python/3.7.4-GCCcore-8.3.0/lib:/opt/itu/easybuild/software/libffi/3.2.1-GCCcore-8.3.0/lib64:/opt/itu/easybuild/software/libffi/3.2.1-GCCcore-8.3.0/lib:/opt/itu/easybuild/software/GMP/6.1.2-GCCcore-8.3.0/lib:/opt/itu/easybuild/software/XZ/5.2.4-GCCcore-8.3.0/lib:/opt/itu/easybuild/software/SQLite/3.29.0-GCCcore-8.3.0/lib:/opt/itu/easybuild/software/Tcl/8.6.9-GCCcore-8.3.0/lib:/opt/itu/easybuild/software/libreadline/8.0-GCCcore-8.3.0/lib:/opt/itu/easybuild/software/ncurses/6.1-GCCcore-8.3.0/lib:/opt/itu/easybuild/software/bzip2/1.0.8-GCCcore-8.3.0/lib:/opt/itu/easybuild/software/binutils/2.32-GCCcore-8.3.0/lib:/opt/itu/easybuild/software/zlib/1.2.11-GCCcore-8.3.0/lib:/opt/itu/easybuild/software/GCCcore/8.3.0/lib64:/opt/itu/easybuild/software/GCCcore/8.3.0/lib:/opt/ohpc/pub/mpi/openmpi3-gnu8/3.1.4/lib:/opt/ohpc/pub/compiler/gcc/8.3.0/lib64
+2023-04-23 23:57:43.706538: W tensorflow/compiler/xla/stream_executor/platform/default/dso_loader.cc:64] Could not load dynamic library 'libcusolver.so.11'; dlerror: libcusolver.so.11: cannot open shared object file: No such file or directory; LD_LIBRARY_PATH: /opt/itu/easybuild/software/CUDA/10.1.243-GCC-8.3.0/nvvm/lib64:/opt/itu/easybuild/software/CUDA/10.1.243-GCC-8.3.0/extras/CUPTI/lib64:/opt/itu/easybuild/software/CUDA/10.1.243-GCC-8.3.0/lib64:/opt/itu/easybuild/software/Python/3.7.4-GCCcore-8.3.0/lib:/opt/itu/easybuild/software/libffi/3.2.1-GCCcore-8.3.0/lib64:/opt/itu/easybuild/software/libffi/3.2.1-GCCcore-8.3.0/lib:/opt/itu/easybuild/software/GMP/6.1.2-GCCcore-8.3.0/lib:/opt/itu/easybuild/software/XZ/5.2.4-GCCcore-8.3.0/lib:/opt/itu/easybuild/software/SQLite/3.29.0-GCCcore-8.3.0/lib:/opt/itu/easybuild/software/Tcl/8.6.9-GCCcore-8.3.0/lib:/opt/itu/easybuild/software/libreadline/8.0-GCCcore-8.3.0/lib:/opt/itu/easybuild/software/ncurses/6.1-GCCcore-8.3.0/lib:/opt/itu/easybuild/software/bzip2/1.0.8-GCCcore-8.3.0/lib:/opt/itu/easybuild/software/binutils/2.32-GCCcore-8.3.0/lib:/opt/itu/easybuild/software/zlib/1.2.11-GCCcore-8.3.0/lib:/opt/itu/easybuild/software/GCCcore/8.3.0/lib64:/opt/itu/easybuild/software/GCCcore/8.3.0/lib:/opt/ohpc/pub/mpi/openmpi3-gnu8/3.1.4/lib:/opt/ohpc/pub/compiler/gcc/8.3.0/lib64
+2023-04-23 23:57:43.708905: W tensorflow/compiler/xla/stream_executor/platform/default/dso_loader.cc:64] Could not load dynamic library 'libcusparse.so.11'; dlerror: libcusparse.so.11: cannot open shared object file: No such file or directory; LD_LIBRARY_PATH: /opt/itu/easybuild/software/CUDA/10.1.243-GCC-8.3.0/nvvm/lib64:/opt/itu/easybuild/software/CUDA/10.1.243-GCC-8.3.0/extras/CUPTI/lib64:/opt/itu/easybuild/software/CUDA/10.1.243-GCC-8.3.0/lib64:/opt/itu/easybuild/software/Python/3.7.4-GCCcore-8.3.0/lib:/opt/itu/easybuild/software/libffi/3.2.1-GCCcore-8.3.0/lib64:/opt/itu/easybuild/software/libffi/3.2.1-GCCcore-8.3.0/lib:/opt/itu/easybuild/software/GMP/6.1.2-GCCcore-8.3.0/lib:/opt/itu/easybuild/software/XZ/5.2.4-GCCcore-8.3.0/lib:/opt/itu/easybuild/software/SQLite/3.29.0-GCCcore-8.3.0/lib:/opt/itu/easybuild/software/Tcl/8.6.9-GCCcore-8.3.0/lib:/opt/itu/easybuild/software/libreadline/8.0-GCCcore-8.3.0/lib:/opt/itu/easybuild/software/ncurses/6.1-GCCcore-8.3.0/lib:/opt/itu/easybuild/software/bzip2/1.0.8-GCCcore-8.3.0/lib:/opt/itu/easybuild/software/binutils/2.32-GCCcore-8.3.0/lib:/opt/itu/easybuild/software/zlib/1.2.11-GCCcore-8.3.0/lib:/opt/itu/easybuild/software/GCCcore/8.3.0/lib64:/opt/itu/easybuild/software/GCCcore/8.3.0/lib:/opt/ohpc/pub/mpi/openmpi3-gnu8/3.1.4/lib:/opt/ohpc/pub/compiler/gcc/8.3.0/lib64
+2023-04-23 23:57:43.710807: W tensorflow/compiler/xla/stream_executor/platform/default/dso_loader.cc:64] Could not load dynamic library 'libcudnn.so.8'; dlerror: libcudnn.so.8: cannot open shared object file: No such file or directory; LD_LIBRARY_PATH: /opt/itu/easybuild/software/CUDA/10.1.243-GCC-8.3.0/nvvm/lib64:/opt/itu/easybuild/software/CUDA/10.1.243-GCC-8.3.0/extras/CUPTI/lib64:/opt/itu/easybuild/software/CUDA/10.1.243-GCC-8.3.0/lib64:/opt/itu/easybuild/software/Python/3.7.4-GCCcore-8.3.0/lib:/opt/itu/easybuild/software/libffi/3.2.1-GCCcore-8.3.0/lib64:/opt/itu/easybuild/software/libffi/3.2.1-GCCcore-8.3.0/lib:/opt/itu/easybuild/software/GMP/6.1.2-GCCcore-8.3.0/lib:/opt/itu/easybuild/software/XZ/5.2.4-GCCcore-8.3.0/lib:/opt/itu/easybuild/software/SQLite/3.29.0-GCCcore-8.3.0/lib:/opt/itu/easybuild/software/Tcl/8.6.9-GCCcore-8.3.0/lib:/opt/itu/easybuild/software/libreadline/8.0-GCCcore-8.3.0/lib:/opt/itu/easybuild/software/ncurses/6.1-GCCcore-8.3.0/lib:/opt/itu/easybuild/software/bzip2/1.0.8-GCCcore-8.3.0/lib:/opt/itu/easybuild/software/binutils/2.32-GCCcore-8.3.0/lib:/opt/itu/easybuild/software/zlib/1.2.11-GCCcore-8.3.0/lib:/opt/itu/easybuild/software/GCCcore/8.3.0/lib64:/opt/itu/easybuild/software/GCCcore/8.3.0/lib:/opt/ohpc/pub/mpi/openmpi3-gnu8/3.1.4/lib:/opt/ohpc/pub/compiler/gcc/8.3.0/lib64
+2023-04-23 23:57:43.710865: W tensorflow/core/common_runtime/gpu/gpu_device.cc:1934] Cannot dlopen some GPU libraries. Please make sure the missing libraries mentioned above are installed properly if you would like to use GPU. Follow the guide at https://www.tensorflow.org/install/gpu for how to download and setup the required libraries for your platform.
+Skipping registering GPU devices...
+2023-04-23 23:57:43.711722: I tensorflow/core/platform/cpu_feature_guard.cc:193] This TensorFlow binary is optimized with oneAPI Deep Neural Network Library (oneDNN) to use the following CPU instructions in performance-critical operations:  AVX2 FMA
+To enable them in other operations, rebuild TensorFlow with the appropriate compiler flags.
+2023-04-23 23:57:43.712908: W tensorflow/core/common_runtime/gpu/gpu_device.cc:1934] Cannot dlopen some GPU libraries. Please make sure the missing libraries mentioned above are installed properly if you would like to use GPU. Follow the guide at https://www.tensorflow.org/install/gpu for how to download and setup the required libraries for your platform.
+Skipping registering GPU devices...
+
+TEST RESULTS:
+
+TensorFlow version: 2.11.0
+
+CUDA version: 10.2.0
+
+Device name: /physical_device:CPU:0
+Device type: CPU
+
+
+No GPU found. Please make sure that TensorFlow is installed with GPU support and that your GPU is properly configured.

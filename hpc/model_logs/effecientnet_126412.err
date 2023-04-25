@@ -1,0 +1,19 @@
+2023-04-24 12:30:22.967903: I tensorflow/core/platform/cpu_feature_guard.cc:182] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
+To enable the following instructions: AVX2 FMA, in other operations, rebuild TensorFlow with the appropriate compiler flags.
+2023-04-24 12:30:33.684814: W tensorflow/compiler/tf2tensorrt/utils/py_utils.cc:38] TF-TRT Warning: Could not find TensorRT
+  0%|          | 0/9841 [00:00<?, ?it/s]  0%|          | 4/9841 [00:00<04:22, 37.48it/s]  0%|          | 11/9841 [00:00<02:59, 54.72it/s]  0%|          | 18/9841 [00:00<02:43, 60.10it/s]  0%|          | 25/9841 [00:00<02:36, 62.80it/s]  0%|          | 33/9841 [00:00<02:22, 68.70it/s]  0%|          | 40/9841 [00:00<02:24, 67.92it/s]  0%|          | 48/9841 [00:00<02:18, 70.51it/s]  1%|          | 56/9841 [00:00<02:34, 63.14it/s]  1%|          | 65/9841 [00:01<02:25, 67.17it/s]  1%|          | 72/9841 [00:01<02:30, 65.07it/s]  1%|          | 80/9841 [00:01<02:21, 69.10it/s]  1%|          | 88/9841 [00:01<02:18, 70.64it/s]  1%|          | 96/9841 [00:01<02:16, 71.21it/s]  1%|          | 99/9841 [00:01<02:27, 65.96it/s]2023-04-24 12:30:52.404057: E tensorflow/compiler/xla/stream_executor/cuda/cuda_driver.cc:266] failed call to cuInit: CUDA_ERROR_NO_DEVICE: no CUDA-capable device is detected
+
+Traceback (most recent call last):
+  File "EffecientNet0Bmodel.py", line 129, in <module>
+    model = train_model(model = model, 
+  File "EffecientNet0Bmodel.py", line 74, in train_model
+    model.save(f"{model_path}/model_{model_version}.h5")
+  File "/home/data_shares/group_jet/KDS_AdvancedMachineLearning_project/hpc/venv/lib/python3.8/site-packages/keras/utils/traceback_utils.py", line 70, in error_handler
+    raise e.with_traceback(filtered_tb) from None
+  File "/opt/itu/easybuild/software/Python/3.8.6-GCCcore-10.2.0/lib/python3.8/json/__init__.py", line 234, in dumps
+    return cls(
+  File "/opt/itu/easybuild/software/Python/3.8.6-GCCcore-10.2.0/lib/python3.8/json/encoder.py", line 199, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/opt/itu/easybuild/software/Python/3.8.6-GCCcore-10.2.0/lib/python3.8/json/encoder.py", line 257, in iterencode
+    return _iterencode(o, 0)
+TypeError: Unable to serialize [2.0896919 2.1128857 2.1081853] to JSON. Unrecognized type <class 'tensorflow.python.framework.ops.EagerTensor'>.

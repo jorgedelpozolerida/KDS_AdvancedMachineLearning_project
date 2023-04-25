@@ -1,0 +1,11 @@
+2023-04-24 10:38:23.182996: W tensorflow/compiler/tf2tensorrt/utils/py_utils.cc:38] TF-TRT Warning: Could not find TensorRT
+  0%|          | 0/9841 [00:00<?, ?it/s]  0%|          | 11/9841 [00:00<01:32, 106.76it/s]  0%|          | 22/9841 [00:00<01:30, 108.37it/s]  0%|          | 34/9841 [00:00<01:28, 111.42it/s]  0%|          | 46/9841 [00:00<01:28, 110.69it/s]  1%|          | 58/9841 [00:00<01:29, 109.67it/s]  1%|          | 69/9841 [00:00<01:29, 109.34it/s]  1%|          | 80/9841 [00:00<01:29, 108.87it/s]  1%|          | 91/9841 [00:00<01:30, 107.98it/s]  1%|          | 99/9841 [00:00<01:30, 107.70it/s]2023-04-24 10:38:26.901310: E tensorflow/compiler/xla/stream_executor/cuda/cuda_driver.cc:266] failed call to cuInit: CUDA_ERROR_NO_DEVICE: no CUDA-capable device is detected
+
+Traceback (most recent call last):
+  File "CNN_model.py", line 146, in <module>
+    save_test_pred(model_path, model, X_test, y_test, model_version)
+  File "CNN_model.py", line 89, in save_test_pred
+    y_pred = test_model(model, X_test, y_test)
+  File "CNN_model.py", line 101, in test_model
+    test_loss,test_mae,test_mse = model.evaluate(X_test, y_test, verbose=1)
+ValueError: too many values to unpack (expected 3)

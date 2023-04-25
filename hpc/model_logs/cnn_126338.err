@@ -1,0 +1,6 @@
+2023-04-24 11:06:54.122872: W tensorflow/compiler/tf2tensorrt/utils/py_utils.cc:38] TF-TRT Warning: Could not find TensorRT
+2023-04-24 11:07:02.944352: E tensorflow/compiler/xla/stream_executor/cuda/cuda_driver.cc:266] failed call to cuInit: CUDA_ERROR_NO_DEVICE: no CUDA-capable device is detected
+Traceback (most recent call last):
+  File "CNN_model.py", line 150, in <module>
+    print(model.evaluate(X_test, y_test, verbose=1))
+NameError: name 'X_test' is not defined
