@@ -66,15 +66,21 @@ DATAOUT_PATH = os.path.join(
 
 
 
-def calculate_correlations(groundtruth_fmri, predicted_fmri, subject, save=False, save_args=None , plot = False):
+def calculate_correlations(groundtruth_fmri, predicted_fmri, subject, save=False, save_args=None , recalculate=False):
     '''
     Returns dict for left and right correlation values computed per vertex and across images
     
     
     save_ags: {'model_name': XX, 'id': X}
     '''
-    # groundtruth_fmri = utils.load_fMRIdata(subject)
-    # predicted_fmri = utils.load_predicted_data(subject, model='CNN')
+
+    out_dir = utils.ensure_dir(os.path.join(DATAOUT_PATH, 'evaluation', save_args['model_name'], 'pearson_correlation', subject))
+    file_path = os.path.join(out_dir, f"{save_args['id']}_pearsoncorr_{subject}_{save_args['model_name']}.pickle")
+    
+    if os.path.exists(file_path) and not recalculate:
+        correlation_data = np.load(file_path, allow_pickle=True)
+        _logger.info(f"Loading already calcualted correlaiton data form {file_path}")
+        return correlation_data
     
     correlation_data = {}
     for hemisphere, hem_data in groundtruth_fmri.items():
@@ -92,24 +98,23 @@ def calculate_correlations(groundtruth_fmri, predicted_fmri, subject, save=False
         with open(file_path, 'wb') as f:
             pickle.dump(correlation_data, f)
     
-    if plot:   
-        
-        fsaverage_all_vertices = utils.load_allvertices(subject)
-       
-        for hemisphere, hem_corr in correlation_data.items():
-
-            fsaverage_correlation = np.zeros(len(fsaverage_all_vertices[hemisphere]))
-            fsaverage_correlation[np.where(fsaverage_all_vertices[hemisphere])[0]] = hem_corr
-            utils.visualize_brainresponse(hemisphere, 
-                                        surface_map=fsaverage_correlation, 
-                                        cmap='cold_hot',
-                                        title='Encoding accuracy, '+ hemisphere+' hemisphere'
-                                        
-                                        )
         
     return correlation_data
 
+# TODO: noise ceiling
+def calculate_noise_ceiling():
+    
+    return None
 
+
+
+def square_and_normalize(correlation_list, noise_ceiling_list):
+    """
+    Square the correlation coefficients and normalize by the noise ceiling.
+    """
+    squared_correlations = np.square(correlation_list)
+    normalized_correlations = squared_correlations / noise_ceiling_list
+    return normalized_correlations
 
 def load_correlations( subject, model, id):
     '''
@@ -235,13 +240,22 @@ def main(args):
 
     correlations = calculate_correlations(groundtruth_fmri, predicted_fmri, subject,
                                         save=True, save_args={'id': idx, 'model_name': model},
-                                        plot = True)
+                                        recalculate=False)
+    
+    # Plot correlation on brain surface for both hemispheres
+        
+    fsaverage_all_vertices = utils.load_allvertices(subject)
+    for hemisphere, hem_corr in correlations.items():
 
-    # or load it if you have it calculated already
-    # correlations = load_correlations(subject,  model='CNN', id = idx)
-    
-    
-    # Plot correlation
+        fsaverage_correlation = np.zeros(len(fsaverage_all_vertices[hemisphere]))
+        fsaverage_correlation[np.where(fsaverage_all_vertices[hemisphere])[0]] = hem_corr
+        utils.visualize_brainresponse(hemisphere, 
+                                    surface_map=fsaverage_correlation, 
+                                    cmap='cold_hot',
+                                    title='Encoding accuracy, '+ hemisphere+' hemisphere'
+                                    
+                                    )
+    # Plot correlation per Vertex
     plot_ROI_correlations(subject, correlations,
                           show=True,
                           save=True, save_args={'id': idx, 'model_name': model})

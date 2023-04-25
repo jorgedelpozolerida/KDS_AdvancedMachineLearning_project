@@ -73,10 +73,12 @@ def target_creator(subject, DATAIN_PATH=DATAIN_PATH, test =False, merged = False
 def training_data_creator(subject, DATAIN_PATH=DATAIN_PATH, test =False):
     """ """
 
+    training_images_path = os.path.join(DATAIN_PATH, subject, "training_split", "resized_training_images.pkl")
+    
     if not os.path.exists(
-        f"../Data/{subject}/training_split/resized_training_images.pkl"
+        training_images_path
     ) or test:
-        images_dir = f"../Data/{subject}/training_split/training_images"
+        images_dir = os.path.join(DATAIN_PATH, subject, "training_split", "training_images.pkl")
         # Create a dataloader that can load the images
         images = [] #np.array([])
         for image in tqdm(os.listdir(images_dir)):
@@ -97,13 +99,13 @@ def training_data_creator(subject, DATAIN_PATH=DATAIN_PATH, test =False):
         # save images as pickle file
         if not test:
             with open(
-                f"../Data/{subject}/training_split/resized_training_images.pkl", "wb"
+                training_images_path, "wb"
             ) as f:
                 pickle.dump(images, f)
 
     else:
         with open(
-            f"../Data/{subject}/training_split/resized_training_images.pkl", "rb"
+            training_images_path, "rb"
         ) as f:
             images = pickle.load(f)
 
