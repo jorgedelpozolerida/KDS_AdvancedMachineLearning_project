@@ -75,7 +75,7 @@ def train_model(model, model_path, X_train, y_train, X_val, model_version, y_val
 
     val_loss, val_mae, val_mse, val_mape = model.evaluate(X_val,  y_val,  verbose=1)
 
-    model.save(f"{model_path}/model_{model_version}.h5")
+    model.save(f"{model_path}/CNN_{model_version}.h5")
 
     return model
 
@@ -87,7 +87,7 @@ def save_test_pred(model_path, model, X_test, y_test, model_version):
     y_pred = test_model(model, X_test, y_test)
 
     model_path = model_path.replace("models", "predictions")
-    with open(f"{model_path}/y_test_{model_version}.pickle", "wb") as f:
+    with open(f"{model_path}/y_test_CNN_{model_version}.pickle", "wb") as f:
         pickle.dump(y_test, f)   
 
 
