@@ -207,16 +207,32 @@ def plot_ROI_correlations(subject, correlations, save=False, save_args=None, sho
 
 def main(args):
     
-    subject = 'subj01'
-    idx = 1
-    model = 'CNN'
+    subject = 'subj01' # subject to get predicitons and ground truth from
+    idx = 2 # id of the model run
+    model = 'CNN' # model to be evaluated
+    
+    
+    # Load data
+    groundtruth_fmri = utils.load_fMRIdata(subject) # take 
+    images_subject = generate_processed_data.training_data_creator(subject, test = False) # get all images from subject
+
+
+    # TOCHECK: why shapes do not match!....
+    print("Ground truth: ", groundtruth_fmri['left'].shape, groundtruth_fmri['right'].shape)
+    print("Images: ", np.array(images_subject).shape)
+    min_slice = min(len(images_subject), groundtruth_fmri['left'].shape[0])
+    images_subject = images_subject[:min_slice]
+    groundtruth_fmri = {key: value[ :min_slice,:] for key,value in groundtruth_fmri.items()}
+
+
+    y_pred = utils.predict_from_savedmodel(images_subject, subject, model_name=model, id=idx, save=True, recalculate=False)
+    predicted_fmri = generate_processed_data.split_y_data(subject, y_pred)
+        
+    
+    # 1. TEST DATA ----------------------------------------------------------
     
     # --------------------- CORRELATION METRICS -----------------------------
-    # Calculate correlations
-    groundtruth_fmri = utils.load_fMRIdata(subject)
-    predicted_fmri = utils.load_predicted_data(subject, model_name=model, id=idx) # for now taking a copy of the target
- 
-   
+
     correlations = calculate_correlations(groundtruth_fmri, predicted_fmri, subject,
                                         save=True, save_args={'id': idx, 'model_name': model},
                                         plot = True)

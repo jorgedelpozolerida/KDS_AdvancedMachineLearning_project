@@ -41,7 +41,7 @@ logging.basicConfig(level=logging.INFO)
 _logger = logging.getLogger(__name__)
 
 
-def target_creator(subject, DATAIN_PATH=DATAIN_PATH, test =False, merged = False ):
+def target_creator(subject, DATAIN_PATH=DATAIN_PATH, test =False, merged = False, silent=False):
     """
     """
     fmri_dir = os.path.join(DATAIN_PATH, f"{subject}","training_split","training_fmri")
@@ -53,13 +53,16 @@ def target_creator(subject, DATAIN_PATH=DATAIN_PATH, test =False, merged = False
         rh_fmri = rh_fmri[:100]
 
     i = 0
-    print("lh_fmri loaded...")
-    print("lh_fmri.shape: ", lh_fmri.shape)
-    print(f"lh_fmri[{i}].shape: ", lh_fmri[i].shape, "\n")
-    print("rh_fmri loaded...")
-    print("rh_fmri.shape: ", rh_fmri.shape)
-    print(f"rh_fmri[{i}].shape: ", rh_fmri[i].shape, "\n")
-    print("")
+    
+    if not silent:
+        
+        print("lh_fmri loaded...")
+        print("lh_fmri.shape: ", lh_fmri.shape)
+        print(f"lh_fmri[{i}].shape: ", lh_fmri[i].shape, "\n")
+        print("rh_fmri loaded...")
+        print("rh_fmri.shape: ", rh_fmri.shape)
+        print(f"rh_fmri[{i}].shape: ", rh_fmri[i].shape, "\n")
+        print("")
 
     if merged: 
         return merge_y_data((lh_fmri, rh_fmri))
@@ -109,8 +112,11 @@ def training_data_creator(subject, DATAIN_PATH=DATAIN_PATH, test =False):
 
 def split_y_data(subject, y_data: np.array(object)):
     """
-    Expected format: a numpy array of all the merged fmri data 
-    E.g y_data shape: (N, 39548) , where N is the number of images
+    Splits y_data into dictionary containing left and right splits
+    
+    Expected y_data format: a numpy array of all the merged fmri data 
+    (e.g. as outputed by CNN model,for instance y_data shape: (N, 39548), 
+    where N is the number of images
     """
     shapes = utils.get_fMRI_shapes(subject)
     len_of_left_side = shapes['left'][1] # get lh number of vertices
@@ -118,7 +124,7 @@ def split_y_data(subject, y_data: np.array(object)):
     lh_y = y_data[:, :len_of_left_side]
     rh_y = y_data[:, len_of_left_side:]
     
-    return lh_y, rh_y
+    return {'left': lh_y, 'right': rh_y}
 
 def merge_y_data(y_data: tuple):
     """

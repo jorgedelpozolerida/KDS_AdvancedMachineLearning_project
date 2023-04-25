@@ -132,7 +132,9 @@ dmypy.json
 # Ignore data files 
 # datain/
 Data
-*.h5
-*.pickle
+# *.h5
+# *.pickle
+dataout/models
+dataout/predictions
 folder.py
 folderstructure.sh

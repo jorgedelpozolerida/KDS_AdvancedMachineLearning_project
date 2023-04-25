@@ -27,20 +27,15 @@ import pandas as pd  # NOQA E402
 
 import generate_processed_data
 
-import json
 import re
-import cv2
 import pickle
 import nibabel as nib
 import matplotlib.pyplot as plt
 from PIL import Image
 from tqdm import tqdm
 from nilearn import surface, datasets, plotting
-import keras 
 import tensorflow as tf
 
-# from decord import cpu
-# from decord import VideoReader
 
 logging.basicConfig(level=logging.INFO)
 _logger = logging.getLogger(__name__)
@@ -53,9 +48,6 @@ DATAIN_PATH = os.path.join(
 DATAOUT_PATH = os.path.join(
     os.path.abspath(os.path.join(THISFILE_PATH, os.pardir, os.pardir)), "dataout"
 )
-
-
-# TODO: perhaps organize datain differently? A bit messy like this
 
 
 # -----------------------------
@@ -184,24 +176,6 @@ def load_ROI_brainsurface_masks(subject, roi):
     return roi_brainsurfacemasks, roi_indices
 
 
-def load_predicted_data(subject, model_name, id):
-    '''
-    Returns predicted data for some model for subject in a dicitonary.
-    Assumed to be stored under dataout/predictions/{model_name}/{subject}
-    '''
-    data_dir = os.path.join(DATAOUT_PATH, 'predictions', model_name,  subject)
-    filenames = os.listdir(data_dir)
-    filename_with_start_id = next((filename for filename in filenames if re.match(r'^(\d+)_', filename) and int(re.match(r'^(\d+)_', filename).group(1)) == id), None)
-    file_path = os.path.join(data_dir, filename_with_start_id)
-    with open(file_path, 'rb') as f:
-        data = pickle.load(f)
-    
-    lh_data, rh_data = generate_processed_data.split_y_data(subject, data)
-      
-    return {'left': lh_data, 'right': rh_data}
-
-
-
 def get_file_with_id(id, folder_path):
     """
     Get the file name that starts with the given ID in the given folder.
@@ -315,6 +289,25 @@ def ensure_dir(dir):
 
     return dir 
 
+
+def get_nextid(dir):
+    '''
+    Looks into files within dir that have a naming convention of id_XXX and
+    returns next available index (integer)
+    
+    Ex: inside some prediction folder 1_XXX.pickle, 2_XXX.pickle it returns 3
+    '''
+
+    filenames = os.listdir(dir)
+    # Get a list of IDs from the filenames
+    ids = [int(filename.split('_')[0]) for filename in filenames]
+    print(ids)
+    # Find the next available ID
+    next_id = max(ids) + 1
+
+    return next_id
+
+
 # -----------------------------
 #  ML functions
 # -----------------------------
@@ -343,19 +336,38 @@ def check_for_GPU():
     print("Num CPUs Available: ", len(tf.config.experimental.list_physical_devices('CPU')))
 
 
-def get_nextid(dir):
+def predict_from_savedmodel(X_data, subject, model_name, id, save=False, recalculate=True):
     '''
-    Looks into files within dir that have a naming convention of id_XXX and
-    returns next available index (integer)
+    Predicts/reads prediction for subject, model and id combination.
+    If save=True, it saves into file. 
+    If recalculate, it will not read if file exists but rather calculate again
+    '''
     
-    Ex: inside some prediction folder 1_XXX.pickle, 2_XXX.pickle it returns 3
-    '''
-
-    filenames = os.listdir(dir)
-    # Get a list of IDs from the filenames
-    ids = [int(filename.split('_')[0]) for filename in filenames]
-    print(ids)
-    # Find the next available ID
-    next_id = max(ids) + 1
-
-    return next_id
+    # If file eists read it unless recalculate=True
+    prediction_dir = os.path.join(DATAOUT_PATH, "predictions", model_name, subject)
+    prediction_path = os.path.join(prediction_dir, f"posterior_prediction_{id}.pickle" )
+    
+    if os.path.exists(prediction_path) and not recalculate:
+        with open(prediction_path, "rb") as f:
+            # Load the already existing prediction
+            y_pred = pickle.load(f)
+            _logger.info(f"Loading already existing predicition file: {prediction_path}")
+            return y_pred
+            
+    # Convert data, load model and predict        
+    X_data = np.array(X_data)
+    
+    model_dir = os.path.join(DATAOUT_PATH, "models", model_name, subject)
+    model_path = next((os.path.join(model_dir, filename) for filename in os.listdir(model_dir) if filename.endswith(f'_{id}.h5')), None)
+    print(model_path)
+    model = tf.keras.models.load_model(model_path)
+    
+    y_pred = model.predict(X_data)
+   
+    # Save if required
+    if save:
+        with open(prediction_path, "wb") as f:
+            pickle.dump(y_pred, f) 
+            _logger.info(f"Saved into file: {prediction_path}")  
+   
+    return y_pred
