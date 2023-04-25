@@ -9,8 +9,6 @@
 import os
 import sys
 import argparse
-os.environ['CUDA_VISIBLE_DEVICES'] = '-1' # forces CPU use because errors with GPU
-os.environ['TF_CONFIG'] = '{"device_count": {"CPU": 32}}' # specify CORES you have in your job file
 
 import logging                                                                      # NOQA E402
 import numpy as np                                                                  # NOQA E402
@@ -117,6 +115,12 @@ if __name__ == '__main__':
     learning_rate = 0.000001
     patience = 3
     model_path = f"../dataout/models/CNN/{subject}"
+
+    # forces CPU use because errors with GPU
+    os.environ['CUDA_VISIBLE_DEVICES'] = '-1'
+
+    # specify CORES you have in your job file
+    os.environ['TF_CONFIG'] = '{"device_count": {"CPU": 32}}' 
 
     input_shape = X_data[0].shape
     output_dim = y_data[0].shape
