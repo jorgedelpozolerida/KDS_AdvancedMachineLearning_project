@@ -1,0 +1,61 @@
+CNN_model.py:
+
+	model_1:
+	- Saved
+	subject = 'subj01'
+	test = True
+	y_data = target_creator(subject, test = test, merged = True)
+	X_data = training_data_creator(subject, test = test)
+	epochs = 15
+	batch_size = 32
+	learning_rate = 0.000001
+	patience = 3
+
+	model_2:
+	- Saved
+	subject = 'subj01'
+	test = False
+	y_data = target_creator(subject, test = test, merged = True)
+	X_data = training_data_creator(subject, test = test)
+	epochs = 15
+	batch_size = 32
+	learning_rate = 0.000001
+	patience = 3
+
+
+
+EffecientNet0Bmodel.py:
+
+	model_1:
+	- Error when saving
+	subject = 'subj01'
+	test = True
+	y_data = target_creator(subject, test = test, merged = True)
+	X_data = training_data_creator(subject, test = test)
+	epochs = 15
+	batch_size = 32
+	learning_rate = 0.000001
+	patience = 3
+
+	model_2:
+	- Error when saving
+	subject = 'subj01'
+	test = False
+	y_data = target_creator(subject, test = test, merged = True)
+	X_data = training_data_creator(subject, test = test)
+	epochs = 15
+	batch_size = 32
+	learning_rate = 0.000001
+	patience = 3
+
+	model_3:
+	- Because of errors of model_1 and model_2. Disabled saving .h5. Only saving predictions
+	subject = 'subj01'
+	test = False
+	y_data = target_creator(subject, test = test, merged = True)
+	X_data = training_data_creator(subject, test = test)
+	epochs = 15
+	batch_size = 32
+	learning_rate = 0.000001
+	patience = 3
+
