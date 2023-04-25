@@ -67,9 +67,17 @@ def train_model(model, model_path, X_train, y_train, X_val, model_version, y_val
 
     epochs_trained = len(model_history.history['loss']) - patience
     print(f"Epochs Trained: {epochs_trained}")
-    val_loss, val_mae, val_mse  = model.evaluate(X_val,  y_val,  verbose=1)
+    val_loss, val_mae, val_mse, val_mape  = model.evaluate(X_val,  y_val,  verbose=1)
 
-    model.save(f"{model_path}/model_{model_version}.h5")
+    # Skipping saving the model for now due to 
+    # ERROR: TypeError: Unable to serialize [2.0896919 2.1128857 2.1081853] to JSON. Unrecognized 
+#           type <class 'tensorflow.python.framework.ops.EagerTensor'>.
+
+
+    # with open(f"{model_path}/model_{model_version}.pickle", "wb") as f:
+    #     pickle.dump(model, f)
+
+    # model.save(f"{model_path}/model_{model_version}.h5")
 
     return model
 
@@ -90,7 +98,7 @@ def test_model(model, X_test, y_test):
     Test the model
     """
     # Evaluate the model
-    test_loss,test_mae,test_mse = model.evaluate(X_test, y_test, verbose=1)
+    test_loss,test_mae,test_mse, val_mape = model.evaluate(X_test, y_test, verbose=1)
     y_pred = model.predict(X_test)
     
     return y_pred
@@ -104,10 +112,10 @@ if __name__ == '__main__':
     test = True 
     y_data = target_creator(subject, test = test, merged = True)
     X_data = training_data_creator(subject, test = test)
-    epochs = 200
+    epochs = 1
     batch_size = 32
     learning_rate = 0.000001
-    patience = 2
+    patience = 1
     model_path = f"../dataout/models/EffecientNet/{subject}"
 
     input_shape = X_data[0].shape

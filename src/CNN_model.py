@@ -74,7 +74,7 @@ def train_model(model, model_path, X_train, y_train, X_val, model_version, y_val
 
     epochs_trained = len(model_history.history['loss']) - patience
     print(f"Epochs Trained: {epochs_trained}")
-    val_loss, val_mae, val_mse  = model.evaluate(X_val,  y_val,  verbose=1)
+    val_loss, val_mae, val_mse, val_mape  = model.evaluate(X_val,  y_val,  verbose=1)
 
     model.save(f"{model_path}/model_{model_version}.h5")
 
@@ -97,7 +97,7 @@ def test_model(model, X_test, y_test):
     Test the model
     """
     # Evaluate the model
-    test_loss,test_mae,test_mse = model.evaluate(X_test, y_test, verbose=1)
+    test_loss,test_mae,test_mse, val_mape = model.evaluate(X_test, y_test, verbose=1)
     y_pred = model.predict(X_test)
     
     return y_pred
