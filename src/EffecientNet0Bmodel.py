@@ -26,9 +26,9 @@ try:
     num_cpus = int(os.environ['SLURM_CPUS_PER_TASK']) 
     tf.config.threading.set_inter_op_parallelism_threads(num_cpus)
     tf.config.threading.set_intra_op_parallelism_threads(num_cpus)
-    print("CPUs set to same as HPC job.")
+    print("CPUs set to same as HPC job.\n")
 except:
-    print("Not running on HPC.")
+    print("Not running on HPC.\n")
 
 from keras import layers, models
 import keras
@@ -125,7 +125,7 @@ if __name__ == '__main__':
     patience = 3
     model_path = f"../dataout/models/EffecientNet/{subject}"
 
-    print(" ############################### \n")
+    print("############################### \n")
     print(" MODEL PARAMETERS: ")
     print("")
     print("Subject: ", subject)
@@ -135,7 +135,7 @@ if __name__ == '__main__':
     print("Learning Rate: ", learning_rate)
     print("Patience: ", patience)
     print("Model Path: ", model_path)
-    print(" ############################### \n")
+    print("############################### \n")
 
     input_shape = X_data[0].shape
     output_dim = y_data[0].shape
