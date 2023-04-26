@@ -134,8 +134,10 @@ if __name__ == '__main__':
     # forces CPU use because errors with GPU
     os.environ['CUDA_VISIBLE_DEVICES'] = '-1'
 
-    # specify CORES you have in your job file
-    os.environ['TF_CONFIG'] = '{"device_count": {"CPU": 32}}' 
+    # get the number of CPUs specified in the job submission
+    num_cpus = int(os.environ['SLURM_CPUS_PER_TASK']) 
+    tf.config.threading.set_inter_op_parallelism_threads(num_cpus)
+    tf.config.threading.set_intra_op_parallelism_threads(num_cpus)
 
     input_shape = X_data[0].shape
     output_dim = y_data[0].shape
