@@ -41,7 +41,7 @@ logging.basicConfig(level=logging.INFO)
 _logger = logging.getLogger(__name__)
 
 
-def target_creator(subject, DATAIN_PATH=DATAIN_PATH, test =False, merged = False, silent=False):
+def target_creator(subject, DATAIN_PATH=DATAIN_PATH, test =False, merged = False, silent=False, verbose=False):
     """
     """
     fmri_dir = os.path.join(DATAIN_PATH, f"{subject}","training_split","training_fmri")
@@ -54,8 +54,7 @@ def target_creator(subject, DATAIN_PATH=DATAIN_PATH, test =False, merged = False
 
     i = 0
     
-    if not silent:
-        
+    if verbose:
         print("lh_fmri loaded...")
         print("lh_fmri.shape: ", lh_fmri.shape)
         print(f"lh_fmri[{i}].shape: ", lh_fmri[i].shape, "\n")
@@ -70,18 +69,23 @@ def target_creator(subject, DATAIN_PATH=DATAIN_PATH, test =False, merged = False
         return lh_fmri, rh_fmri
 
 
-def training_data_creator(subject, DATAIN_PATH=DATAIN_PATH, test =False):
+def training_data_creator(subject, DATAIN_PATH=DATAIN_PATH, test =False, dont_use_images=False):
     """ """
 
     training_images_path = os.path.join(DATAIN_PATH, subject, "training_split", "resized_training_images.pkl")
     
     if not os.path.exists(
         training_images_path
-    ) or test:
-        images_dir = os.path.join(DATAIN_PATH, subject, "training_split", "training_images.pkl")
+    ) or test or dont_use_images:
+        images_dir = os.path.join(DATAIN_PATH, subject, "training_split", "training_images")
         # Create a dataloader that can load the images
         images = [] #np.array([])
         for image in tqdm(os.listdir(images_dir)):
+            if test and len(images) == 100:
+                break
+            if dont_use_images:
+                images.append(np.array([0]))
+                continue
             image = Image.open(os.path.join(images_dir, image))
             image_array = np.array(image)
 
@@ -93,11 +97,9 @@ def training_data_creator(subject, DATAIN_PATH=DATAIN_PATH, test =False):
             # image_array = cv2.resize(image_array, (227, 227))
             images.append(image_array)
 
-            if test and len(images) == 100:
-                break
 
         # save images as pickle file
-        if not test:
+        if not test or dont_use_images:
             with open(
                 training_images_path, "wb"
             ) as f:
@@ -167,9 +169,9 @@ def main():
 if __name__ == "__main__":
     subject = 'subj01'
     test = False
-    y_data = target_creator(subject, test = test, merged = True)
-    X_data = training_data_creator(subject, test = test)
+    # y_data = target_creator(subject, test = test, merged = True)
+    X_data = training_data_creator(subject, test = test, dont_use_images = True)
 
-    input_shape = X_data[0].shape
+    # input_shape = X_data[0].shape
 
-    X_train, X_val, X_test, y_train, y_val, y_test = create_train_test_split(X_data, y_data, test_size=0.2, random_state=123)
+    # X_train, X_val, X_test, y_train, y_val, y_test = create_train_test_split(X_data, y_data, test_size=0.2, random_state=123)

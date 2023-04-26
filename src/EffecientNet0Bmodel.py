@@ -82,6 +82,8 @@ def save_test_pred(model_path, model, X_test, y_test, model_version):
     model_path = model_path.replace("models", "predictions")
     with open(f"{model_path}/y_test_effecientnet_{model_version}.pickle", "wb") as f:
         pickle.dump(y_test, f)   
+    with open(f"{model_path}/y_pred_effecientnet_{model_version}.pickle", "wb") as f:
+        pickle.dump(y_pred, f)   
 
 
 def test_model(model, X_test, y_test):
@@ -104,11 +106,23 @@ if __name__ == '__main__':
     test = False 
     y_data = target_creator(subject, test = test, merged = True)
     X_data = training_data_creator(subject, test = test)
-    epochs = 15
+    epochs = 20
     batch_size = 32
     learning_rate = 0.000001
     patience = 3
     model_path = f"../dataout/models/EffecientNet/{subject}"
+
+    print(" ############################### \n")
+    print(" MODEL PARAMETERS: ")
+    print("")
+    print("Subject: ", subject)
+    print("Test: ", test)
+    print("Epochs: ", epochs)
+    print("Batch Size: ", batch_size)
+    print("Learning Rate: ", learning_rate)
+    print("Patience: ", patience)
+    print("Model Path: ", model_path)
+    print(" ############################### \n")
 
     # forces CPU use because errors with GPU
     os.environ['CUDA_VISIBLE_DEVICES'] = '-1'

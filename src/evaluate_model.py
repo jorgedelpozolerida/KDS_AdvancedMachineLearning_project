@@ -43,10 +43,10 @@ import matplotlib
 from matplotlib import pyplot as plt
 from nilearn import datasets
 from nilearn import plotting
-import torch
-from torch.utils.data import DataLoader, Dataset
-from torchvision.models.feature_extraction import create_feature_extractor, get_graph_node_names
-from torchvision import transforms
+# import torch
+# from torch.utils.data import DataLoader, Dataset
+# from torchvision.models.feature_extraction import create_feature_extractor, get_graph_node_names
+# from torchvision import transforms
 from sklearn.decomposition import IncrementalPCA
 from sklearn.linear_model import LinearRegression
 from scipy.stats import pearsonr as corr
@@ -209,7 +209,6 @@ def plot_ROI_correlations(subject, correlations, save=False, save_args=None, sho
         plt.show()
 
 
-
 def main(args):
     
     subject = 'subj01' # subject to get predicitons and ground truth from
@@ -264,6 +263,25 @@ def main(args):
 
     # ---------------------  INFORMATION METRICS --------------------------
 
+
+def main_2(args):
+    subject = 'subj01' # subject to get predicitons and ground truth from
+    idx = 2 # id of the model run
+    model = 'CNN' # model to be evaluated
+
+    # Load predictions 
+    with open (f"../dataout/predictions/{model}/{subject}/y_pred_{model}_{idx}.pickle", "rb") as f:
+        y_test = pickle.load(f)
+    print("Shape of y_pred: ", y_test.shape)
+
+    # Load test data
+    with open (f"../dataout/predictions/{model}/{subject}/y_test_{model}_{idx}.pickle", "rb") as f:
+        y_pred = pickle.load(f)
+    print("Shape of y_pred: ", y_pred.shape)
+
+    return None
+
+
 def parse_args():
     '''
     Parses all script arguments.
@@ -281,4 +299,6 @@ def parse_args():
 
 if __name__ == '__main__':
     args = parse_args()
-    main(args)
+    # main(args)
+
+    main_2(args)
