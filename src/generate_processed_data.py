@@ -26,6 +26,11 @@ import pickle
 import time
 from sklearn.model_selection import train_test_split
 import utils  # our custom functions
+# import PCA and standard scalar from sklearn
+from sklearn.decomposition import PCA
+from sklearn.preprocessing import StandardScaler
+
+
 
 # Global variables
 THISFILE_PATH = os.path.abspath(__file__)
@@ -160,6 +165,55 @@ def create_train_test_split(X_data, y_data, test_size=0.20, random_state=123):
                                                         random_state=random_state, shuffle=True)
 
     return X_train, X_val, X_test, y_train, y_val, y_test 
+
+
+def StandardScaler_fit_transform(y_train, subject):
+    scalar_file_path = os.path.join(DATAIN_PATH, subject, "Scalar_transformer.pickle")
+    scalar_model = StandardScaler()
+    y_train = scalar_model.fit_transform(y_train)
+    with open(scalar_file_path, 'wb') as f:
+        pickle.dump(scalar_model, f)
+    return y_train
+
+def StandardScaler_transform(y_data, subject):
+    scalar_file_path = os.path.join(DATAIN_PATH, subject, "Scalar_transformer.pickle")
+    with open(scalar_file_path, 'rb') as f:
+        scalar_model = pickle.load(f)
+    y_data = scalar_model.transform(y_data)
+    return y_data
+
+def StandardScaler_inverse_transform(y_data, subject):
+    scalar_file_path = os.path.join(DATAIN_PATH, subject, "Scalar_transformer.pickle")
+    with open(scalar_file_path, 'rb') as f:
+        scalar_model = pickle.load(f)
+    y_data = scalar_model.inverse_transform(y_data)
+    return y_data
+
+
+def PCA_fit_transform(y_train, subject):
+    pca_file_path = os.path.join(DATAIN_PATH, subject, "PCA_model.pickle")
+    pca_model = PCA(n_components=0.95)
+    y_train = StandardScaler_fit_transform(y_train, subject)
+    y_train = pca_model.fit_transform(y_train)
+    with open(pca_file_path, 'wb') as f:
+        pickle.dump(pca_model, f)
+    return y_train
+
+def PCA_transform(y_data, subject):
+    pca_file_path = os.path.join(DATAIN_PATH, subject, "PCA_model.pickle")
+    with open(pca_file_path, 'rb') as f:
+        pca_model = pickle.load(f)
+    y_data = StandardScaler_transform(y_data, subject)
+    y_data = pca_model.transform(y_data)
+    return y_data
+
+def PCA_inverse_transform(y_data, subject):
+    pca_file_path = os.path.join(DATAIN_PATH, subject, "PCA_model.pickle")
+    with open(pca_file_path, 'rb') as f:
+        pca_model = pickle.load(f)
+    y_data = pca_model.inverse_transform(y_data)
+    y_data = StandardScaler_inverse_transform(y_data, subject)
+    return y_data
 
 
 def main():

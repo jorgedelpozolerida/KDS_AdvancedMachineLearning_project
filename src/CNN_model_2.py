@@ -34,6 +34,8 @@ from keras import layers, models
 import keras
 from utils import find_latest_model
 from generate_processed_data import target_creator, training_data_creator, create_train_test_split
+from generate_processed_data import StandardScaler_fit_transform , StandardScaler_transform , StandardScaler_inverse_transform
+from generate_processed_data import PCA_fit_transform , PCA_transform , PCA_inverse_transform
 
 from utils import check_for_GPU
 from keras.optimizers import Adam
@@ -50,6 +52,8 @@ def create_cnn_model(input_shape, output_dim, model_path):
         layers.Conv2D(8, (3, 3), activation='relu', padding='same'),
         layers.MaxPooling2D((2, 2)),
         layers.Conv2D(16, (3, 3), activation='relu', padding='same'),
+        layers.MaxPooling2D((2, 2)),
+        layers.Conv2D(32, (3, 3), activation='relu', padding='same'),
         layers.MaxPooling2D((2, 2)),
         layers.Flatten(),
         layers.Dense(512, activation='relu'),
@@ -92,11 +96,21 @@ def train_model(model, model_path, X_train, y_train, X_val, model_version, y_val
     return model
 
 
-def save_test_pred(model_path, model, X_test, y_test, model_version):
+def save_test_pred(model_path, model, X_test, y_test, model_version, verbose = True):
     """
     Save the test predictions
     """
-    y_pred = test_model(model, X_test, y_test)
+    test_loss, test_mae, test_mse, test_mape = model.evaluate(X_test, y_test, verbose=1)
+    if verbose:
+        print("\n#### MODEL METRICS ON TEST DATA ####")
+        print("   Loss: ", test_loss)
+        print("   MAE: ", test_mae)
+        print("   MSE: ", test_mse)
+        print("   MAPE: ", test_mape)
+        print("\n")
+
+    y_pred = model.predict(X_test)
+    y_pred = PCA_inverse_transform(y_pred, subject) # Inverts into "NeUrOa DaTA"
 
     model_path = model_path.replace("models", "predictions")
 
@@ -111,8 +125,8 @@ def test_model(model, X_test, y_test):
     Test the model
     """
     # Evaluate the model
-    test_loss, test_mae, test_mse, test_mape = model.evaluate(X_test, y_test, verbose=1)
-    y_pred = model.predict(X_test)
+    
+    
     
     return y_pred
     
@@ -122,13 +136,13 @@ def test_model(model, X_test, y_test):
 if __name__ == '__main__':
     
     subject = 'subj01'
-    test = False
+    test = True
     y_data = target_creator(subject, test = test, merged = True)
     X_data = training_data_creator(subject, test = test)
-    epochs = 20
-    batch_size = 32
+    epochs = 1000
+    batch_size = 8
     learning_rate = 0.000001
-    patience = 3
+    patience = 10
     model_path = f"../dataout/models/CNN/{subject}"
 
     print("############################### \n")
@@ -143,18 +157,25 @@ if __name__ == '__main__':
     print("Model Path: ", model_path)
     print("############################### \n")
 
+    # NOTE: ENABLE ME FOR HPC!
     # get the number of CPUs specified in the job submission
-    num_cpus = int(os.environ['SLURM_CPUS_PER_TASK']) 
-    tf.config.threading.set_inter_op_parallelism_threads(num_cpus)
-    tf.config.threading.set_intra_op_parallelism_threads(num_cpus)
+    # num_cpus = int(os.environ['SLURM_CPUS_PER_TASK']) 
+    # tf.config.threading.set_inter_op_parallelism_threads(num_cpus)
+    # tf.config.threading.set_intra_op_parallelism_threads(num_cpus)
 
-    input_shape = X_data[0].shape
-    output_dim = y_data[0].shape
     X_train, X_val, X_test, y_train, y_val, y_test = create_train_test_split(X_data, y_data, test_size=0.2, random_state=123)
 
     # Clear RAM
     del X_data
     del y_data
+
+    # Scale and PCA transform the data 
+    y_train =  PCA_fit_transform(y_train, subject)
+    y_test = PCA_transform(y_test, subject)
+    y_val = PCA_transform(y_val, subject)
+    input_shape = X_train[0].shape
+    output_dim = y_train[0].shape
+
 
     check_for_GPU()
     model, model_version = create_cnn_model(input_shape = input_shape, 
