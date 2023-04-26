@@ -10,6 +10,9 @@ import os
 import sys
 import argparse
 
+# forces CPU use because errors with GPU
+os.environ['CUDA_VISIBLE_DEVICES'] = '-1'
+
 import logging                                                                      # NOQA E402
 import numpy as np                                                                  # NOQA E402
 import pandas as pd                                                                 # NOQA E402
@@ -17,6 +20,16 @@ import utils
 import pickle
 
 import tensorflow as tf
+
+# get the number of CPUs specified in the job submission
+try:
+    num_cpus = int(os.environ['SLURM_CPUS_PER_TASK']) 
+    tf.config.threading.set_inter_op_parallelism_threads(num_cpus)
+    tf.config.threading.set_intra_op_parallelism_threads(num_cpus)
+    print("CPUs set to same as HPC job.")
+except:
+    print("Not running on HPC.")
+
 from keras import layers, models
 import keras
 from utils import find_latest_model
@@ -123,14 +136,6 @@ if __name__ == '__main__':
     print("Patience: ", patience)
     print("Model Path: ", model_path)
     print(" ############################### \n")
-
-    # forces CPU use because errors with GPU
-    os.environ['CUDA_VISIBLE_DEVICES'] = '-1'
-
-    # get the number of CPUs specified in the job submission
-    num_cpus = int(os.environ['SLURM_CPUS_PER_TASK']) 
-    tf.config.threading.set_inter_op_parallelism_threads(num_cpus)
-    tf.config.threading.set_intra_op_parallelism_threads(num_cpus)
 
     input_shape = X_data[0].shape
     output_dim = y_data[0].shape

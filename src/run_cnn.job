@@ -4,8 +4,8 @@
 #SBATCH --output=../hpc/model_logs/cnn_full_%j.out      # Name of output file (%j expands to jobId)
 #SBATCH --error=../hpc/model_logs/cnn_full_%j.err
 #SBATCH --cpus-per-task=32                   # Schedule one core
-#SBATCH --time=10:00:00                     # Run time (hh:mm:ss) - run for one hour max
-#SBATCH --mem=64GB
+#SBATCH --time=04:00:00                     # Run time (hh:mm:ss) - run for one hour max
+#SBATCH --mem=32GB
 #SBATCH --partition=brown                   # Run on either the Red or Brown queue
 
 # load modules
@@ -16,8 +16,11 @@ module load CUDA/11.1.1-GCC-10.2.0
 source ../hpc/venv/bin/activate
 
 # info of node
-echo "Node specs"
+echo "#############################"
+echo "   NODE SPECIFICATIONS"
 lscpu
+echo "#############################"
+echo ""
 
 # run python file
 python CNN_model.py
