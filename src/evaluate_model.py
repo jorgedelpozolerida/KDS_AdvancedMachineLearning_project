@@ -128,7 +128,7 @@ def load_correlations( subject, model, id):
     return correlation_data
 
 
-def plot_ROI_correlations(subject, correlations, save=False, save_args=None, show=True):
+def plot_ROI_correlations(subject, correlations, save=False, save_args=None, show=True, title=""):
     '''
     Function that plots obtained calculated correlations per ROI class for 
     some subject
@@ -199,7 +199,7 @@ def plot_ROI_correlations(subject, correlations, save=False, save_args=None, sho
     plt.xticks(ticks=x, labels=roi_names, rotation=60)
     plt.ylabel('Median Pearson\'s $r$')
     plt.legend(frameon=True, loc=1)
-    
+    plt.title(title)
 
     if save:
         assert save_args is not None, "Please provide save_args accordingly"
@@ -213,38 +213,38 @@ def plot_ROI_correlations(subject, correlations, save=False, save_args=None, sho
 def main(args):
     
     subject = 'subj01' # subject to get predicitons and ground truth from
-    idx = 2 # id of the model run
+    idx = 3 # id of the model run
     model = 'CNN' # model to be evaluated
+    
+    
+    # # CREATING PREDICTION FOR ALL DATA
+    # # Load all fMRI data and predict on it
+    # groundtruth_fmri = utils.load_fMRIdata(subject) # take 
+    
+    # images_subject = generate_processed_data.training_data_creator(subject, test = False) # get all images from subject
+    # y_pred = utils.predict_from_savedmodel(images_subject, subject, model_name=model, id=idx, save=True, recalculate=False)
+    # predicted_fmri = generate_processed_data.split_y_data(subject, y_pred)
+        
+    
 
-    # Load predictions 
-    with open (f"../dataout/predictions/{model}/{subject}/y_test_{model}_{idx}.pickle", "rb") as f:
+    # USING ALREADY SAVED FILES
+    # Load pred data
+    pred_file_path = os.path.join(DATAOUT_PATH, f"predictions/{model}/{subject}/y_pred_{model}_{idx}.pickle")
+    with open (pred_file_path, "rb") as f:
         y_test = pickle.load(f)
-    # if y_test.shape[1] == 2561:
-    #     y_test = PCA_inverse_transform(y_test, subject) # PCA inverse transform
-    #     # pickle the file 
-    #     with open (f"../dataout/predictions/{model}/{subject}/y_test_{model}_{idx}.pickle", "wb") as f:
-    #         pickle.dump(y_test, f)
     print("Shape of y_test: ", y_test.shape)
-
+    
     # Load test data
-    with open (f"../dataout/predictions/{model}/{subject}/y_pred_{model}_{idx}.pickle", "rb") as f:
+    gt_file_path = os.path.join(DATAOUT_PATH, f"predictions/{model}/{subject}/y_test_{model}_{idx}.pickle")
+    with open (gt_file_path, "rb") as f:
         y_pred = pickle.load(f)
     print("Shape of y_pred: ", y_pred.shape)
 
-
-    # TOCHECK: why shapes do not match!....
-    # print("Ground truth: ", groundtruth_fmri['left'].shape, groundtruth_fmri['right'].shape)
-    # print("Images: ", np.array(images_subject).shape)
-    # min_slice = min(len(images_subject), groundtruth_fmri['left'].shape[0])
-    # images_subject = images_subject[:min_slice]
-    # groundtruth_fmri = {key: value[ :min_slice,:] for key,value in groundtruth_fmri.items()}
-
-
-    # y_pred = utils.predict_from_savedmodel(images_subject, subject, model_name=model, id=idx, save=True, recalculate=False)
+    # Create left-right split into dictionary
     predicted_fmri = generate_processed_data.split_y_data(subject, y_pred)
     groundtruth_fmri = generate_processed_data.split_y_data(subject, y_test)
-        
-    
+
+
     # 1. TEST DATA ----------------------------------------------------------
     
     # --------------------- CORRELATION METRICS -----------------------------
@@ -263,12 +263,12 @@ def main(args):
         utils.visualize_brainresponse(hemisphere, 
                                     surface_map=fsaverage_correlation, 
                                     cmap='cold_hot',
-                                    title='Encoding accuracy, '+ hemisphere+' hemisphere'
+                                    title= f'Encoding accuracy for model {model}, id={idx}. {hemisphere} hemisphere. Subject: {subject[-2:]}'
                                     
                                     )
     # Plot correlation per Vertex
     plot_ROI_correlations(subject, correlations,
-                          show=True,
+                          show=True, title=f'Correlations for model {model}, id={idx}. Subject: {subject[-2:]}', 
                           save=True, save_args={'id': idx, 'model_name': model})
 
 
@@ -276,22 +276,16 @@ def main(args):
     # ---------------------  INFORMATION METRICS --------------------------
 
 
-
 def parse_args():
     '''
     Parses all script arguments.
     '''
     parser = argparse.ArgumentParser()
-
-
-    # parser.add_argument('--in_dir', type=str, default=None,
-    #                     help='Path to the input directory')
-    # parser.add_argument('--out_dir', type=str, default=None,
-    #                     help='Path to the output directory')
     args = parser.parse_args()
     return args
 
 
 if __name__ == '__main__':
     args = parse_args()
+
     main(args)
