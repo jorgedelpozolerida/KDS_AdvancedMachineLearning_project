@@ -154,7 +154,8 @@ def create_train_test_split(X_data, y_data, test_size=0.20, random_state=123):
     if type(X_data):
         # transform to numpy array
         X_data = np.array(X_data)
-
+    
+    print("From create_train_test_split():")
     print("X_data.shape: ", X_data.shape)
     print("y_data.shape: ", y_data.shape)
 

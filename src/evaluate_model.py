@@ -51,6 +51,7 @@ from sklearn.decomposition import IncrementalPCA
 from sklearn.linear_model import LinearRegression
 from scipy.stats import pearsonr as corr
 import pickle
+from generate_processed_data import PCA_inverse_transform
 
 logging.basicConfig(level=logging.INFO)
 _logger = logging.getLogger(__name__)
@@ -214,23 +215,34 @@ def main(args):
     subject = 'subj01' # subject to get predicitons and ground truth from
     idx = 2 # id of the model run
     model = 'CNN' # model to be evaluated
-    
-    
-    # Load data
-    groundtruth_fmri = utils.load_fMRIdata(subject) # take 
-    images_subject = generate_processed_data.training_data_creator(subject, test = False) # get all images from subject
+
+    # Load predictions 
+    with open (f"../dataout/predictions/{model}/{subject}/y_test_{model}_{idx}.pickle", "rb") as f:
+        y_test = pickle.load(f)
+    # if y_test.shape[1] == 2561:
+    #     y_test = PCA_inverse_transform(y_test, subject) # PCA inverse transform
+    #     # pickle the file 
+    #     with open (f"../dataout/predictions/{model}/{subject}/y_test_{model}_{idx}.pickle", "wb") as f:
+    #         pickle.dump(y_test, f)
+    print("Shape of y_test: ", y_test.shape)
+
+    # Load test data
+    with open (f"../dataout/predictions/{model}/{subject}/y_pred_{model}_{idx}.pickle", "rb") as f:
+        y_pred = pickle.load(f)
+    print("Shape of y_pred: ", y_pred.shape)
 
 
     # TOCHECK: why shapes do not match!....
-    print("Ground truth: ", groundtruth_fmri['left'].shape, groundtruth_fmri['right'].shape)
-    print("Images: ", np.array(images_subject).shape)
-    min_slice = min(len(images_subject), groundtruth_fmri['left'].shape[0])
-    images_subject = images_subject[:min_slice]
-    groundtruth_fmri = {key: value[ :min_slice,:] for key,value in groundtruth_fmri.items()}
+    # print("Ground truth: ", groundtruth_fmri['left'].shape, groundtruth_fmri['right'].shape)
+    # print("Images: ", np.array(images_subject).shape)
+    # min_slice = min(len(images_subject), groundtruth_fmri['left'].shape[0])
+    # images_subject = images_subject[:min_slice]
+    # groundtruth_fmri = {key: value[ :min_slice,:] for key,value in groundtruth_fmri.items()}
 
 
-    y_pred = utils.predict_from_savedmodel(images_subject, subject, model_name=model, id=idx, save=True, recalculate=False)
+    # y_pred = utils.predict_from_savedmodel(images_subject, subject, model_name=model, id=idx, save=True, recalculate=False)
     predicted_fmri = generate_processed_data.split_y_data(subject, y_pred)
+    groundtruth_fmri = generate_processed_data.split_y_data(subject, y_test)
         
     
     # 1. TEST DATA ----------------------------------------------------------
@@ -264,23 +276,6 @@ def main(args):
     # ---------------------  INFORMATION METRICS --------------------------
 
 
-def main_2(args):
-    subject = 'subj01' # subject to get predicitons and ground truth from
-    idx = 2 # id of the model run
-    model = 'CNN' # model to be evaluated
-
-    # Load predictions 
-    with open (f"../dataout/predictions/{model}/{subject}/y_pred_{model}_{idx}.pickle", "rb") as f:
-        y_test = pickle.load(f)
-    print("Shape of y_pred: ", y_test.shape)
-
-    # Load test data
-    with open (f"../dataout/predictions/{model}/{subject}/y_test_{model}_{idx}.pickle", "rb") as f:
-        y_pred = pickle.load(f)
-    print("Shape of y_pred: ", y_pred.shape)
-
-    return None
-
 
 def parse_args():
     '''
@@ -299,6 +294,4 @@ def parse_args():
 
 if __name__ == '__main__':
     args = parse_args()
-    # main(args)
-
-    main_2(args)
+    main(args)

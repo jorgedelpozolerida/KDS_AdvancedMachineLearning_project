@@ -111,6 +111,7 @@ def save_test_pred(model_path, model, X_test, y_test, model_version, verbose = T
 
     y_pred = model.predict(X_test)
     y_pred = PCA_inverse_transform(y_pred, subject) # Inverts into "NeUrOa DaTA"
+    y_test = PCA_inverse_transform(y_test, subject) # Inverts into "NeUrOa DaTA"
 
     model_path = model_path.replace("models", "predictions")
 
@@ -136,12 +137,13 @@ def test_model(model, X_test, y_test):
 if __name__ == '__main__':
     
     subject = 'subj01'
-    test = True
+    test = False
     y_data = target_creator(subject, test = test, merged = True)
     X_data = training_data_creator(subject, test = test)
     epochs = 1000
     batch_size = 8
-    learning_rate = 0.000001
+    # learning_rate = 0.000001
+    learning_rate = 0.0000005
     patience = 10
     model_path = f"../dataout/models/CNN/{subject}"
 
@@ -175,6 +177,11 @@ if __name__ == '__main__':
     y_val = PCA_transform(y_val, subject)
     input_shape = X_train[0].shape
     output_dim = y_train[0].shape
+
+    print("     Data shape : ")
+    print("   Input Shape: ", input_shape)
+    print("   Output Dim: ", output_dim)
+    print("\n")
 
 
     check_for_GPU()
