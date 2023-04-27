@@ -43,7 +43,7 @@ _logger = logging.getLogger(__name__)
 # Global variables
 THISFILE_PATH = os.path.abspath(__file__)
 DATAIN_PATH = os.path.join(
-    os.path.abspath(os.path.join(THISFILE_PATH, os.pardir, os.pardir)), "datain"
+    os.path.abspath(os.path.join(THISFILE_PATH, os.pardir, os.pardir)), "Data"
 )
 DATAOUT_PATH = os.path.join(
     os.path.abspath(os.path.join(THISFILE_PATH, os.pardir, os.pardir)), "dataout"
@@ -111,8 +111,10 @@ def main(args):
 
     # input_path = args.in_dir
     # output_dir = args.out_dir
-    test_img_dir = '/home/jorge/Insync/jorgitoje@gmail.com/OneDrive/Documentos/JORGE/EDUCATION/MASTER_DATASCIENCE/Semester2/AdvancedMachineLearning/MiniProject/KDS_AdvancedMachineLearning_project/datain/subj01/test_split/test_images'
+    test_img_dir = os.path.join(DATAIN_PATH, 'subj01/test_split/test_images')
     training_img_dir = '/home/jorge/Insync/jorgitoje@gmail.com/OneDrive/Documentos/JORGE/EDUCATION/MASTER_DATASCIENCE/Semester2/AdvancedMachineLearning/MiniProject/KDS_AdvancedMachineLearning_project/datain/subj01/training_split/training_images'
+        test_img_dir = os.path.join(DATAIN_PATH, 'subj01/test_split/test_images')
+
     data_fmri = utils.load_fMRIdata('subj01')
     print(data_fmri['left'].shape, data_fmri['right'].shape)
     
