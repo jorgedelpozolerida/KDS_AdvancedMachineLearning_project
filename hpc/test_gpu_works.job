@@ -1,0 +1,16 @@
+#!/bin/bash
+
+#SBATCH --job-name=tensorflow        # Job name
+#SBATCH --output=logs/gpu_test_%j.out          # Name of output file (%j expands to jobId)
+#SBATCH --error=logs/gpu_test_%j.err
+#SBATCH --cpus-per-task=8            # Schedule 8 cores (includes hyperthreading)
+#SBATCH --gres=gpu                   # Schedule a GPU
+#SBATCH --gres-flags=enforce-binding # Get directoy connected cores to GPU
+#SBATCH --time=01:00:00              # Run time (hh:mm:ss) - run for one hour max
+#SBATCH --partition=brown        # Run on either the Red or Brown queue
+
+echo "Running on $(hostname):"
+module load TensorFlow/2.3.1-fosscuda-2020a-Python-3.8.2
+pip install --upgrade pip
+pip install pycuda
+python3 ./test_gpu.py

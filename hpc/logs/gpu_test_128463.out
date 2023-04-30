@@ -1,0 +1,16 @@
+Running on desktop3:
+Requirement already satisfied: pip in ./venv/lib/python3.8/site-packages (23.1.2)
+Collecting pycuda
+  Using cached pycuda-2022.2.2-cp38-cp38-linux_x86_64.whl
+Collecting pytools>=2011.2 (from pycuda)
+  Using cached pytools-2022.1.14-py2.py3-none-any.whl
+Collecting appdirs>=1.4.0 (from pycuda)
+  Using cached appdirs-1.4.4-py2.py3-none-any.whl (9.6 kB)
+Collecting mako (from pycuda)
+  Using cached Mako-1.2.4-py3-none-any.whl (78 kB)
+Collecting platformdirs>=2.2.0 (from pytools>=2011.2->pycuda)
+  Using cached platformdirs-3.5.0-py3-none-any.whl (15 kB)
+Requirement already satisfied: typing-extensions>=4.0 in ./venv/lib/python3.8/site-packages (from pytools>=2011.2->pycuda) (4.5.0)
+Requirement already satisfied: MarkupSafe>=0.9.2 in ./venv/lib/python3.8/site-packages (from mako->pycuda) (2.1.2)
+Installing collected packages: appdirs, platformdirs, mako, pytools, pycuda
+Successfully installed appdirs-1.4.4 mako-1.2.4 platformdirs-3.5.0 pycuda-2022.2.2 pytools-2022.1.14

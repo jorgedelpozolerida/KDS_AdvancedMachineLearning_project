@@ -1,0 +1,13 @@
+Running on desktop7:
+
+TEST RESULTS:
+
+TensorFlow version: 2.9.0
+
+CUDA not available
+
+Device name: /physical_device:CPU:0
+Device type: CPU
+
+
+No GPU found. Please make sure that TensorFlow is installed with GPU support and that your GPU is properly configured.

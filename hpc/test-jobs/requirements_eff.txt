@@ -1,6 +1,5 @@
-tensorflow-gpu==2.9
-keras==2.9
-matplotlib
+keras==2.3.1
+matplotlib==3.3.3
 nibabel
 nilearn
 numpy

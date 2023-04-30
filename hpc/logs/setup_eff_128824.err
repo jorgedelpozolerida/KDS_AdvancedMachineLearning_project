@@ -1,0 +1,6 @@
+2023-05-01 00:28:08.654038: I tensorflow/stream_executor/platform/default/dso_loader.cc:48] Successfully opened dynamic library libcudart.so.11.0
+Using TensorFlow backend.
+Traceback (most recent call last):
+  File "../src/Eff_test.py", line 42, in <module>
+    from keras.applications import EfficientNetB0, EfficientNetB5
+ImportError: cannot import name 'EfficientNetB0' from 'keras.applications' (/home/data_shares/group_jet/KDS_AdvancedMachineLearning_project/hpc/venv2/lib/python3.8/site-packages/keras/applications/__init__.py)

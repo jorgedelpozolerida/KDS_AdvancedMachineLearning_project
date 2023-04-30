@@ -1,0 +1,17 @@
+ERROR: pip's dependency resolver does not currently take into account all the packages that are installed. This behaviour is the source of the following dependency conflicts.
+tensorflow 2.3.1 requires numpy<1.19.0,>=1.16.0, but you have numpy 1.24.3 which is incompatible.
+jax 0.4.8 requires scipy>=1.7, but you have scipy 1.4.1 which is incompatible.
+nilearn 0.10.0 requires pandas>=1.1.5, but you have pandas 1.0.3 which is incompatible.
+nilearn 0.10.0 requires scipy>=1.6.0, but you have scipy 1.4.1 which is incompatible.
+Traceback (most recent call last):
+  File "../src/CNN_model.py", line 20, in <module>
+    import utils
+  File "/home/data_shares/group_jet/KDS_AdvancedMachineLearning_project/src/utils.py", line 28, in <module>
+    import generate_processed_data
+  File "/home/data_shares/group_jet/KDS_AdvancedMachineLearning_project/src/generate_processed_data.py", line 23, in <module>
+    import matplotlib
+  File "/home/data_shares/group_jet/KDS_AdvancedMachineLearning_project/hpc/venv/lib/python3.8/site-packages/matplotlib/__init__.py", line 229, in <module>
+    _check_versions()
+  File "/home/data_shares/group_jet/KDS_AdvancedMachineLearning_project/hpc/venv/lib/python3.8/site-packages/matplotlib/__init__.py", line 225, in _check_versions
+    raise ImportError(f"Matplotlib requires {modname}>={minver}; "
+ImportError: Matplotlib requires numpy>=1.20; you have 1.18.3

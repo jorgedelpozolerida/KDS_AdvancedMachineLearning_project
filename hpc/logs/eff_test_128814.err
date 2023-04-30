@@ -1,0 +1,12 @@
+Traceback (most recent call last):
+  File "../src/Eff_test.py", line 20, in <module>
+    import utils
+  File "/home/data_shares/group_jet/KDS_AdvancedMachineLearning_project/src/utils.py", line 28, in <module>
+    import generate_processed_data
+  File "/home/data_shares/group_jet/KDS_AdvancedMachineLearning_project/src/generate_processed_data.py", line 23, in <module>
+    import matplotlib
+  File "/home/data_shares/group_jet/KDS_AdvancedMachineLearning_project/hpc/venv/lib/python3.8/site-packages/matplotlib/__init__.py", line 229, in <module>
+    _check_versions()
+  File "/home/data_shares/group_jet/KDS_AdvancedMachineLearning_project/hpc/venv/lib/python3.8/site-packages/matplotlib/__init__.py", line 225, in _check_versions
+    raise ImportError(f"Matplotlib requires {modname}>={minver}; "
+ImportError: Matplotlib requires numpy>=1.20; you have 1.18.3

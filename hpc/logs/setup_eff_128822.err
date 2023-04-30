@@ -1,0 +1,56 @@
+ERROR: pip's dependency resolver does not currently take into account all the packages that are installed. This behaviour is the source of the following dependency conflicts.
+tensorflow 2.3.1 requires numpy<1.19.0,>=1.16.0, but you have numpy 1.24.3 which is incompatible.
+nilearn 0.10.1 requires pandas>=1.1.5, but you have pandas 1.0.3 which is incompatible.
+nilearn 0.10.1 requires scipy>=1.6.0, but you have scipy 1.4.1 which is incompatible.
+ERROR: pip's dependency resolver does not currently take into account all the packages that are installed. This behaviour is the source of the following dependency conflicts.
+tensorflow 2.3.1 requires numpy<1.19.0,>=1.16.0, but you have numpy 1.24.3 which is incompatible.
+2023-05-01 00:20:19.086577: I tensorflow/stream_executor/platform/default/dso_loader.cc:48] Successfully opened dynamic library libcudart.so.11.0
+2023-05-01 00:20:24.833025: I tensorflow/stream_executor/platform/default/dso_loader.cc:48] Successfully opened dynamic library libcuda.so.1
+2023-05-01 00:20:25.505332: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1716] Found device 0 with properties: 
+pciBusID: 0000:03:00.0 name: NVIDIA GeForce GTX 1080 Ti computeCapability: 6.1
+coreClock: 1.582GHz coreCount: 28 deviceMemorySize: 10.91GiB deviceMemoryBandwidth: 451.17GiB/s
+2023-05-01 00:20:25.505449: I tensorflow/stream_executor/platform/default/dso_loader.cc:48] Successfully opened dynamic library libcudart.so.11.0
+2023-05-01 00:20:25.781989: I tensorflow/stream_executor/platform/default/dso_loader.cc:48] Successfully opened dynamic library libcublas.so.11
+2023-05-01 00:20:25.833417: I tensorflow/stream_executor/platform/default/dso_loader.cc:48] Successfully opened dynamic library libcufft.so.10
+2023-05-01 00:20:25.833563: I tensorflow/stream_executor/platform/default/dso_loader.cc:48] Successfully opened dynamic library libcurand.so.10
+2023-05-01 00:20:25.905097: I tensorflow/stream_executor/platform/default/dso_loader.cc:48] Successfully opened dynamic library libcusolver.so.10
+2023-05-01 00:20:25.927453: I tensorflow/stream_executor/platform/default/dso_loader.cc:48] Successfully opened dynamic library libcusparse.so.11
+2023-05-01 00:20:25.951589: I tensorflow/stream_executor/platform/default/dso_loader.cc:48] Successfully opened dynamic library libcudnn.so.8
+2023-05-01 00:20:25.952080: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1858] Adding visible gpu devices: 0
+2023-05-01 00:20:25.958699: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1716] Found device 0 with properties: 
+pciBusID: 0000:03:00.0 name: NVIDIA GeForce GTX 1080 Ti computeCapability: 6.1
+coreClock: 1.582GHz coreCount: 28 deviceMemorySize: 10.91GiB deviceMemoryBandwidth: 451.17GiB/s
+2023-05-01 00:20:25.958751: I tensorflow/stream_executor/platform/default/dso_loader.cc:48] Successfully opened dynamic library libcudart.so.11.0
+2023-05-01 00:20:25.958779: I tensorflow/stream_executor/platform/default/dso_loader.cc:48] Successfully opened dynamic library libcublas.so.11
+2023-05-01 00:20:25.958799: I tensorflow/stream_executor/platform/default/dso_loader.cc:48] Successfully opened dynamic library libcufft.so.10
+2023-05-01 00:20:25.958817: I tensorflow/stream_executor/platform/default/dso_loader.cc:48] Successfully opened dynamic library libcurand.so.10
+2023-05-01 00:20:25.958835: I tensorflow/stream_executor/platform/default/dso_loader.cc:48] Successfully opened dynamic library libcusolver.so.10
+2023-05-01 00:20:25.958854: I tensorflow/stream_executor/platform/default/dso_loader.cc:48] Successfully opened dynamic library libcusparse.so.11
+2023-05-01 00:20:25.958872: I tensorflow/stream_executor/platform/default/dso_loader.cc:48] Successfully opened dynamic library libcudnn.so.8
+2023-05-01 00:20:25.959188: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1858] Adding visible gpu devices: 0
+2023-05-01 00:20:25.959221: I tensorflow/stream_executor/platform/default/dso_loader.cc:48] Successfully opened dynamic library libcudart.so.11.0
+2023-05-01 00:20:26.148892: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1257] Device interconnect StreamExecutor with strength 1 edge matrix:
+2023-05-01 00:20:26.148957: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1263]      0 
+2023-05-01 00:20:26.148969: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1276] 0:   N 
+2023-05-01 00:20:26.163773: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1402] Created TensorFlow device (/device:GPU:0 with 10372 MB memory) -> physical GPU (device: 0, name: NVIDIA GeForce GTX 1080 Ti, pci bus id: 0000:03:00.0, compute capability: 6.1)
+2023-05-01 00:20:26.165130: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1716] Found device 0 with properties: 
+pciBusID: 0000:03:00.0 name: NVIDIA GeForce GTX 1080 Ti computeCapability: 6.1
+coreClock: 1.582GHz coreCount: 28 deviceMemorySize: 10.91GiB deviceMemoryBandwidth: 451.17GiB/s
+2023-05-01 00:20:26.165180: I tensorflow/stream_executor/platform/default/dso_loader.cc:48] Successfully opened dynamic library libcudart.so.11.0
+2023-05-01 00:20:26.165210: I tensorflow/stream_executor/platform/default/dso_loader.cc:48] Successfully opened dynamic library libcublas.so.11
+2023-05-01 00:20:26.165230: I tensorflow/stream_executor/platform/default/dso_loader.cc:48] Successfully opened dynamic library libcufft.so.10
+2023-05-01 00:20:26.165249: I tensorflow/stream_executor/platform/default/dso_loader.cc:48] Successfully opened dynamic library libcurand.so.10
+2023-05-01 00:20:26.165273: I tensorflow/stream_executor/platform/default/dso_loader.cc:48] Successfully opened dynamic library libcusolver.so.10
+2023-05-01 00:20:26.165319: I tensorflow/stream_executor/platform/default/dso_loader.cc:48] Successfully opened dynamic library libcusparse.so.11
+2023-05-01 00:20:26.165347: I tensorflow/stream_executor/platform/default/dso_loader.cc:48] Successfully opened dynamic library libcudnn.so.8
+2023-05-01 00:20:26.165687: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1858] Adding visible gpu devices: 0
+2023-05-01 00:20:26.165718: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1257] Device interconnect StreamExecutor with strength 1 edge matrix:
+2023-05-01 00:20:26.165727: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1263]      0 
+2023-05-01 00:20:26.165733: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1276] 0:   N 
+2023-05-01 00:20:26.166093: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1402] Created TensorFlow device (/device:GPU:0 with 10372 MB memory) -> physical GPU (device: 0, name: NVIDIA GeForce GTX 1080 Ti, pci bus id: 0000:03:00.0, compute capability: 6.1)
+2023-05-01 00:20:31.091774: I tensorflow/stream_executor/platform/default/dso_loader.cc:48] Successfully opened dynamic library libcudart.so.11.0
+Using TensorFlow backend.
+Traceback (most recent call last):
+  File "../src/Eff_test.py", line 42, in <module>
+    from keras.applications import EfficientNetB0, EfficientNetB5
+ImportError: cannot import name 'EfficientNetB0' from 'keras.applications' (/home/data_shares/group_jet/KDS_AdvancedMachineLearning_project/hpc/venv2/lib/python3.8/site-packages/keras/applications/__init__.py)

@@ -1,0 +1,23 @@
+Running on desktop3:
+Requirement already satisfied: pip in ./venv/lib/python3.8/site-packages (23.1.2)
+Requirement already satisfied: numpy in ./venv/lib/python3.8/site-packages (1.20.0)
+Collecting numpy
+  Using cached numpy-1.24.3-cp38-cp38-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (17.3 MB)
+Installing collected packages: numpy
+  Attempting uninstall: numpy
+    Found existing installation: numpy 1.20.0
+    Uninstalling numpy-1.20.0:
+      Successfully uninstalled numpy-1.20.0
+Successfully installed numpy-1.23.5
+
+TEST RESULTS:
+
+TensorFlow version: 2.12.0
+
+CUDA version: 11.0.0
+
+Device name: /physical_device:CPU:0
+Device type: CPU
+
+
+No GPU found. Please make sure that TensorFlow is installed with GPU support and that your GPU is properly configured.

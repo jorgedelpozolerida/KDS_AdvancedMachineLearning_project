@@ -1,0 +1,153 @@
+Requirement already satisfied: pip in ./venv/lib/python3.8/site-packages (23.1.2)
+
+
+Installing package tensorflow-gpu==2.9
+
+Requirement already satisfied: tensorflow-gpu==2.9 in ./venv/lib/python3.8/site-packages (2.9.0)
+Requirement already satisfied: absl-py>=1.0.0 in ./venv/lib/python3.8/site-packages (from tensorflow-gpu==2.9) (1.4.0)
+Requirement already satisfied: astunparse>=1.6.0 in ./venv/lib/python3.8/site-packages (from tensorflow-gpu==2.9) (1.6.3)
+Requirement already satisfied: flatbuffers<2,>=1.12 in ./venv/lib/python3.8/site-packages (from tensorflow-gpu==2.9) (1.12)
+Requirement already satisfied: gast<=0.4.0,>=0.2.1 in ./venv/lib/python3.8/site-packages (from tensorflow-gpu==2.9) (0.4.0)
+Requirement already satisfied: google-pasta>=0.1.1 in ./venv/lib/python3.8/site-packages (from tensorflow-gpu==2.9) (0.2.0)
+Requirement already satisfied: grpcio<2.0,>=1.24.3 in ./venv/lib/python3.8/site-packages (from tensorflow-gpu==2.9) (1.54.0)
+Requirement already satisfied: h5py>=2.9.0 in ./venv/lib/python3.8/site-packages (from tensorflow-gpu==2.9) (3.8.0)
+Requirement already satisfied: keras<2.10.0,>=2.9.0rc0 in ./venv/lib/python3.8/site-packages (from tensorflow-gpu==2.9) (2.9.0)
+Requirement already satisfied: keras-preprocessing>=1.1.1 in ./venv/lib/python3.8/site-packages (from tensorflow-gpu==2.9) (1.1.2)
+Requirement already satisfied: libclang>=13.0.0 in ./venv/lib/python3.8/site-packages (from tensorflow-gpu==2.9) (16.0.0)
+Requirement already satisfied: numpy>=1.20 in ./venv/lib/python3.8/site-packages (from tensorflow-gpu==2.9) (1.24.3)
+Requirement already satisfied: opt-einsum>=2.3.2 in ./venv/lib/python3.8/site-packages (from tensorflow-gpu==2.9) (3.3.0)
+Requirement already satisfied: packaging in ./venv/lib/python3.8/site-packages (from tensorflow-gpu==2.9) (23.1)
+Requirement already satisfied: protobuf>=3.9.2 in ./venv/lib/python3.8/site-packages (from tensorflow-gpu==2.9) (3.19.6)
+Requirement already satisfied: setuptools in ./venv/lib/python3.8/site-packages (from tensorflow-gpu==2.9) (67.6.1)
+Requirement already satisfied: six>=1.12.0 in ./venv/lib/python3.8/site-packages (from tensorflow-gpu==2.9) (1.16.0)
+Requirement already satisfied: tensorboard<2.10,>=2.9 in ./venv/lib/python3.8/site-packages (from tensorflow-gpu==2.9) (2.9.1)
+Requirement already satisfied: tensorflow-io-gcs-filesystem>=0.23.1 in ./venv/lib/python3.8/site-packages (from tensorflow-gpu==2.9) (0.32.0)
+Requirement already satisfied: tensorflow-estimator<2.10.0,>=2.9.0rc0 in ./venv/lib/python3.8/site-packages (from tensorflow-gpu==2.9) (2.9.0)
+Requirement already satisfied: termcolor>=1.1.0 in ./venv/lib/python3.8/site-packages (from tensorflow-gpu==2.9) (2.3.0)
+Requirement already satisfied: typing-extensions>=3.6.6 in ./venv/lib/python3.8/site-packages (from tensorflow-gpu==2.9) (4.5.0)
+Requirement already satisfied: wrapt>=1.11.0 in ./venv/lib/python3.8/site-packages (from tensorflow-gpu==2.9) (1.15.0)
+Requirement already satisfied: wheel<1.0,>=0.23.0 in ./venv/lib/python3.8/site-packages (from astunparse>=1.6.0->tensorflow-gpu==2.9) (0.40.0)
+Requirement already satisfied: google-auth<3,>=1.6.3 in ./venv/lib/python3.8/site-packages (from tensorboard<2.10,>=2.9->tensorflow-gpu==2.9) (2.17.3)
+Requirement already satisfied: google-auth-oauthlib<0.5,>=0.4.1 in ./venv/lib/python3.8/site-packages (from tensorboard<2.10,>=2.9->tensorflow-gpu==2.9) (0.4.6)
+Requirement already satisfied: markdown>=2.6.8 in ./venv/lib/python3.8/site-packages (from tensorboard<2.10,>=2.9->tensorflow-gpu==2.9) (3.4.3)
+Requirement already satisfied: requests<3,>=2.21.0 in ./venv/lib/python3.8/site-packages (from tensorboard<2.10,>=2.9->tensorflow-gpu==2.9) (2.29.0)
+Requirement already satisfied: tensorboard-data-server<0.7.0,>=0.6.0 in ./venv/lib/python3.8/site-packages (from tensorboard<2.10,>=2.9->tensorflow-gpu==2.9) (0.6.1)
+Requirement already satisfied: tensorboard-plugin-wit>=1.6.0 in ./venv/lib/python3.8/site-packages (from tensorboard<2.10,>=2.9->tensorflow-gpu==2.9) (1.8.1)
+Requirement already satisfied: werkzeug>=1.0.1 in ./venv/lib/python3.8/site-packages (from tensorboard<2.10,>=2.9->tensorflow-gpu==2.9) (2.3.2)
+Requirement already satisfied: cachetools<6.0,>=2.0.0 in ./venv/lib/python3.8/site-packages (from google-auth<3,>=1.6.3->tensorboard<2.10,>=2.9->tensorflow-gpu==2.9) (5.3.0)
+Requirement already satisfied: pyasn1-modules>=0.2.1 in ./venv/lib/python3.8/site-packages (from google-auth<3,>=1.6.3->tensorboard<2.10,>=2.9->tensorflow-gpu==2.9) (0.3.0)
+Requirement already satisfied: rsa<5,>=3.1.4 in ./venv/lib/python3.8/site-packages (from google-auth<3,>=1.6.3->tensorboard<2.10,>=2.9->tensorflow-gpu==2.9) (4.9)
+Requirement already satisfied: requests-oauthlib>=0.7.0 in ./venv/lib/python3.8/site-packages (from google-auth-oauthlib<0.5,>=0.4.1->tensorboard<2.10,>=2.9->tensorflow-gpu==2.9) (1.3.1)
+Requirement already satisfied: importlib-metadata>=4.4 in ./venv/lib/python3.8/site-packages (from markdown>=2.6.8->tensorboard<2.10,>=2.9->tensorflow-gpu==2.9) (6.6.0)
+Requirement already satisfied: charset-normalizer<4,>=2 in ./venv/lib/python3.8/site-packages (from requests<3,>=2.21.0->tensorboard<2.10,>=2.9->tensorflow-gpu==2.9) (3.1.0)
+Requirement already satisfied: idna<4,>=2.5 in ./venv/lib/python3.8/site-packages (from requests<3,>=2.21.0->tensorboard<2.10,>=2.9->tensorflow-gpu==2.9) (3.4)
+Requirement already satisfied: urllib3<1.27,>=1.21.1 in ./venv/lib/python3.8/site-packages (from requests<3,>=2.21.0->tensorboard<2.10,>=2.9->tensorflow-gpu==2.9) (1.26.15)
+Requirement already satisfied: certifi>=2017.4.17 in ./venv/lib/python3.8/site-packages (from requests<3,>=2.21.0->tensorboard<2.10,>=2.9->tensorflow-gpu==2.9) (2022.12.7)
+Requirement already satisfied: MarkupSafe>=2.1.1 in ./venv/lib/python3.8/site-packages (from werkzeug>=1.0.1->tensorboard<2.10,>=2.9->tensorflow-gpu==2.9) (2.1.2)
+Requirement already satisfied: zipp>=0.5 in ./venv/lib/python3.8/site-packages (from importlib-metadata>=4.4->markdown>=2.6.8->tensorboard<2.10,>=2.9->tensorflow-gpu==2.9) (3.15.0)
+Requirement already satisfied: pyasn1<0.6.0,>=0.4.6 in ./venv/lib/python3.8/site-packages (from pyasn1-modules>=0.2.1->google-auth<3,>=1.6.3->tensorboard<2.10,>=2.9->tensorflow-gpu==2.9) (0.5.0)
+Requirement already satisfied: oauthlib>=3.0.0 in ./venv/lib/python3.8/site-packages (from requests-oauthlib>=0.7.0->google-auth-oauthlib<0.5,>=0.4.1->tensorboard<2.10,>=2.9->tensorflow-gpu==2.9) (3.2.2)
+
+
+Installing package keras==2.9
+
+Requirement already satisfied: keras==2.9 in ./venv/lib/python3.8/site-packages (2.9.0)
+
+
+Installing package matplotlib
+
+Requirement already satisfied: matplotlib in ./venv/lib/python3.8/site-packages (3.7.1)
+Requirement already satisfied: contourpy>=1.0.1 in ./venv/lib/python3.8/site-packages (from matplotlib) (1.0.7)
+Requirement already satisfied: cycler>=0.10 in ./venv/lib/python3.8/site-packages (from matplotlib) (0.11.0)
+Requirement already satisfied: fonttools>=4.22.0 in ./venv/lib/python3.8/site-packages (from matplotlib) (4.39.3)
+Requirement already satisfied: kiwisolver>=1.0.1 in ./venv/lib/python3.8/site-packages (from matplotlib) (1.4.4)
+Requirement already satisfied: numpy>=1.20 in ./venv/lib/python3.8/site-packages (from matplotlib) (1.24.3)
+Requirement already satisfied: packaging>=20.0 in ./venv/lib/python3.8/site-packages (from matplotlib) (23.1)
+Requirement already satisfied: pillow>=6.2.0 in ./venv/lib/python3.8/site-packages (from matplotlib) (9.5.0)
+Requirement already satisfied: pyparsing>=2.3.1 in ./venv/lib/python3.8/site-packages (from matplotlib) (3.0.9)
+Requirement already satisfied: python-dateutil>=2.7 in ./venv/lib/python3.8/site-packages (from matplotlib) (2.8.2)
+Requirement already satisfied: importlib-resources>=3.2.0 in ./venv/lib/python3.8/site-packages (from matplotlib) (5.12.0)
+Requirement already satisfied: zipp>=3.1.0 in ./venv/lib/python3.8/site-packages (from importlib-resources>=3.2.0->matplotlib) (3.15.0)
+Requirement already satisfied: six>=1.5 in ./venv/lib/python3.8/site-packages (from python-dateutil>=2.7->matplotlib) (1.16.0)
+
+
+Installing package nibabel
+
+Requirement already satisfied: nibabel in ./venv/lib/python3.8/site-packages (5.1.0)
+Requirement already satisfied: importlib-resources>=1.3 in ./venv/lib/python3.8/site-packages (from nibabel) (5.12.0)
+Requirement already satisfied: numpy>=1.19 in ./venv/lib/python3.8/site-packages (from nibabel) (1.24.3)
+Requirement already satisfied: packaging>=17 in ./venv/lib/python3.8/site-packages (from nibabel) (23.1)
+Requirement already satisfied: zipp>=3.1.0 in ./venv/lib/python3.8/site-packages (from importlib-resources>=1.3->nibabel) (3.15.0)
+
+
+Installing package nilearn
+
+Requirement already satisfied: nilearn in ./venv/lib/python3.8/site-packages (0.10.1)
+Requirement already satisfied: joblib>=1.0.0 in ./venv/lib/python3.8/site-packages (from nilearn) (1.2.0)
+Requirement already satisfied: lxml in ./venv/lib/python3.8/site-packages (from nilearn) (4.9.2)
+Requirement already satisfied: nibabel>=3.2.0 in ./venv/lib/python3.8/site-packages (from nilearn) (5.1.0)
+Requirement already satisfied: numpy>=1.19.0 in ./venv/lib/python3.8/site-packages (from nilearn) (1.24.3)
+Requirement already satisfied: packaging in ./venv/lib/python3.8/site-packages (from nilearn) (23.1)
+Requirement already satisfied: pandas>=1.1.5 in ./venv/lib/python3.8/site-packages (from nilearn) (2.0.1)
+Requirement already satisfied: requests>=2.25.0 in ./venv/lib/python3.8/site-packages (from nilearn) (2.29.0)
+Requirement already satisfied: scikit-learn>=1.0.0 in ./venv/lib/python3.8/site-packages (from nilearn) (1.2.2)
+Requirement already satisfied: scipy>=1.6.0 in ./venv/lib/python3.8/site-packages (from nilearn) (1.10.1)
+Requirement already satisfied: importlib-resources>=1.3 in ./venv/lib/python3.8/site-packages (from nibabel>=3.2.0->nilearn) (5.12.0)
+Requirement already satisfied: python-dateutil>=2.8.2 in ./venv/lib/python3.8/site-packages (from pandas>=1.1.5->nilearn) (2.8.2)
+Requirement already satisfied: pytz>=2020.1 in ./venv/lib/python3.8/site-packages (from pandas>=1.1.5->nilearn) (2023.3)
+Requirement already satisfied: tzdata>=2022.1 in ./venv/lib/python3.8/site-packages (from pandas>=1.1.5->nilearn) (2023.3)
+Requirement already satisfied: charset-normalizer<4,>=2 in ./venv/lib/python3.8/site-packages (from requests>=2.25.0->nilearn) (3.1.0)
+Requirement already satisfied: idna<4,>=2.5 in ./venv/lib/python3.8/site-packages (from requests>=2.25.0->nilearn) (3.4)
+Requirement already satisfied: urllib3<1.27,>=1.21.1 in ./venv/lib/python3.8/site-packages (from requests>=2.25.0->nilearn) (1.26.15)
+Requirement already satisfied: certifi>=2017.4.17 in ./venv/lib/python3.8/site-packages (from requests>=2.25.0->nilearn) (2022.12.7)
+Requirement already satisfied: threadpoolctl>=2.0.0 in ./venv/lib/python3.8/site-packages (from scikit-learn>=1.0.0->nilearn) (3.1.0)
+Requirement already satisfied: zipp>=3.1.0 in ./venv/lib/python3.8/site-packages (from importlib-resources>=1.3->nibabel>=3.2.0->nilearn) (3.15.0)
+Requirement already satisfied: six>=1.5 in ./venv/lib/python3.8/site-packages (from python-dateutil>=2.8.2->pandas>=1.1.5->nilearn) (1.16.0)
+
+
+Installing package numpy
+
+Requirement already satisfied: numpy in ./venv/lib/python3.8/site-packages (1.24.3)
+
+
+Installing package pandas
+
+Requirement already satisfied: pandas in ./venv/lib/python3.8/site-packages (2.0.1)
+Requirement already satisfied: python-dateutil>=2.8.2 in ./venv/lib/python3.8/site-packages (from pandas) (2.8.2)
+Requirement already satisfied: pytz>=2020.1 in ./venv/lib/python3.8/site-packages (from pandas) (2023.3)
+Requirement already satisfied: tzdata>=2022.1 in ./venv/lib/python3.8/site-packages (from pandas) (2023.3)
+Requirement already satisfied: numpy>=1.20.3 in ./venv/lib/python3.8/site-packages (from pandas) (1.24.3)
+Requirement already satisfied: six>=1.5 in ./venv/lib/python3.8/site-packages (from python-dateutil>=2.8.2->pandas) (1.16.0)
+
+
+Installing package Pillow
+
+Requirement already satisfied: Pillow in ./venv/lib/python3.8/site-packages (9.5.0)
+
+
+Installing package sklearn
+
+Requirement already satisfied: sklearn in ./venv/lib/python3.8/site-packages (0.0.post4)
+
+
+Installing package tqdm
+
+Requirement already satisfied: tqdm in ./venv/lib/python3.8/site-packages (4.65.0)
+
+
+Installing package opencv-python
+
+Requirement already satisfied: opencv-python in ./venv/lib/python3.8/site-packages (4.7.0.72)
+Requirement already satisfied: numpy>=1.17.0 in ./venv/lib/python3.8/site-packages (from opencv-python) (1.24.3)
+
+TEST RESULTS:
+
+TensorFlow version: 2.9.0
+
+CUDA not available
+
+Device name: /physical_device:CPU:0
+Device type: CPU
+
+
+No GPU found. Please make sure that TensorFlow is installed with GPU support and that your GPU is properly configured.

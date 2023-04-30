@@ -1,0 +1,23 @@
+2023-04-29 13:35:24.676632: I tensorflow/core/platform/cpu_feature_guard.cc:182] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
+To enable the following instructions: AVX2 FMA, in other operations, rebuild TensorFlow with the appropriate compiler flags.
+RuntimeError: module compiled against API version 0xf but this version of numpy is 0xe
+ImportError: numpy.core.multiarray failed to import
+
+The above exception was the direct cause of the following exception:
+
+SystemError: <built-in method __contains__ of dict object at 0x7f3c990956c0> returned a result with an error set
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "./test_gpu.py", line 1, in <module>
+    import tensorflow as tf
+  File "/home/data_shares/group_jet/KDS_AdvancedMachineLearning_project/hpc/venv/lib/python3.8/site-packages/tensorflow/__init__.py", line 37, in <module>
+    from tensorflow.python.tools import module_util as _module_util
+  File "/home/data_shares/group_jet/KDS_AdvancedMachineLearning_project/hpc/venv/lib/python3.8/site-packages/tensorflow/python/__init__.py", line 37, in <module>
+    from tensorflow.python.eager import context
+  File "/home/data_shares/group_jet/KDS_AdvancedMachineLearning_project/hpc/venv/lib/python3.8/site-packages/tensorflow/python/eager/context.py", line 33, in <module>
+    from tensorflow.python.client import pywrap_tf_session
+  File "/home/data_shares/group_jet/KDS_AdvancedMachineLearning_project/hpc/venv/lib/python3.8/site-packages/tensorflow/python/client/pywrap_tf_session.py", line 19, in <module>
+    from tensorflow.python.client._pywrap_tf_session import *
+ImportError: initialization failed

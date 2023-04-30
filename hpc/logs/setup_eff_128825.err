@@ -1,0 +1,26 @@
+2023-05-01 00:29:08.175176: I tensorflow/stream_executor/platform/default/dso_loader.cc:48] Successfully opened dynamic library libcudart.so.11.0
+Using TensorFlow backend.
+  0%|          | 0/9841 [00:00<?, ?it/s]  0%|          | 1/9841 [00:00<16:45,  9.78it/s]  0%|          | 3/9841 [00:00<20:21,  8.05it/s]  0%|          | 6/9841 [00:00<11:35, 14.14it/s]  0%|          | 11/9841 [00:00<06:43, 24.36it/s]  0%|          | 17/9841 [00:00<05:00, 32.70it/s]  0%|          | 23/9841 [00:00<04:07, 39.67it/s]  0%|          | 28/9841 [00:00<04:41, 34.87it/s]  0%|          | 32/9841 [00:01<05:35, 29.25it/s]  0%|          | 36/9841 [00:01<05:57, 27.40it/s]  0%|          | 39/9841 [00:01<05:52, 27.81it/s]  0%|          | 42/9841 [00:01<06:11, 26.41it/s]  0%|          | 47/9841 [00:01<05:07, 31.90it/s]  1%|          | 53/9841 [00:01<04:13, 38.61it/s]  1%|          | 58/9841 [00:01<04:12, 38.67it/s]  1%|          | 64/9841 [00:02<03:47, 42.99it/s]  1%|          | 71/9841 [00:02<03:20, 48.76it/s]  1%|          | 77/9841 [00:02<05:02, 32.24it/s]  1%|          | 82/9841 [00:02<05:10, 31.40it/s]  1%|          | 88/9841 [00:02<04:29, 36.21it/s]  1%|          | 93/9841 [00:02<04:14, 38.32it/s]  1%|          | 99/9841 [00:02<03:44, 43.31it/s]  1%|          | 100/9841 [00:02<04:49, 33.62it/s]2023-05-01 00:29:18.461454: I tensorflow/stream_executor/platform/default/dso_loader.cc:48] Successfully opened dynamic library libcuda.so.1
+2023-05-01 00:29:19.040591: E tensorflow/stream_executor/cuda/cuda_driver.cc:314] failed call to cuInit: CUDA_ERROR_NO_DEVICE: no CUDA-capable device is detected
+2023-05-01 00:29:19.040711: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:169] retrieving CUDA diagnostic information for host: desktop21
+2023-05-01 00:29:19.040732: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:176] hostname: desktop21
+2023-05-01 00:29:19.040954: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:200] libcuda reported version is: 525.89.2
+2023-05-01 00:29:19.041056: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:204] kernel reported version is: 525.89.2
+2023-05-01 00:29:19.041075: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:310] kernel version seems to match DSO: 525.89.2
+
+Traceback (most recent call last):
+  File "../src/Eff_test.py", line 152, in <module>
+    model, model_version = create_effecientnet_model(input_shape = input_shape, 
+  File "../src/Eff_test.py", line 50, in create_effecientnet_model
+    x = layers.GlobalAveragePooling2D()(base_model.output)
+  File "/home/data_shares/group_jet/KDS_AdvancedMachineLearning_project/hpc/venv2/lib/python3.8/site-packages/keras/backend/tensorflow_backend.py", line 75, in symbolic_fn_wrapper
+    return func(*args, **kwargs)
+  File "/home/data_shares/group_jet/KDS_AdvancedMachineLearning_project/hpc/venv2/lib/python3.8/site-packages/keras/engine/base_layer.py", line 446, in __call__
+    self.assert_input_compatibility(inputs)
+  File "/home/data_shares/group_jet/KDS_AdvancedMachineLearning_project/hpc/venv2/lib/python3.8/site-packages/keras/engine/base_layer.py", line 310, in assert_input_compatibility
+    K.is_keras_tensor(x)
+  File "/home/data_shares/group_jet/KDS_AdvancedMachineLearning_project/hpc/venv2/lib/python3.8/site-packages/keras/backend/tensorflow_backend.py", line 695, in is_keras_tensor
+    if not is_tensor(x):
+  File "/home/data_shares/group_jet/KDS_AdvancedMachineLearning_project/hpc/venv2/lib/python3.8/site-packages/keras/backend/tensorflow_backend.py", line 703, in is_tensor
+    return isinstance(x, tf_ops._TensorLike) or tf_ops.is_dense_tensor_like(x)
+AttributeError: module 'tensorflow.python.framework.ops' has no attribute '_TensorLike'

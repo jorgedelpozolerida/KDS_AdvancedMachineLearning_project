@@ -39,24 +39,18 @@ from generate_processed_data import target_creator, training_data_creator, creat
 from utils import check_for_GPU
 from keras.optimizers import Adam
 from keras.callbacks import EarlyStopping
+from tensorflow.keras.applications import EfficientNetB0, EfficientNetB5
 
 
-def create_cnn_model(input_shape, output_dim, model_path):
-    model = models.Sequential([
-        layers.Input(shape=input_shape),
-        layers.Conv2D(4, (5, 5), activation='relu', padding='same'),
-        layers.MaxPooling2D((3, 3)),
-        layers.Conv2D(4, (3, 3), activation='relu', padding='same'),
-        layers.MaxPooling2D((2, 2)),
-        layers.Conv2D(8, (3, 3), activation='relu', padding='same'),
-        layers.MaxPooling2D((2, 2)),
-        layers.Conv2D(16, (3, 3), activation='relu', padding='same'),
-        layers.MaxPooling2D((2, 2)),
-        layers.Flatten(),
-        layers.Dense(512, activation='relu'),
-        layers.Dense(output_dim[0])
-    ])
-
+def create_effecientnet_model(input_shape, output_dim, model_path):
+    # base_model = EfficientNetB0(weights='imagenet', include_top=False, input_shape=input_shape)
+    # freeze the weights of the base model
+    base_model = EfficientNetB5(weights='imagenet', include_top=False, input_shape=input_shape)
+    base_model.trainable = False
+    x = layers.GlobalAveragePooling2D()(base_model.output)
+    x = layers.Dense(512, activation='relu')(x)
+    output_layer = layers.Dense(output_dim[0])(x)
+    model = models.Model(inputs=base_model.inputs, outputs=output_layer)
     model.summary()
 
     # Save the model
@@ -88,7 +82,7 @@ def train_model(model, model_path, X_train, y_train, X_val, model_version, y_val
 
     val_loss, val_mae, val_mse, val_mape = model.evaluate(X_val,  y_val,  verbose=1)
 
-    model.save(f"{model_path}/CNN_{model_version}_{job_id}.h5")
+    model.save(f"{model_path}/effecientnet_{model_version}_test_{job_id}.h5")
 
     return model
 
@@ -100,10 +94,9 @@ def save_test_pred(model_path, model, X_test, y_test, model_version):
     y_pred = test_model(model, X_test, y_test)
 
     model_path = model_path.replace("models", "predictions")
-
-    with open(f"{model_path}/y_test_CNN_{model_version}_{job_id}.pickle", "wb") as f:
+    with open(f"{model_path}/y_test_effecientnet_{model_version}_test_{job_id}.pickle", "wb") as f:
         pickle.dump(y_test, f)   
-    with open(f"{model_path}/y_pred_CNN_{model_version}_{job_id}.pickle", "wb") as f:
+    with open(f"{model_path}/y_pred_effecientnet_{model_version}_test_{job_id}.pickle", "wb") as f:
         pickle.dump(y_pred, f)   
 
 
@@ -113,6 +106,7 @@ def test_model(model, X_test, y_test):
     """
     # Evaluate the model
     test_loss, test_mae, test_mse, test_mape = model.evaluate(X_test, y_test, verbose=1)
+
     y_pred = model.predict(X_test)
     
     return y_pred
@@ -122,15 +116,17 @@ def test_model(model, X_test, y_test):
 
 if __name__ == '__main__':
     
+    print("TEST - Only 1 epoch")
+
     subject = 'subj01'
-    test = False
+    test = True 
     y_data = target_creator(subject, test = test, merged = True)
     X_data = training_data_creator(subject, test = test)
     epochs = 1
     batch_size = 32
     learning_rate = 0.000001
     patience = 3
-    model_path = f"../dataout/models/CNN/{subject}"
+    model_path = f"../dataout/models/EffecientNet/{subject}"
 
     print("############################### \n")
     print(" MODEL PARAMETERS: ")
@@ -144,11 +140,6 @@ if __name__ == '__main__':
     print("Model Path: ", model_path)
     print("############################### \n")
 
-    # get the number of CPUs specified in the job submission
-    num_cpus = int(os.environ['SLURM_CPUS_PER_TASK']) 
-    tf.config.threading.set_inter_op_parallelism_threads(num_cpus)
-    tf.config.threading.set_intra_op_parallelism_threads(num_cpus)
-
     input_shape = X_data[0].shape
     output_dim = y_data[0].shape
     X_train, X_val, X_test, y_train, y_val, y_test = create_train_test_split(X_data, y_data, test_size=0.2, random_state=123)
@@ -158,9 +149,9 @@ if __name__ == '__main__':
     del y_data
 
     check_for_GPU()
-    model, model_version = create_cnn_model(input_shape = input_shape, 
-                                            output_dim = output_dim, 
-                                            model_path = model_path)
+    model, model_version = create_effecientnet_model(input_shape = input_shape, 
+                                                        output_dim = output_dim, 
+                                                        model_path = model_path)
 
     model = train_model(model = model, 
                         model_path = model_path, 
@@ -175,3 +166,6 @@ if __name__ == '__main__':
                         patience=patience)
 
     save_test_pred(model_path, model, X_test, y_test, model_version)
+
+    
+

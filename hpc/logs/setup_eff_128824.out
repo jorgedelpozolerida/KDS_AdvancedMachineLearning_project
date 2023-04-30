@@ -1,0 +1,18 @@
+Tries to use TF 2.3.1 from module to work with script.
+
+############################################
+CREATE ENVIRONMENT
+
+
+############################################
+INSTALL PACKAGES
+
+
+############################################
+
+RUN test_gpy.py
+
+############################################
+RUN ../src/Eff_test.py
+CPUs set to same as HPC job.
+

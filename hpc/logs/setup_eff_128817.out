@@ -1,0 +1,12 @@
+Tries to use TF 2.3.1 from module to work with script.
+created virtual environment CPython3.8.2.final.0-64 in 57477ms
+  creator CPython3Posix(dest=/home/data_shares/group_jet/KDS_AdvancedMachineLearning_project/hpc/venv2, clear=False, global=False)
+  seeder FromAppData(download=False, pip=latest, setuptools=latest, wheel=latest, via=copy, app_data_dir=/home/thcl/.local/share/virtualenv/seed-app-data/v1.0.1)
+  activators BashActivator,CShellActivator,FishActivator,PowerShellActivator,PythonActivator,XonshActivator
+Collecting pip
+  Using cached pip-23.1.2-py3-none-any.whl (2.1 MB)
+Installing collected packages: pip
+  Attempting uninstall: pip
+    Found existing installation: pip 20.0.2
+    Uninstalling pip-20.0.2:
+      Successfully uninstalled pip-20.0.2
