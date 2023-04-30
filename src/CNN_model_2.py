@@ -11,7 +11,7 @@ import sys
 import argparse
 
 # forces CPU use because errors with GPU
-os.environ['CUDA_VISIBLE_DEVICES'] = '-1'
+# os.environ['CUDA_VISIBLE_DEVICES'] = '-1'
 
 import logging                                                                      # NOQA E402
 import numpy as np                                                                  # NOQA E402
@@ -29,6 +29,12 @@ try:
     print("CPUs set to same as HPC job.\n")
 except:
     print("Not running on HPC.\n")
+
+# Add job id to model name
+try: 
+    job_id = "_" + os.environ.get('SLURM_JOB_ID')
+except:
+    job_id = ""
 
 from keras import layers, models
 import keras
@@ -91,7 +97,7 @@ def train_model(model, model_path, X_train, y_train, X_val, model_version, y_val
 
     val_loss, val_mae, val_mse, val_mape = model.evaluate(X_val,  y_val,  verbose=1)
 
-    model.save(f"{model_path}/CNN_{model_version}.h5")
+    model.save(f"{model_path}/CNN_{model_version}{job_id}.h5")
 
     return model
 
@@ -115,9 +121,9 @@ def save_test_pred(model_path, model, X_test, y_test, model_version, verbose = T
 
     model_path = model_path.replace("models", "predictions")
 
-    with open(f"{model_path}/y_test_CNN_{model_version}.pickle", "wb") as f:
+    with open(f"{model_path}/y_test_CNN_{model_version}{job_id}.pickle", "wb") as f:
         pickle.dump(y_test, f)   
-    with open(f"{model_path}/y_pred_CNN_{model_version}.pickle", "wb") as f:
+    with open(f"{model_path}/y_pred_CNN_{model_version}{job_id}.pickle", "wb") as f:
         pickle.dump(y_pred, f)   
 
 
@@ -140,11 +146,11 @@ if __name__ == '__main__':
     test = False
     y_data = target_creator(subject, test = test, merged = True)
     X_data = training_data_creator(subject, test = test)
-    epochs = 1000
+    epochs = 20
     batch_size = 8
     # learning_rate = 0.000001
     learning_rate = 0.0000005
-    patience = 10
+    patience = 3
     model_path = f"../dataout/models/CNN/{subject}"
 
     print("############################### \n")
@@ -158,12 +164,6 @@ if __name__ == '__main__':
     print("Patience: ", patience)
     print("Model Path: ", model_path)
     print("############################### \n")
-
-    # NOTE: ENABLE ME FOR HPC!
-    # get the number of CPUs specified in the job submission
-    # num_cpus = int(os.environ['SLURM_CPUS_PER_TASK']) 
-    # tf.config.threading.set_inter_op_parallelism_threads(num_cpus)
-    # tf.config.threading.set_intra_op_parallelism_threads(num_cpus)
 
     X_train, X_val, X_test, y_train, y_val, y_test = create_train_test_split(X_data, y_data, test_size=0.2, random_state=123)
 

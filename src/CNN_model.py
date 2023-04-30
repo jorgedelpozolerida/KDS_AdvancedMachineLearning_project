@@ -10,7 +10,6 @@ import os
 import sys
 import argparse
 
-job_id = os.environ.get('SLURM_JOB_ID')
 # forces CPU use because errors with GPU
 # os.environ['CUDA_VISIBLE_DEVICES'] = '-1'
 
@@ -30,6 +29,12 @@ try:
     print("CPUs set to same as HPC job.\n")
 except:
     print("Not running on HPC.\n")
+
+# Add job id to model name
+try: 
+    job_id = "_" + os.environ.get('SLURM_JOB_ID')
+except:
+    job_id = ""
 
 from keras import layers, models
 import keras
@@ -101,9 +106,9 @@ def save_test_pred(model_path, model, X_test, y_test, model_version):
 
     model_path = model_path.replace("models", "predictions")
 
-    with open(f"{model_path}/y_test_CNN_{model_version}_{job_id}.pickle", "wb") as f:
+    with open(f"{model_path}/y_test_CNN_{model_version}{job_id}.pickle", "wb") as f:
         pickle.dump(y_test, f)   
-    with open(f"{model_path}/y_pred_CNN_{model_version}_{job_id}.pickle", "wb") as f:
+    with open(f"{model_path}/y_pred_CNN_{model_version}{job_id}.pickle", "wb") as f:
         pickle.dump(y_pred, f)   
 
 
@@ -143,11 +148,6 @@ if __name__ == '__main__':
     print("Patience: ", patience)
     print("Model Path: ", model_path)
     print("############################### \n")
-
-    # get the number of CPUs specified in the job submission
-    num_cpus = int(os.environ['SLURM_CPUS_PER_TASK']) 
-    tf.config.threading.set_inter_op_parallelism_threads(num_cpus)
-    tf.config.threading.set_intra_op_parallelism_threads(num_cpus)
 
     input_shape = X_data[0].shape
     output_dim = y_data[0].shape

@@ -30,6 +30,13 @@ try:
 except:
     print("Not running on HPC.\n")
 
+# Add job id to model name
+try: 
+    job_id = "_" + os.environ.get('SLURM_JOB_ID')
+except:
+    job_id = ""
+
+
 from keras import layers, models
 import keras
 from utils import find_latest_model
@@ -81,7 +88,7 @@ def train_model(model, model_path, X_train, y_train, X_val, model_version, y_val
 
     val_loss, val_mae, val_mse, val_mape = model.evaluate(X_val,  y_val,  verbose=1)
 
-    # model.save(f"{model_path}/effecientnet_{model_version}.h5")
+    model.save(f"{model_path}/effecientnet_{model_version}{job_id}.h5")
 
     return model
 
@@ -93,9 +100,9 @@ def save_test_pred(model_path, model, X_test, y_test, model_version):
     y_pred = test_model(model, X_test, y_test)
 
     model_path = model_path.replace("models", "predictions")
-    with open(f"{model_path}/y_test_effecientnet_{model_version}.pickle", "wb") as f:
+    with open(f"{model_path}/y_test_effecientnet_{model_version}{job_id}.pickle", "wb") as f:
         pickle.dump(y_test, f)   
-    with open(f"{model_path}/y_pred_effecientnet_{model_version}.pickle", "wb") as f:
+    with open(f"{model_path}/y_pred_effecientnet_{model_version}{job_id}.pickle", "wb") as f:
         pickle.dump(y_pred, f)   
 
 
