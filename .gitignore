@@ -138,3 +138,5 @@ dataout/models
 dataout/predictions
 folder.py
 folderstructure.sh
+hpc/venv/
+hpc/venv2/
