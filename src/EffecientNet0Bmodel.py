@@ -128,10 +128,10 @@ if __name__ == '__main__':
     X_data = training_data_creator(subject, test = test)
     epochs = 20
     batch_size = 32
-    learning_rate = 0.000001
+    learning_rate = 0.0000005
     patience = 3
     model_path = f"../dataout/models/EffecientNet/{subject}"
-
+ 
     print("############################### \n")
     print(" MODEL PARAMETERS: ")
     print("")
