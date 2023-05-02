@@ -41,6 +41,9 @@ from keras import layers, models
 import keras
 from utils import find_latest_model
 from generate_processed_data import target_creator, training_data_creator, create_train_test_split
+from generate_processed_data import StandardScaler_fit_transform , StandardScaler_transform , StandardScaler_inverse_transform
+from generate_processed_data import PCA_fit_transform , PCA_transform , PCA_inverse_transform
+
 
 from utils import check_for_GPU
 from keras.optimizers import Adam
