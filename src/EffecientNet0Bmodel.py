@@ -152,6 +152,18 @@ if __name__ == '__main__':
     del X_data
     del y_data
 
+    # Scale and PCA transform the data 
+    y_train =  PCA_fit_transform(y_train, subject)
+    y_test = PCA_transform(y_test, subject)
+    y_val = PCA_transform(y_val, subject)
+    input_shape = X_train[0].shape
+    output_dim = y_train[0].shape
+
+    print("     Data shape : ")
+    print("   Input Shape: ", input_shape)
+    print("   Output Dim: ", output_dim)
+    print("\n")
+
     check_for_GPU()
     model, model_version = create_effecientnet_model(input_shape = input_shape, 
                                                         output_dim = output_dim, 
