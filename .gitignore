@@ -140,3 +140,4 @@ folder.py
 folderstructure.sh
 hpc/venv/
 hpc/venv2/
+*.pickle

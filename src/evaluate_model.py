@@ -198,6 +198,7 @@ def plot_ROI_correlations(subject, correlations, save=False, save_args=None, sho
     plt.ylim(bottom=0, top=1)
     plt.xticks(ticks=x, labels=roi_names, rotation=60)
     plt.ylabel('Median Pearson\'s $r$')
+
     plt.legend(frameon=True, loc=1)
     plt.title(title)
 
@@ -213,8 +214,11 @@ def plot_ROI_correlations(subject, correlations, save=False, save_args=None, sho
 def main(args):
     
     subject = 'subj01' # subject to get predicitons and ground truth from
-    idx = 1 #201# 3 # id of the model run
+    idx = 201# 3 # id of the model run
     model = 'CNN' # model to be evaluated
+
+    # model = 'effecientnet' # CNN
+    # idx = 1 #3
     
     
     # # CREATING PREDICTION FOR ALL DATA
@@ -238,7 +242,6 @@ def main(args):
     gt_file_path = os.path.join(DATAOUT_PATH, f"predictions/{model}/{subject}/y_test_{model}_{idx}.pickle")
     with open (gt_file_path, "rb") as f:
         y_pred = pickle.load(f)
-    y_pred = y_pred
     print("Shape of y_pred: ", y_pred.shape)
 
     # Create left-right split into dictionary
@@ -263,7 +266,8 @@ def main(args):
         fsaverage_correlation[np.where(fsaverage_all_vertices[hemisphere])[0]] = hem_corr
         utils.visualize_brainresponse(hemisphere, 
                                     surface_map=fsaverage_correlation, 
-                                    cmap='cold_hot',
+                                    cmap='bwr',
+                                    vmin=-0.5, vmax=0.5,
                                     title= f'Encoding accuracy for model {model}, id={idx}. {hemisphere} hemisphere. Subject: {subject[-2:]}'
                                     
                                     )

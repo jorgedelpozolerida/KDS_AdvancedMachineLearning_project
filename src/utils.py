@@ -200,7 +200,8 @@ def get_file_with_id(id, folder_path):
 
 
 def visualize_brainresponse(
-    hemisphere, surface_map, title="", open_in_browser=True, cmap="cool"
+    hemisphere, surface_map, title="", open_in_browser=True, cmap="cool",
+    vmin = None, vmax = None 
 ):
     """
     Visualizes intractively the fMRI response onto brain surface in fsaverage space.
@@ -216,6 +217,11 @@ def visualize_brainresponse(
         colorbar=True,
         title=title,
     )
+
+    if vmax is not None:
+        view.set_vmax(vmax)
+    if vmin is not None:
+        view.set_vmin(vmin)
 
     if open_in_browser:
         view.open_in_browser()

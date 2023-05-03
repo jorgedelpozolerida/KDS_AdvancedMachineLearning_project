@@ -177,7 +177,12 @@ def create_train_test_split(X_data, y_data, test_size=0.20, random_state=123):
     print("X_val_ids[:10]: ", X_val_ids[:10])
     for idx, image_id in enumerate(X_train_ids):
         print("IDX: {}   image_id:  train-{}....png".format(idx, image_id+1)) # +1 so it corresponds with the image ID in the file name
+        if idx == 10:
+            break 
 
+    print("Length of X_train_ids: ", len(X_train_ids))
+    print("Length of X_val_ids: ", len(X_val_ids))
+    print("Length of X_test_ids: ", len(X_test_ids))
 
     return X_train, X_val, X_test, y_train, y_val, y_test 
 
