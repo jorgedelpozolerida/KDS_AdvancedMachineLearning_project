@@ -1,0 +1,33 @@
+I tried the following setups:
+
+
+Job ID = 128806
+
+module load Python/3.8.6-GCCcore-10.2.0
+module load CUDA/11.1.1-GCC-10.2.0 
+
+Install all requirements, including tensorflow-gpu==2.9
+Everything installs, however:
+
+TEST RESULTS:
+TensorFlow version: 2.9.0
+CUDA not available
+
+
+
+Job ID = 128822
+
+module load TensorFlow/2.3.1-fosscuda-2020a-Python-3.8.2
+
+TF 2.3.1
+
+Changes to requirements. Uses requirements_eff.txt instead. Run setup_eff.job
+Matplotlib asks for Numpy 2.0, but that's not a part of the module.
+Try to downgrade matplotlib to 3.3.3 (Chat says this version is compatible with numpy < 2.0)
+
+In model.py
+from keras.applications import EfficientNetB0, EfficientNetB5
+
+Changed to
+from tensorflow.keras.applications import EfficientNetB0, EfficientNetB5
+
