@@ -118,6 +118,15 @@ def test_model(model, X_test, y_test):
     test_loss, test_mae, test_mse, test_mape = model.evaluate(X_test, y_test, verbose=1)
 
     y_pred = model.predict(X_test)
+    y_pred = PCA_inverse_transform(y_pred, subject) # Inverts into "NeUrOa DaTA"
+    y_test = PCA_inverse_transform(y_test, subject) # Inverts into "NeUrOa DaTA"
+
+    model_path = model_path.replace("models", "predictions")
+
+    with open(f"{model_path}/y_test_CNN_{model_version}.pickle", "wb") as f:
+        pickle.dump(y_test, f)   
+    with open(f"{model_path}/y_pred_CNN_{model_version}.pickle", "wb") as f:
+        pickle.dump(y_pred, f)   
     
     return y_pred
     
