@@ -41,6 +41,9 @@ from keras import layers, models
 import keras
 from utils import find_latest_model
 from generate_processed_data import target_creator, training_data_creator, create_train_test_split
+from generate_processed_data import StandardScaler_fit_transform , StandardScaler_transform , StandardScaler_inverse_transform
+from generate_processed_data import PCA_fit_transform , PCA_transform , PCA_inverse_transform
+
 
 from utils import check_for_GPU
 from keras.optimizers import Adam
@@ -128,10 +131,10 @@ if __name__ == '__main__':
     X_data = training_data_creator(subject, test = test)
     epochs = 20
     batch_size = 32
-    learning_rate = 0.000001
+    learning_rate = 0.0000005
     patience = 3
     model_path = f"../dataout/models/EffecientNet/{subject}"
-
+ 
     print("############################### \n")
     print(" MODEL PARAMETERS: ")
     print("")
@@ -151,6 +154,18 @@ if __name__ == '__main__':
     # Clear RAM
     del X_data
     del y_data
+
+    # Scale and PCA transform the data 
+    y_train =  PCA_fit_transform(y_train, subject)
+    y_test = PCA_transform(y_test, subject)
+    y_val = PCA_transform(y_val, subject)
+    input_shape = X_train[0].shape
+    output_dim = y_train[0].shape
+
+    print("     Data shape : ")
+    print("   Input Shape: ", input_shape)
+    print("   Output Dim: ", output_dim)
+    print("\n")
 
     check_for_GPU()
     model, model_version = create_effecientnet_model(input_shape = input_shape, 

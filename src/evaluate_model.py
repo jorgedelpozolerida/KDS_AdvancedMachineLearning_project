@@ -213,7 +213,7 @@ def plot_ROI_correlations(subject, correlations, save=False, save_args=None, sho
 def main(args):
     
     subject = 'subj01' # subject to get predicitons and ground truth from
-    idx = 3 # id of the model run
+    idx = 1 #201# 3 # id of the model run
     model = 'CNN' # model to be evaluated
     
     
@@ -238,6 +238,7 @@ def main(args):
     gt_file_path = os.path.join(DATAOUT_PATH, f"predictions/{model}/{subject}/y_test_{model}_{idx}.pickle")
     with open (gt_file_path, "rb") as f:
         y_pred = pickle.load(f)
+    y_pred = y_pred
     print("Shape of y_pred: ", y_pred.shape)
 
     # Create left-right split into dictionary
@@ -251,7 +252,7 @@ def main(args):
 
     correlations = calculate_correlations(groundtruth_fmri, predicted_fmri, subject,
                                         save=True, save_args={'id': idx, 'model_name': model},
-                                        recalculate=False)
+                                        recalculate=True)
     
     # Plot correlation on brain surface for both hemispheres
         
