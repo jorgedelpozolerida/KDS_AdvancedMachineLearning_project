@@ -218,10 +218,10 @@ def visualize_brainresponse(
         title=title,
     )
 
-    if vmax is not None:
-        view.set_vmax(vmax)
-    if vmin is not None:
-        view.set_vmin(vmin)
+    # if vmax is not None:
+    #     view.set_vmax(vmax)
+    # if vmin is not None:
+    #     view.set_vmin(vmin)
 
     if open_in_browser:
         view.open_in_browser()
