@@ -159,11 +159,25 @@ def create_train_test_split(X_data, y_data, test_size=0.20, random_state=123):
     print("X_data.shape: ", X_data.shape)
     print("y_data.shape: ", y_data.shape)
 
+    # create a list of image ids
+    image_ids = [i for i in range(len(X_data))] # image ID starts at 1 tho, consdier it...
+
     X_train, X_test, y_train, y_test = train_test_split(X_data, y_data, test_size=test_size,
                                                         random_state=random_state, shuffle=True)
 
     X_train, X_val, y_train, y_val = train_test_split(X_train, y_train, test_size=test_size,
                                                         random_state=random_state, shuffle=True)
+
+    X_train_ids, X_test_ids = train_test_split(image_ids, test_size=test_size,
+                                                        random_state=random_state, shuffle=True)            
+    X_train_ids, X_val_ids  = train_test_split(X_train_ids, test_size=test_size,
+                                                        random_state=random_state, shuffle=True)            
+
+    print("X_train_ids[:10]: ", X_train_ids[:10])
+    print("X_val_ids[:10]: ", X_val_ids[:10])
+    for idx, image_id in enumerate(X_train_ids):
+        print("IDX: {}   image_id:  train-{}....png".format(idx, image_id+1)) # +1 so it corresponds with the image ID in the file name
+
 
     return X_train, X_val, X_test, y_train, y_val, y_test 
 
@@ -224,9 +238,9 @@ def main():
 if __name__ == "__main__":
     subject = 'subj01'
     test = False
-    # y_data = target_creator(subject, test = test, merged = True)
+    y_data = target_creator(subject, test = test, merged = True)
     X_data = training_data_creator(subject, test = test, dont_use_images = True)
 
     # input_shape = X_data[0].shape
 
-    # X_train, X_val, X_test, y_train, y_val, y_test = create_train_test_split(X_data, y_data, test_size=0.2, random_state=123)
+    X_train, X_val, X_test, y_train, y_val, y_test = create_train_test_split(X_data, y_data, test_size=0.2, random_state=123)
