@@ -180,7 +180,9 @@ def plot_ROI_correlations(subject, correlations, save=False, save_args=None, sho
     roi_names.append('All vertices')
     lh_roi_correlation.append(lh_correlation)
     rh_roi_correlation.append(rh_correlation)
-
+    total_roi_correlation = np.concatenate((lh_correlation, rh_correlation))
+    print("Mean correlation across all vertices: " + str(np.mean(total_roi_correlation)))
+    
 
     lh_median_roi_correlation = [np.median(lh_roi_correlation[r]) for r in range(len(lh_roi_correlation))]
     rh_median_roi_correlation = [np.median(rh_roi_correlation[r]) for r in range(len(rh_roi_correlation))]
@@ -214,8 +216,12 @@ def plot_ROI_correlations(subject, correlations, save=False, save_args=None, sho
 def main(args):
     
     subject = 'subj01' # subject to get predicitons and ground truth from
+    # idx = 201# 3 # id of the model run
     idx = 201# 3 # id of the model run
     model = 'CNN' # model to be evaluated
+
+    # model = 'effecientnet'
+    # idx = 2
 
     # model = 'effecientnet' # CNN
     # idx = 1 #3
@@ -267,7 +273,6 @@ def main(args):
         utils.visualize_brainresponse(hemisphere, 
                                     surface_map=fsaverage_correlation, 
                                     cmap='bwr',
-                                    vmin=-0.5, vmax=0.5,
                                     title= f'Encoding accuracy for model {model}, id={idx}. {hemisphere} hemisphere. Subject: {subject[-2:]}'
                                     
                                     )
