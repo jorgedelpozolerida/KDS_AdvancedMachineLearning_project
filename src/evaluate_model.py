@@ -216,8 +216,7 @@ def plot_ROI_correlations(subject, correlations, save=False, save_args=None, sho
 def main(args):
     
     subject = 'subj01' # subject to get predicitons and ground truth from
-    # idx = 201# 3 # id of the model run
-    idx = 201# 3 # id of the model run
+    idx = 201  # id of the model run
     model = 'CNN' # model to be evaluated
 
     # model = 'effecientnet'
@@ -258,14 +257,17 @@ def main(args):
     # 1. TEST DATA ----------------------------------------------------------
     
     # --------------------- CORRELATION METRICS -----------------------------
-
     correlations = calculate_correlations(groundtruth_fmri, predicted_fmri, subject,
                                         save=True, save_args={'id': idx, 'model_name': model},
-                                        recalculate=True)
+                                        recalculate=False)
     
     # Plot correlation on brain surface for both hemispheres
         
     fsaverage_all_vertices = utils.load_allvertices(subject)
+    
+    min_corr = np.min([np.min(i) for i in correlations.values()])
+    max_corr = np.max([np.max(i) for i in correlations.values()])
+    
     for hemisphere, hem_corr in correlations.items():
 
         fsaverage_correlation = np.zeros(len(fsaverage_all_vertices[hemisphere]))
@@ -273,8 +275,9 @@ def main(args):
         utils.visualize_brainresponse(hemisphere, 
                                     surface_map=fsaverage_correlation, 
                                     cmap='bwr',
-                                    title= f'Encoding accuracy for model {model}, id={idx}. {hemisphere} hemisphere. Subject: {subject[-2:]}'
-                                    
+                                    title= f'Encoding accuracy for model {model}, id={idx}. {hemisphere} hemisphere. Subject: {subject[-2:]}',
+                                    vmin=min_corr,
+                                    vmax=max_corr
                                     )
     # Plot correlation per Vertex
     plot_ROI_correlations(subject, correlations,
@@ -284,6 +287,7 @@ def main(args):
 
 
     # ---------------------  INFORMATION METRICS --------------------------
+    # TBD
 
 
 def parse_args():
