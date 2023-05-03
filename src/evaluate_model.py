@@ -216,14 +216,8 @@ def plot_ROI_correlations(subject, correlations, save=False, save_args=None, sho
 def main(args):
     
     subject = 'subj01' # subject to get predicitons and ground truth from
-    idx = 201  # id of the model run
-    model = 'CNN' # model to be evaluated
-
-    # model = 'effecientnet'
-    # idx = 2
-
-    # model = 'effecientnet' # CNN
-    # idx = 1 #3
+    idx = 0  # id of the model run
+    model = 'linearizing_model' # model to be evaluated
     
     
     # # CREATING PREDICTION FOR ALL DATA

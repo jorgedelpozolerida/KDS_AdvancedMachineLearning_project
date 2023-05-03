@@ -134,10 +134,10 @@ dmypy.json
 Data
 # *.h5
 # *.pickle
-dataout/models
-dataout/predictions
+dataout/models/
+dataout/predictions/
 folder.py
 folderstructure.sh
 hpc/venv/
 hpc/venv2/
-*.pickle
+# *.pickle
