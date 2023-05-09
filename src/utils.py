@@ -214,6 +214,7 @@ def visualize_brainresponse(
         bg_map=fsaverage["sulc_" + hemisphere],
         threshold=1e-14,
         cmap=cmap,
+        symmetric_cmap=False,
         colorbar=True,
         title=title,
         vmin=vmin,  
@@ -362,7 +363,6 @@ def predict_from_savedmodel(X_data, subject, model_name, id, save=False, recalcu
     
     model_dir = os.path.join(DATAOUT_PATH, "models", model_name, subject)
     model_path = next((os.path.join(model_dir, filename) for filename in os.listdir(model_dir) if filename.endswith(f'_{id}.h5')), None)
-    print(model_path)
     model = tf.keras.models.load_model(model_path)
     
     y_pred = model.predict(X_data)

@@ -209,7 +209,7 @@ def split_data(subject, device, batch_size, train_percentage=90 ):
 
 def main(args):
 
-    idx = 0
+    idx = 2
     subject = 'subj01'
     
     
@@ -243,7 +243,8 @@ def main(args):
     model.eval() # set the model to evaluation mode, since not training it
 
 
-    model_layer = "features.2" 
+
+    model_layer = args.alexnet_layer
     feature_extractor = create_feature_extractor(model, return_nodes=[model_layer])
 
     # Fit incremental PCA to features
@@ -301,6 +302,9 @@ def parse_args():
                         help='P')
 
     parser.add_argument('--batchsize', type=int, default=300,
+                        help='')
+
+    parser.add_argument('--alexnet_layer', type=str, default="features.2",
                         help='')
     # parser.add_argument('--rand_seed', type=str, default=None,
     #                     help='Random seed used')

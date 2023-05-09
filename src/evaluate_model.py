@@ -216,8 +216,8 @@ def plot_ROI_correlations(subject, correlations, save=False, save_args=None, sho
 def main(args):
     
     subject = 'subj01' # subject to get predicitons and ground truth from
-    idx = 0  # id of the model run
-    model = 'linearizing_model' # model to be evaluated
+    idx = 1  # id of the model run
+    model = 'linearizing_model' # model to be evaluated. Possible: effecientnet, CNN, linearizing_model
     
     
     # # CREATING PREDICTION FOR ALL DATA
@@ -269,7 +269,7 @@ def main(args):
         utils.visualize_brainresponse(hemisphere, 
                                     surface_map=fsaverage_correlation, 
                                     cmap='bwr',
-                                    title= f'Encoding accuracy for model {model}, id={idx}. {hemisphere} hemisphere. Subject: {subject[-2:]}',
+                                    title= f'Pearson correlation coefficient for model {model}, id={idx}. {hemisphere} hemisphere. Subject: {subject[-2:]}',
                                     vmin=min_corr,
                                     vmax=max_corr
                                     )
@@ -280,9 +280,33 @@ def main(args):
 
 
 
-    # ---------------------  INFORMATION METRICS --------------------------
-    # TBD
+    # ---------------------  MSE --------------------------
+    
+    # Calculate the mean squared error for whole brain
+    mse = np.mean((y_pred - y_test) ** 2)
 
+    print("MSE (whole brain):", mse)
+    
+        
+    min_val = np.min(mse)
+    max_val = np.max(mse)
+    
+    # Calculate per vertex
+    for i, hemisphere in enumerate(['left', 'right']):
+        
+        mse_vertices_hem = np.mean((predicted_fmri[hemisphere] - groundtruth_fmri[hemisphere]) ** 2, axis=0)
+
+
+        fsaverage_mse = np.zeros(len(fsaverage_all_vertices[hemisphere]))
+        fsaverage_mse[np.where(fsaverage_all_vertices[hemisphere])[0]] = mse_vertices_hem
+        
+        utils.visualize_brainresponse(hemisphere, 
+                                    surface_map=fsaverage_mse, 
+                                    cmap='bwr',
+                                    title = f'MSE for model {model}, id={idx}. {hemisphere} hemisphere. Subject: {subject[-2:]}',
+                                    vmin = min_val,
+                                    vmax = max_val
+                                    )
 
 def parse_args():
     '''
