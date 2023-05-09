@@ -216,9 +216,15 @@ def plot_ROI_correlations(subject, correlations, save=False, save_args=None, sho
 def main(args):
     
     subject = 'subj01' # subject to get predicitons and ground truth from
-    idx = 1  # id of the model run
-    model = 'linearizing_model' # model to be evaluated. Possible: effecientnet, CNN, linearizing_model
+    idx = 2  # id of the model run
+    model = 'CNN' # model to be evaluated. Possible: effecientnet, CNN, linearizing_model
     
+    models_titles_dict = {
+        'CNN': {1: "Simple CNN", 2: "Simple CNN + PCA transform"},
+        'effecientnet': {1: "EfficientNet", 2: "EfficientNet + PCA transform"} ,
+        'linearizing_model': {1: "Linearizing encoding model"}
+        
+    }
     
     # # CREATING PREDICTION FOR ALL DATA
     # # Load all fMRI data and predict on it
@@ -261,6 +267,7 @@ def main(args):
     
     min_corr = np.min([np.min(i) for i in correlations.values()])
     max_corr = np.max([np.max(i) for i in correlations.values()])
+    print("CORRELATION_VALUES = ", min_corr, max_corr)
     
     for hemisphere, hem_corr in correlations.items():
 
@@ -269,7 +276,7 @@ def main(args):
         utils.visualize_brainresponse(hemisphere, 
                                     surface_map=fsaverage_correlation, 
                                     cmap='bwr',
-                                    title= f'Pearson correlation coefficient for model {model}, id={idx}. {hemisphere} hemisphere. Subject: {subject[-2:]}',
+                                    title= f'Pearson correlation coefficient for {models_titles_dict[model][idx]}. {hemisphere} hemisphere. Subject: {subject[-2:]}',
                                     vmin=min_corr,
                                     vmax=max_corr
                                     )
@@ -287,15 +294,15 @@ def main(args):
 
     print("MSE (whole brain):", mse)
     
+   
+    # Calculate per vertex 
+    mse_vertices = {hemisphere:np.mean((predicted_fmri[hemisphere] - groundtruth_fmri[hemisphere]) ** 2, axis=0) for hemisphere in ['left', 'right']}
         
-    min_val = np.min(mse)
-    max_val = np.max(mse)
-    
-    # Calculate per vertex
-    for i, hemisphere in enumerate(['left', 'right']):
-        
-        mse_vertices_hem = np.mean((predicted_fmri[hemisphere] - groundtruth_fmri[hemisphere]) ** 2, axis=0)
+    min_val = np.min([np.min(i) for i in mse_vertices.values()])
+    max_val = np.max([np.max(i) for i in mse_vertices.values()])
+    print("MeanSquaredError_VALUES = ", min_val, max_val)
 
+    for hemisphere, mse_vertices_hem in mse_vertices.items():
 
         fsaverage_mse = np.zeros(len(fsaverage_all_vertices[hemisphere]))
         fsaverage_mse[np.where(fsaverage_all_vertices[hemisphere])[0]] = mse_vertices_hem
@@ -303,7 +310,7 @@ def main(args):
         utils.visualize_brainresponse(hemisphere, 
                                     surface_map=fsaverage_mse, 
                                     cmap='bwr',
-                                    title = f'MSE for model {model}, id={idx}. {hemisphere} hemisphere. Subject: {subject[-2:]}',
+                                    title = f'MSE for model {models_titles_dict[model][idx]}. {hemisphere} hemisphere. Subject: {subject[-2:]}',
                                     vmin = min_val,
                                     vmax = max_val
                                     )
