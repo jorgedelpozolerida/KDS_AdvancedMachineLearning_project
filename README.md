@@ -25,10 +25,17 @@ Note: the fMRI data does not represent the whole brain, but rather only vertices
 
 # Methods
 
+## Architectures
 We tried three different approaches for this problem for the following reasons:
 * Linearizing encoding model: because it is a common approach in the field
 * Simple CNN (+/- PCA transform of target data): to test how some standard architecture could capture the complexity of the problem
 * EfficientNet (+/- PCA transform of target data): because it is state-of-the-art in computer vision
+
+## Training
+Models were trained on IT University's HPC cluster.
+
+## Code
+All code used for creating the models, training and evaluating them can be found under src/. Log data from HPC runs can be found under hpc/.
 
 # Evaluation metrics
 With the aim of evaluating encoding accuracy of our model in computational neurosience, what is normally used is the Pearson's correlation between predicted and observed brain response. So we used two different metrics to evaluate:
