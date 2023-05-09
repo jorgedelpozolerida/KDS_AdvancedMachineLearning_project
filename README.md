@@ -1,30 +1,85 @@
 # KDS_AdvancedMachineLearning_project
 
 Repository containing source code and results of final mini-project for Advanced Machine Learning, course of Data Science master at ITU.
-Team members: Thomas Fosdam Claudinger, Emil Haldan, Jorge del Pozo Lerida
+Team members:
+
+* Thomas Fosdam Claudinger, [@thcla](https://github.com/thcla)
+* Emil Haldan, [@EmilHaldan](https://github.com/EmilHaldan)
+* Jorge del Pozo Lerida, [@jorgedelpozolerida](https://github.com/jorgedelpozolerida)
 
 ### Prequisites
-Install packages described in requirements.txt
+Install packages described in [requirements.txt](https://github.com/jorgedelpozolerida/KDS_AdvancedMachineLearning_project/blob/main/requirements.txt) file
 
-# Task: Model how the brain represents visual information
-{Central problem, domain}
+# Task: predict brain activity in front of visual stimuli
+The goal of this project is to predict brain response in front of visual stimuli of complex natural scenes. This problem lies in the field of visual neuroscience, and aims to find an encoding model (algorithm that predicts how the brain responds to some stimuli) that models how the visual brain perceives complex natural visual scenes. It originates from "The Algonauts Project 2023".
 
-## Goals
-* Do a comprehensive pre-processing and some visualisation of the fMRI data. Can you see patterns in the data for either input category?
-* Train a voxel-wise encoding model (deep CNN network) to predict fMRI responses in different brain regions from the stimulus data as input. You might consider vanilla versus pre-trained image processing networks. Can you identify an architecture (and meta-parameter settings) that predicts well and remains bio-inspired regarding the hierarchy?
-* Compare predictions of the individual layers (model) with activations of different regions (imaging data), e.g. through heatmaps. How does the cortex hierarchy to the model's hierarchy? Do you observe any patterns?
-### Secondary goals
-* Can you suggest which brain regions preserve spatial information? Apply image transformations randomly before feeding to the model and observe the change in encoding accuracy.
-* Can you identify in which regions the brain might encode categorical information? For this, you might compare representation similarities (e.g. via RSA).
+# Data
+Data is originally split into 8 subjects, but due to time constraints we only use first subject.
 
-# The dataset
-{data characteristics}
+* Input data: 9841 different images (in '.png' format). They come from the  [NSD  dataset](https://naturalscenesdataset.org/)
+
+
+* Ouput data: fMRI visual responses (as '.npy' files) of both the left hemisphere ('lh_training_fmri.npy') and the right hemisphere ('rh_training_fmri.npy'). So it is divided into the left (LH) and right (RH) hemispheres, each having 19004 and 20544 vertices (so an output vector of 39548).  For more detailed explanation of data adquisition, see http://algonauts.csail.mit.edu/braindata.html 
+
+Note: the fMRI data does not represent the whole brain, but rather only vertices (point on the surface of the brain) on the visual cortex, since it is knwon to be the region specifically dedicated to processing visual information.
 
 # Methods
-{Central method: chosen architecture and training mechanisms, with a brief justification if non-standard}
+
+We tried three different approaches for this problem for the following reasons:
+* Linearizing encoding model: because it is a common approach in the field
+* Simple CNN (+/- PCA transform of target data): to test how some standard architecture could capture the complexity of the problem
+* EfficientNet (+/- PCA transform of target data): because it is state-of-the-art in computer vision
+
+# Evaluation metrics
+With the aim of evaluating encoding accuracy of our model in computational neurosience, what is normally used is the Pearson's correlation between predicted and observed brain response. So we used two different metrics to evaluate:
+
+* Pearson's correlation
+* Mean Squared Error
+
+In both cases it is computed across images, independently for each vertex.
 
 # Experiments & results
-{present and explain results, e.g. in simple accuracy tables over error graphs up to visualisations of representations and/or edge cases – keep it crisp}
+
+## Linearizing Encoding model
+![](img/lin_corr_1.png)
+
+![](img/lin_MSE.png)
+
+
+
+## Simple CNN
+![](img/CNN_corr.png)
+
+![](img/CNN_MSE.png)
+
+
+
+## Simple CNN + PCA transform
+![](img/CNN+PCA_corr.png)
+
+![](img/CNN+PCA_MSE.png)
+
+
+
+## Efficientnet
+![](img/Eff_corr.png)
+
+![](img/Eff_MSE.png)
+
+
+
+## Efficientnet + PCA transform
+![](img/Eff+PCA_corr.png)
+
+![](img/Eff+PCA_MSE.png)
+
+
 
 # Discussion
-{summarise the most important results and lessons learned (what is good, what can be improved)}
+On the one hand, the linearizing encoding model did show some good results for the correlation metric, around 0.2. even if this does not look  very high, bear in mind that the correlaiton of the leaderboard for similar challenges from previous years were around 0.4.
+
+On the other hand, our basic CNN apporach as well as our EfficientNet approach can be analyzed differently. When not using PCA transform on the output data, these architectures do not show neither correlation nor low MSE in the vertices. However, when applying PCA to the target data, we see that the CNNs that we have used point to the right direction, since there is an improvement of the MSE at some regions of the brain, at some areas even near 0. However, in terms of correlation per vertex, in any case they perform well
+
+We indentify a misalignment between the metric we use during the training process of the CNNs (MSE) with what we also look for, which is correlation across images per vertex. We propose for future work to use a modified loss function that takes into account correlation.
+
+Also we propose instead of using PCA as decoder from lower dimension to higher dimension, to use a more sophisticated decoder architecture that can also account for spacial information in the brain.
