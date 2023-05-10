@@ -13,6 +13,9 @@ Install packages described in [requirements.txt](https://github.com/jorgedelpozo
 # Task: predict brain activity in front of visual stimuli
 The goal of this project is to predict brain response in front of visual stimuli of complex natural scenes. This problem lies in the field of visual neuroscience, and aims to find an encoding model (algorithm that predicts how the brain responds to some stimuli) that models how the visual brain perceives complex natural visual scenes. It originates from "The Algonauts Project 2023".
 
+![](img/task.png)
+
+
 # Data
 Data is originally split into 8 subjects, but due to time constraints we only use first subject.
 

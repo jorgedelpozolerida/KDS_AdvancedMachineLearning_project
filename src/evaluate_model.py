@@ -213,11 +213,27 @@ def plot_ROI_correlations(subject, correlations, save=False, save_args=None, sho
         plt.show()
 
 
+def calculate_MAPE(y_test, y_pred):
+    '''
+    Calculate MAPE per vertex
+    '''
+    
+    
+    abs_percentage_error = np.abs(
+        (y_test - y_pred) / y_test
+        ) * 100
+    mape = np.mean(abs_percentage_error, axis=0) # Calculate the mean along the first dimension
+    
+    
+    return mape
+    
+
+
 def main(args):
     
     subject = 'subj01' # subject to get predicitons and ground truth from
-    idx = 2  # id of the model run
-    model = 'CNN' # model to be evaluated. Possible: effecientnet, CNN, linearizing_model
+    idx = 1  # id of the model run
+    model = 'linearizing_model' # model to be evaluated. Possible: effecientnet, CNN, linearizing_model
     
     models_titles_dict = {
         'CNN': {1: "Simple CNN", 2: "Simple CNN + PCA transform"},
@@ -267,7 +283,10 @@ def main(args):
     
     min_corr = np.min([np.min(i) for i in correlations.values()])
     max_corr = np.max([np.max(i) for i in correlations.values()])
-    print("CORRELATION_VALUES = ", min_corr, max_corr)
+    mean_corr = np.mean([np.mean(i) for i in correlations.values()])
+    median_corr = np.median([np.median(i) for i in correlations.values()])
+    
+    print("CORRELATION_VALUES (min, max, mean, median) = ", min_corr, max_corr, mean_corr, median_corr)
     
     for hemisphere, hem_corr in correlations.items():
 
@@ -314,6 +333,43 @@ def main(args):
                                     vmin = min_val,
                                     vmax = max_val
                                     )
+        
+        
+        
+        
+    # -------------------- MAPE -----------------------------
+    
+
+
+
+    # Calculate the MAPE for whole brain
+    mape =  np.mean(np.abs((y_test - y_pred) / y_test) * 100)
+    print("MAPE (whole brain):", mape)
+    
+   
+    # Calculate per vertex 
+    mape_vertices = {hemisphere: calculate_MAPE(groundtruth_fmri[hemisphere], predicted_fmri[hemisphere]) for hemisphere in ['left', 'right']}
+        
+    min_val = np.min([np.min(i) for i in mape_vertices.values()])
+    max_val = np.max([np.max(i) for i in mape_vertices.values()])
+    print("MAPE_VALUES = ", min_val, max_val)
+
+    for hemisphere, mape_vertices_hem in mape_vertices.items():
+
+        fsaverage_mape = np.zeros(len(fsaverage_all_vertices[hemisphere]))
+        fsaverage_mape[np.where(fsaverage_all_vertices[hemisphere])[0]] = mape_vertices_hem
+        
+        utils.visualize_brainresponse(hemisphere, 
+                                    surface_map=fsaverage_mape, 
+                                    cmap='bwr',
+                                    title = f'MAPE for model {models_titles_dict[model][idx]}. {hemisphere} hemisphere. Subject: {subject[-2:]}',
+                                    vmin = min_val,
+                                    # vmax = max_val
+                                    vmax = 400
+                                    )
+        
+        
+
 
 def parse_args():
     '''
