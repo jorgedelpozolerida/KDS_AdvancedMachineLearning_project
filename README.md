@@ -8,7 +8,9 @@ Team members:
 * Jorge del Pozo Lerida, [@jorgedelpozolerida](https://github.com/jorgedelpozolerida)
 
 ### Prequisites
-Install packages described in [requirements.txt](https://github.com/jorgedelpozolerida/KDS_AdvancedMachineLearning_project/blob/main/requirements.txt) file
+* Install packages described in [requirements.txt](https://github.com/jorgedelpozolerida/KDS_AdvancedMachineLearning_project/blob/main/requirements.txt) file
+* Subject data (only if you want to re-run the model) is restricted to participant of the challenge and can be downloaded from the challenge: [https://codalab.lisn.upsaclay.fr/competitions/9304](https://codalab.lisn.upsaclay.fr/competitions/9304)
+* Dataout-folder, PCA model and Scalar transformer (due to file size limit on GitHub) should be downloaded from Google Drive: [https://drive.google.com/drive/folders/1QIFqmd6kOVYahGwy7wuZ-7r7VZCxdvov](https://drive.google.com/drive/folders/1QIFqmd6kOVYahGwy7wuZ-7r7VZCxdvov)
 
 # Task: predict brain activity in front of visual stimuli
 The goal of this project is to predict brain response in front of visual stimuli of complex natural scenes. This problem lies in the field of visual neuroscience, and aims to find an encoding model (algorithm that predicts how the brain responds to some stimuli) that models how the visual brain perceives complex natural visual scenes. It originates from "The Algonauts Project 2023".
