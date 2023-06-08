@@ -3,7 +3,7 @@
 Repository containing source code and results of final mini-project for Advanced Machine Learning, course of Data Science master at ITU.
 Team members:
 
-* Thomas Fosdam Claudinger, [@thcla](https://github.com/thcla)
+* Thomas Fosdam Claudinger, [@ThomasClaudinger](https://github.com/ThomasClaudinger)
 * Emil Haldan, [@EmilHaldan](https://github.com/EmilHaldan)
 * Jorge del Pozo Lerida, [@jorgedelpozolerida](https://github.com/jorgedelpozolerida)
 
